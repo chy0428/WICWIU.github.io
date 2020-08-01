@@ -1,6 +1,4 @@
 
-## About
-
 이곳은 [**WICWIU**](https://github.com/WICWIU/WICWIU) 를 사용하기 위하여 필요한 내용과 [**WICWIU**](https://github.com/WICWIU/WICWIU) 프로젝트에 참여하기 위하여 필요한 내용을 Markdown 파일 형식으로 쉽게 게시해두기 위하여 제작된 [**WICWIU Github Pages**](https://wicwiu.github.io/) 입니다.
 
 한동대학교 학부생 주도로 제작된 딥러닝 프레임워크 **WICWIU** 프로젝트에 참여하기 위해서는 **(1)** 방대한 양의 **C++** 코드와 **(2)** 그 코드에 구현되어 있는 딥러닝 기술들, **(3)** **GPU** 코딩을 위한 **CUDA** 프로그래밍 기술들, **(4)** 협업을 위한 **Git**, **Github**, **Pull Requests**, **(5)** [Coding Convention](https://en.wikipedia.org/wiki/Coding_conventions) 에 대한 이해, **(6)** **C++** 코딩을 위하여 주의해야 할 내용들, **(7)** `Makefile` 에 대한 이해, 기타등등이 필요합니다.

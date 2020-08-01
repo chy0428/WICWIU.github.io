@@ -40,6 +40,10 @@
 
 `src/` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 라이브러리 디렉토리입니다. 이것을 컴파일하는 `makefile` 를 같이 살펴보겠습니다.
 
+!!! info 
+
+    [**WICWIU**](https://github.com/WICWIU/WICWIU) 는 계속 업데이트 되고 있기 때문에 최신 버전의 소스코드와 다를 수도 있습니다.
+
 [:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU/blob/master/makefile)
 
 ```makefile linenums="1"
