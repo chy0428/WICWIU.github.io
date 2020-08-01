@@ -1,6 +1,35 @@
 
 이곳에서는 이전에 설명한 [**WICWIU**](https://github.com/WICWIU/WICWIU) 로 신경망을 구성하고, [**WICWIU**](https://github.com/WICWIU/WICWIU) 로 딥러닝을 하는 것을 코드로 함께 보면서 이해해보겠습니다.
 
+먼저 [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 레이아웃을 다시 살펴보겠습니다.
+
+## Project layout
+
+[**WICWIU**](https://github.com/WICWIU/WICWIU) 는 크게 `lib/`, `tutorials/`, `src/` 로 구성되어 있습니다. 세부 디렉토리에 대한 설명은 다음과 같습니다.
+
+    lib/                # 컴파일 후 정적 라이브러리가 생성되는 디렉토리.
+
+    tutorials/          # WICWIU 로 제작된 여러 신경망을 학습해볼 수 있는 코드들.
+                        # net/ 하위 디렉토리에 사전에 정의된 인공신경망이 있습니다.
+                        # data/ 하위 디렉토리에 인공신경망이 학습할 데이터셋이 있습니다.
+        CIFAR10/
+        CIFAR100Reader/
+        ImageNet/       # 포함된 파일을 이용하여 사전에 정의된 인공신경망을 학습 가능.
+        MNIST/          # 포함된 파일을 이용하여 사전에 정의된 인공신경망을 학습 가능.
+        GAN/            # 하위 디렉토리 내 포함된 파일을 이용하여 사전에
+                        # 정의된 인공신경망을 학습할 수 있습니다.
+            VanillaGAN/
+            DCGAN/
+            WGAN/
+            BEGAN/
+
+    src/                # LossFunction, Operator, Optimizer, 그리고 Module
+                        # 을 비롯한 소스파일이 있는 디렉토리.
+        LossFunction/
+        Operator/
+        Optimizer/
+        Module/
+
 # WICWIU 코드 살펴보기
 
 ## Compile

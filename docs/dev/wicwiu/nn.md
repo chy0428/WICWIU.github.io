@@ -6,7 +6,7 @@
 ## 데이터 구조
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/16812446/89108189-6474f180-d471-11ea-94cb-17d40a924109.png" width="70%" />
+  <img src="https://user-images.githubusercontent.com/16812446/89108189-6474f180-d471-11ea-94cb-17d40a924109.png" width="90%" />
   <figcaption><i>Tensor, Shape, LongArray 데이터 형식 요약</i></figcaption>
 </figure>
 
@@ -33,7 +33,7 @@
 ### Class `LongArray`
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/16812446/89108533-3513b400-d474-11ea-881b-3ceb8dd2772e.png" width="70%" />
+  <img src="https://user-images.githubusercontent.com/16812446/89108533-3513b400-d474-11ea-881b-3ceb8dd2772e.png" width="80%" />
   <figcaption><i>LongArray 클래스의 위계적 데이터 구조</i></figcaption>
 </figure>
 
@@ -48,7 +48,7 @@
 ### Class `Operator`
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/16812446/89108602-d8fd5f80-d474-11ea-83c7-a2d05cead642.png" width="70%" />
+  <img src="https://user-images.githubusercontent.com/16812446/89108602-d8fd5f80-d474-11ea-83c7-a2d05cead642.png" width="80%" />
   <figcaption><i> Operator 클래스의 기본 구조
   </i></figcaption>
 </figure>
@@ -73,7 +73,7 @@
 ### Class `Module` 
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/16812446/89108752-fed73400-d475-11ea-9b1d-905d7f1a4e05.png" width="100%" />
+  <img src="https://user-images.githubusercontent.com/16812446/89108752-fed73400-d475-11ea-9b1d-905d7f1a4e05.png" width="130%" />
   <figcaption><i>Module 클래스의 기본 구조 예시</i></figcaption>
 </figure>
 
@@ -88,7 +88,7 @@
 ### Class `LossFunction`
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/16812446/89108807-7f963000-d476-11ea-8c14-7db61d009a1f.png" width="90%" />
+  <img src="https://user-images.githubusercontent.com/16812446/89108807-7f963000-d476-11ea-8c14-7db61d009a1f.png" width="100%" />
   <figcaption><i> LossFunction 클래스의 기본 구조 </i></figcaption>
 </figure>
 
@@ -99,7 +99,7 @@
 ### Class `Optimizer`
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/16812446/89108835-c7b55280-d476-11ea-9b4a-e053e52935a1.png" width="90%" />
+  <img src="https://user-images.githubusercontent.com/16812446/89108835-c7b55280-d476-11ea-9b4a-e053e52935a1.png" width="100%" />
   <figcaption><i> NeuralNetwork 클래스 내 학습 파라미터의 기본 구조 </i></figcaption>
 </figure>
 
@@ -112,7 +112,7 @@
 ### Class `NeuralNetwork`
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/16812446/89109037-963d8680-d478-11ea-8d89-248ce99b8a01.png" width="70%" />
+  <img src="https://user-images.githubusercontent.com/16812446/89109037-963d8680-d478-11ea-8d89-248ce99b8a01.png" width="80%" />
   <figcaption><i>NeuralNetwork 클래스 그래프 예시</i></figcaption>
 </figure>
 

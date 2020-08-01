@@ -35,31 +35,7 @@
 
 -	블록 연결 상태 및 블록 종류에 따라 코드 생성
 
-## 시스템 요구사항
-
-### 지원 플랫폼 및 운영체제
-
-[**WICWIU**](https://github.com/WICWIU/WICWIU) 는 **Ubuntu 16.04** 환경에서 설계되었고 그 이상 버전에서 사용하는 것을 권장합니다.
-
-### Hardware 요구사항
-
-- Intel i5 이상의 CPU 를 사용하는 환경에서 사용하기를 권장합니다.
-
-- CUDA 9.0, cudnn 7.0.5 을 지원하는 NVidia GPU 사용을 권장합니다.
-
-### Software 요구사항
-
-- C++11 이상, gcc 5.4.0 이상을 권장합니다.
-
-- NVIDIA GPU 사용 시 설치를 요구합니다.
-
-    - NVIDIA Grahpic Driver
-
-    - CUDA (tested on v9.0 / 10.0)
-
-    - cudnn (tested on v7.0.5 / 7.4.1)
-
-# Project layout
+## Project layout
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 는 크게 `lib/`, `tutorials/`, `src/` 로 구성되어 있습니다. 세부 디렉토리에 대한 설명은 다음과 같습니다.
 
@@ -85,3 +61,27 @@
         Operator/
         Optimizer/
         Module/
+
+## 시스템 요구사항
+
+### 지원 플랫폼 및 운영체제
+
+[**WICWIU**](https://github.com/WICWIU/WICWIU) 는 **Ubuntu 16.04** 환경에서 설계되었고 그 이상 버전에서 사용하는 것을 권장합니다.
+
+### Hardware 요구사항
+
+- Intel i5 이상의 CPU 를 사용하는 환경에서 사용하기를 권장합니다.
+
+- CUDA 9.0, cudnn 7.0.5 을 지원하는 NVidia GPU 사용을 권장합니다.
+
+### Software 요구사항
+
+- C++11 이상, gcc 5.4.0 이상을 권장합니다.
+
+- NVIDIA GPU 사용 시 설치를 요구합니다.
+
+    - NVIDIA Grahpic Driver
+
+    - CUDA (tested on v9.0 / 10.0)
+
+    - cudnn (tested on v7.0.5 / 7.4.1)

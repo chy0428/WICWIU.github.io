@@ -6,6 +6,7 @@ copyright: Copyright &copy; 2018-2020 HGU DL Lab
 
 nav:
   - Home: index.md
+  - About: about.md
   - WICWIU 딥러닝 가이드: usage/usage.md
   - WICWIU 개발 가이드: 
     - WICWIU: 
