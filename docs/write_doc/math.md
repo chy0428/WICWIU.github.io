@@ -4,7 +4,7 @@
 
 !!! info
 
-    아래의 퍼셉트론 수렴정리와 증명과정을 [:octicons-file-code-24: Source](#) 에서와 같이 **Markdown** 과 **LaTex** 로 작성할 수 있습니다.
+    아래의 퍼셉트론 수렴정리와 증명과정을 [:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU.github.io/blob/master/docs/write_doc/math-sample-perceptron-convergence.md) 에서와 같이 **Markdown** 과 **LaTex** 로 작성할 수 있습니다.
 
 # 퍼셉트론 수렴정리
 
@@ -157,7 +157,7 @@ $$ \iff t \leq \dfrac{R ^{2}}{\gamma ^{2}} $$
 
 !!! info
 
-    아래의 Affine Layer 에서 사용되는 행렬미분 정리와 증명과정을 [:octicons-file-code-24: Source](#) 에서와 같이 **Markdown** 과 **LaTex** 로 작성할 수 있습니다.
+    아래의 Affine Layer 에서 사용되는 행렬미분 정리와 증명과정을 [:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU.github.io/blob/master/docs/write_doc/math-sample-matrix-derivatives.md) 에서와 같이 **Markdown** 과 **LaTex** 로 작성할 수 있습니다.
 
 # Affine Layer 에서 사용되는 행렬미분 
 
