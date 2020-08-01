@@ -1,6 +1,8 @@
 # Step 6. 수식 보여주기
 
-[**LaTex**](https://en.wikibooks.org/wiki/LaTeX/Mathematics) 에 익숙하신 분이라면 [**WICWIU**](https://github.com/WICWIU/WICWIU/) 를 설명하기 위하여 수식을 작성할 수 있습니다.
+[**LaTex**](https://en.wikibooks.org/wiki/LaTeX/Mathematics) 에 익숙하신 분이라면 [**WICWIU**](https://github.com/WICWIU/WICWIU/) 나 수식이 들어가는 내용들을 설명하기 위하여 다음과 같이 수식을 작성할 수 있습니다.
+
+---
 
 !!! info
 
