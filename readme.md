@@ -24,6 +24,8 @@
 
 [**WICWIU Github Pages**](https://wicwiu.github.io/) 에 작성할 것들을 메모해둔 것입니다.
 
+- mkdocs 에 의해 markdown 파일로 쉽게 페이지 추가하는 법
+
 - 코딩 생산성 높이기 & 여러가지 필수 기술들
 
   - Docker : https://github.com/ccss17/ProgrammerBase/blob/master/docker.md
