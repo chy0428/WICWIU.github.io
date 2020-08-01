@@ -2,14 +2,12 @@ site_name: WICWIU
 site_author: HGU DL Lab
 repo_name: WICWIU
 repo_url: https://github.com/WICWIU/WICWIU
-copyright: Copyright &copy; HGU DL Lab
+copyright: Copyright &copy; 2018-2020 HGU DL Lab
 
 nav:
   - Home: index.md
   - GPU:
     - cuda: cuda.md
-  - Neural Network:
-    - nn: nn.md
   - 문서 작성하기:
     - Step 1. Markdown 파일: write_doc/markdown.md
     - Step 2. 소스코드 설명하기: write_doc/code.md
