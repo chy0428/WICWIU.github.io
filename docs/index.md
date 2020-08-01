@@ -22,19 +22,19 @@
 
 또 이 [**WICWIU Github Pages**](https://wicwiu.github.io/) 로써 **WICWIU** 에 참여하고 싶지만 자신에게 어떤 것이 부족한지 몰라서 막연한 두려움을 갖고 있는 한동대생들에게 무엇이 필요하고 어떤 지식들이 있어야 하는지 명확하게 알려줌으로써 **WICWIU** 참여에 자신감과 확신을 심어줄 수도 있다고 생각합니다.
 
-### WICWIU 사용 가이드
+## WICWIU 사용 가이드
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 로 딥러닝을 하고 싶다면 다음을 클릭하여 가이드를 확인하세요!
 
-[WICWIU 딥러닝 가이드](#){: .md-button .md-button--primary }
+[WICWIU 딥러닝 가이드](https://wicwiu.github.io/usage/usage/){: .md-button .md-button--primary }
 
-### WICWIU 개발 가이드
+## WICWIU 개발 가이드
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 프로젝트에 참여하고 싶다면 다음을 클릭하여 가이드를 확인하세요!
 
-[WICWIU 개발 가이드](#){: .md-button .md-button--primary }
+[WICWIU 개발 가이드](https://wicwiu.github.io/wicwiu/wicwiu/){: .md-button .md-button--primary }
 
-### WICWIU 문서 작성하기 가이드
+## WICWIU 문서 작성하기 가이드
 
 [**WICWIU Github Pages**](https://wicwiu.github.io/) 에 문서를 작성하고 싶다면 다음을 클릭하여 가이드를 확인하세요!
 

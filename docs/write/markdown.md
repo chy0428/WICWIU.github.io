@@ -30,7 +30,7 @@ nav:
 
 을 추가하면 됩니다. 
 
-## 하위 카테고리에 문서 추가하기
+### 하위 카테고리에 문서 추가하기
 
 문서를 **Neural Network** 라는 하위 카테고리에 추가하고 싶다면 다음과 같이 하면 됩니다.
 
@@ -39,3 +39,5 @@ nav:
   - Neural Network
     - RNN: RNN.md
 ```
+
+그리고 **commit**, **push** 후 **Pull Requests** 를 하면 됩니다.
