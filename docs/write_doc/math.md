@@ -1,17 +1,53 @@
 
 [**LaTex**](https://en.wikibooks.org/wiki/LaTeX/Mathematics) 에 익숙하신 분이라면 [**WICWIU**](https://github.com/WICWIU/WICWIU/) 나 수식이 들어가는 내용들을 설명하기 위하여 다음과 같이 수식을 작성할 수 있습니다.
 
+## 인라인 수식
+
+문장에 수식을 포함시키려면 $$ 안에 수식을 쓰면 됩니다.
+
+!!! example 
+
+    *Example*:
+
+    직각 삼각형의 두 직각변 \$a , b\$ 를 각각 한 변으로 하는 정사각형 면적의 합은 빗변 \$c\$ 를 한 변으로 하는 정사각형의 면적과 같다. 이를 피타고라스 정리 \$a ^{2} + b ^{2} = c ^{2}\$ 라고 한다.
+
+    *Result*:
+
+    직각 삼각형의 두 직각변 $a , b$ 를 각각 한 변으로 하는 정사각형 면적의 합은 빗변 $c$ 를 한 변으로 하는 정사각형의 면적과 같다. 이를 피타고라스 정리 $a ^{2} + b ^{2} = c ^{2}$ 라고 한다.
+
+## 디스플레이 수식
+
+수식을 강조하기 위하여 디스플레이 스타일로 수식을 쓰려면 $$ $$ 안에 쓰면 됩니다.
+
+!!! example 
+
+    *Example*:
+
+    \$m \times n\$ 행렬 \$\mathbf{A}\$, \$n \times p\$ 행렬 \$\mathbf{B}\$ 에 대한 행렬곱은 \$m \times p\$ 행렬 
+
+    \$\$ \mathbf{AB} = \begin{pmatrix} \sum_{k=1}^{n}A _{1k}B _{k1}& \sum_{k=1}^{n}A _{1k}B _{k2}& \dots& \sum_{k=1}^{n}A _{1k}B _{kp} \\ \sum_{k=1}^{n}A _{2k}B _{k1}& \sum_{k=1}^{n}A _{2k}B _{k2}& \dots& \sum_{k=1}^{n}A _{2k}B _{kp} \\ \vdots& \vdots& \ddots& \vdots \\ \sum_{k=1}^{n}A _{mk}B _{k1}& \sum_{k=1}^{n}A _{mk}B _{k2}& \dots& \sum_{k=1}^{n}A _{mk}B _{kp} \\ \end{pmatrix} \$\$
+
+    이다.
+
+    *Result*:
+
+    $m \times n$ 행렬 $\mathbf{A}$, $n \times p$ 행렬 $\mathbf{B}$ 에 대한 행렬곱은 $m \times p$ 행렬 
+
+    $$ \mathbf{AB} = \begin{pmatrix} \sum_{k=1}^{n}A _{1k}B _{k1}& \sum_{k=1}^{n}A _{1k}B _{k2}& \dots& \sum_{k=1}^{n}A _{1k}B _{kp} \\ \sum_{k=1}^{n}A _{2k}B _{k1}& \sum_{k=1}^{n}A _{2k}B _{k2}& \dots& \sum_{k=1}^{n}A _{2k}B _{kp} \\ \vdots& \vdots& \ddots& \vdots \\ \sum_{k=1}^{n}A _{mk}B _{k1}& \sum_{k=1}^{n}A _{mk}B _{k2}& \dots& \sum_{k=1}^{n}A _{mk}B _{kp} \\ \end{pmatrix} $$
+
+    이다.
+
 ---
+
+# 예시 1: 퍼셉트론 수렴정리
 
 !!! info
 
     아래의 퍼셉트론 수렴정리와 증명과정을 [:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU.github.io/blob/master/docs/write_doc/math-sample-perceptron-convergence.md) 에서와 같이 **Markdown** 과 **LaTex** 로 작성할 수 있습니다.
 
-# 퍼셉트론 수렴정리
-
 !!! note ""
 
-    ^^퍼셉트론 수렴 정리(perceptron convergence theorem)^^ : 퍼셉트론이 선형 분리 가능 문제들, 즉 직선으로 분류가 가능한 데이터를 유한번의 학습으로 데이터를 잘 분류하는 가중치를 수렴시킬 수 있다 는 정리이다.
+    **^^퍼셉트론 수렴 정리(perceptron convergence theorem)^^ : 퍼셉트론이 선형 분리 가능 문제들, 즉 직선으로 분류가 가능한 데이터를 유한번의 학습으로 데이터를 잘 분류하는 가중치를 수렴시킬 수 있다 는 정리이다.**
 
 <h5> <i> 아래의 내용은 <a href="https://nbviewer.jupyter.org/github/metamath1/ml-simple-works/blob/master/perceptron/perceptron.ipynb"> metamath1/ml-simple-works/perceptron/perceptron.ipynb</a> 의 내용을 다시 정리한 것입니다. </i> </h5>
 
@@ -156,15 +192,15 @@ $$ \iff t \leq \dfrac{R ^{2}}{\gamma ^{2}} $$
 
 ---
 
+# 예시 2: Affine Layer 에서 사용되는 행렬미분 
+
 !!! info
 
     아래의 Affine Layer 에서 사용되는 행렬미분 정리와 증명과정을 [:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU.github.io/blob/master/docs/write_doc/math-sample-matrix-derivatives.md) 에서와 같이 **Markdown** 과 **LaTex** 로 작성할 수 있습니다.
 
-# Affine Layer 에서 사용되는 행렬미분 
-
 !!! note ""
 
-    ^^Affine 변환의 역전파^^ : 입력 행렬 $\mathbf{X,W}$ 과 출력행렬 $\mathbf{Y} = \mathbf{XW}$ 를 갖는 Affine 레이어의 역전파는 손실값 $L$ 에 대한 $\mathbf{Y}$ 의 미분 $\dfrac{\partial L}{\partial \mathbf{Y}}$ 에 대하여 $\dfrac{\partial L}{\partial \mathbf{X}} = \dfrac{\partial L}{\partial \mathbf{Y}}\cdot \mathbf{W} ^{\intercal }, \dfrac{\partial L}{\partial \mathbf{W}} = \mathbf{X}^{\intercal } \dfrac{\partial L}{\partial \mathbf{Y}}$ 이다.
+    **^^Affine 변환의 역전파^^ : 입력 행렬 $\mathbf{X,W}$ 과 출력행렬 $\mathbf{Y} = \mathbf{XW}$ 를 갖는 Affine 레이어의 역전파는 손실값 $L$ 에 대한 $\mathbf{Y}$ 의 미분 $\dfrac{\partial L}{\partial \mathbf{Y}}$ 에 대하여 $\dfrac{\partial L}{\partial \mathbf{X}} = \dfrac{\partial L}{\partial \mathbf{Y}}\cdot \mathbf{W} ^{\intercal }, \dfrac{\partial L}{\partial \mathbf{W}} = \mathbf{X}^{\intercal } \dfrac{\partial L}{\partial \mathbf{Y}}$ 이다.**
 
 Affine Layer 는 보통 다음과 같이 구성된다.
 
@@ -359,7 +395,7 @@ $n \times m$ 출력 행렬 $\mathbf{Y}$, $n \times m$ 편향 행렬 $\mathbf{B}$
 
 $$ \dfrac{\partial L}{\partial \mathbf{Y}} = \dfrac{\partial L}{\partial \mathbf{Z}} $$ 
 
-이고, $\mathbf{W}$ 의 미분은
+이고, $\mathbf{B}$ 의 미분은
 
 (2)
 
