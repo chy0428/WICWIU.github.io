@@ -1,6 +1,40 @@
 site_name: WICWIU
+site_author: HGU DL Lab
+repo_name: WICWIU
+repo_url: https://github.com/WICWIU/WICWIU
+copyright: Copyright &copy; HGU DL Lab
+
 nav:
   - Home: index.md
-  - menu1: menu1.md
-theme:
+  - tech:
+    - cuda: cuda.md
+  - Write Document:
+    - admonitions: admonitions.md
+
+theme: 
   name: material
+  palette:
+    scheme: slate
+    primary: indigo
+  language: kr
+  logo: assets/images/favicon.png
+  favicon: assets/images/favicon.ico
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js
+  - javascripts/config.js
+extra_css:
+  - stylesheets/gradient-dark.css
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/WICWIU
+
+markdown_extensions:
+  - toc:
+      permalink: "&para;"
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
