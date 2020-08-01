@@ -1,3 +1,6 @@
 site_name: WICWIU
+nav:
+  - Home: index.md
+  - menu1: menu1.md
 theme:
   name: material
