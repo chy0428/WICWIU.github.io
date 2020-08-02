@@ -138,3 +138,8 @@ button.md-clipboard
 {
   color: #AEFBFF;
 }
+
+.arithmatex{
+  overflow-x: visible;
+  overflow-y: visible;
+}
