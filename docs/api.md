@@ -67,6 +67,8 @@
 `class `[`WGANDiscriminatorLoss`](#classWGANDiscriminatorLoss) | 
 `class `[`WGANGeneratorLoss`](#classWGANGeneratorLoss) | 
 
+---
+
 # class `AdagradOptimizer` {#classAdagradOptimizer}
 
 ```
@@ -74,7 +76,7 @@ class AdagradOptimizer
   : public Optimizer< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -89,7 +91,7 @@ class AdagradOptimizer
 `public inline virtual int `[`UpdateParameter`](#classAdagradOptimizer_1a60131cf4400fbc376bb584a6652f1723)`(`[`Operator`](#classOperator)`< DTYPE > * pParameter)` | UpdateParameter default 함수
 `public inline int `[`UpdateParameter`](#classAdagradOptimizer_1af728a868bb4faf9885d9b2707ebd04ef)`(`[`Operator`](#classOperator)`< DTYPE > * pParameter,`[`Tensor`](#classTensor)`< DTYPE > * m_pGradientSquared)` | 파라미터 값들을 업데이트 하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`AdagradOptimizer`](#classAdagradOptimizer_1a57ec3fb8b88c955719598afba8dc7a85)`(`[`Container](#classContainer)< [Operator`](#classOperator)`< DTYPE > * > * pParameterContainer,float pLearningRate,OptimizeDirection pOptimizeDirection)` {#classAdagradOptimizer_1a57ec3fb8b88c955719598afba8dc7a85}
 
@@ -200,14 +202,18 @@ signed_learning_rate와 gradient의 곱을 업데이트 된 pGradientSquared값�
 #### Returns
 성공 시 TURE
 
+---
+
 # class `Adam` {#classAdam}
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 
-## Members
+### Members
+
+---
 
 # class `AdamOptimizer` {#classAdamOptimizer}
 
@@ -216,7 +222,7 @@ class AdamOptimizer
   : public Optimizer< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -229,7 +235,7 @@ class AdamOptimizer
 `public inline virtual int `[`UpdateParameter`](#classAdamOptimizer_1a92911ca3e755b8028a02ee21a57b8c2d)`(`[`Operator`](#classOperator)`< DTYPE > * pParameter)` | UpdateParameter default 함수
 `public inline int `[`UpdateParameter`](#classAdamOptimizer_1a6ee9461e547e56ee60153a53b4ecf246)`(`[`Operator`](#classOperator)`< DTYPE > * pParameter,`[`Tensor`](#classTensor)`< DTYPE > * pFirstMomentum,`[`Tensor`](#classTensor)`< DTYPE > * pFirstVelocity,`[`Tensor`](#classTensor)`< DTYPE > * pUnbiasedMomentum,`[`Tensor`](#classTensor)`< DTYPE > * pUnbiasedVelocity)` | 파라미터 값들을 업데이트 하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`AdamOptimizer`](#classAdamOptimizer_1af21a930d69dbc8ac3a539019c2e0cb34)`(`[`Container](#classContainer)< [Operator`](#classOperator)`< DTYPE > * > * pParameterContainer,float pLearningRate,float Beta1,float Beta2,float epsilon,OptimizeDirection pOptimizeDirection)` {#classAdamOptimizer_1af21a930d69dbc8ac3a539019c2e0cb34}
 
@@ -366,6 +372,8 @@ signed_learning_rate와 pUnbiasedMomentum곱을 root가 적용된 pUnbiasedVeloc
 #### Returns
 성공 시 TURE
 
+---
+
 # class `Addall` {#classAddall}
 
 ```
@@ -375,7 +383,7 @@ class Addall
 
 값들을 서로 더하는 class
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -386,7 +394,7 @@ class Addall
 `public inline virtual int `[`ForwardPropagate`](#classAddall_1a25b0cdf81f3021bf0aca0c9d65977810)`(int pTime)` | Addall의 forwardPropagate 매소드.
 `public inline virtual int `[`BackPropagate`](#classAddall_1a1fc80ca8d9908d2d126fa1ba6a9264a3)`(int pTime)` | Addall의 BackPropagate 매소드.
 
-## Members
+### Members
 
 #### `public inline  `[`Addall`](#classAddall_1a99310814f54bce052866e8694b4fe6ac)`(`[`Operator`](#classOperator)`< DTYPE > * pLeftInput,`[`Operator`](#classOperator)`< DTYPE > * pRightInput,std::string pName,int pLoadflag)` {#classAddall_1a99310814f54bce052866e8694b4fe6ac}
 
@@ -447,6 +455,8 @@ Container에 저장한 pLeftInput, pRightInput의 Gradient값에 계산한 Gradi
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `AddChannelWise` {#classAddChannelWise}
 
 ```
@@ -456,7 +466,7 @@ class AddChannelWise
 
 서로 더하는 class
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -467,7 +477,7 @@ class AddChannelWise
 `public inline virtual int `[`ForwardPropagate`](#classAddChannelWise_1a0f81d16022df4519a555fe4b1367b902)`(int pTime)` | AddChannelWise의 forwardPropagate 매소드.
 `public inline virtual int `[`BackPropagate`](#classAddChannelWise_1ac03a3c81061ad24b3b693b2b9fd9d96a)`(int pTime)` | AddColWise의 BackPropagate 매소드.
 
-## Members
+### Members
 
 #### `public inline  `[`AddChannelWise`](#classAddChannelWise_1a7128fd2ac40a5e04fb3744e0fa5b020f)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,`[`Operator`](#classOperator)`< DTYPE > * pBias,std::string pName,int pLoadflag)` {#classAddChannelWise_1a7128fd2ac40a5e04fb3744e0fa5b020f}
 
@@ -528,6 +538,8 @@ Container에 저장한 pInput, pBias의 Gradient값애 계산을 통해 구한 g
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `AddColWise` {#classAddColWise}
 
 ```
@@ -537,7 +549,7 @@ class AddColWise
 
 중 Colunm에만 값을 더하는 class
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -548,7 +560,7 @@ class AddColWise
 `public inline virtual int `[`ForwardPropagate`](#classAddColWise_1a4b89ea2fdc1baa3622a2fe68db8436a8)`(int pTime)` | AddColWise의 forwardPropagate 매소드.
 `public inline virtual int `[`BackPropagate`](#classAddColWise_1ab6c9363fae11d7aaad2293bc69f8c57d)`(int pTime)` | AddColWise의 BackPropagate 매소드.
 
-## Members
+### Members
 
 #### `public inline  `[`AddColWise`](#classAddColWise_1a4da3a66eef3f65f59b668ff69b48e218)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,`[`Operator`](#classOperator)`< DTYPE > * pBias,std::string pName,int pLoadflag)` {#classAddColWise_1a4da3a66eef3f65f59b668ff69b48e218}
 
@@ -609,6 +621,8 @@ Container에 저장한 pInput, pBias의 Gradient값에 계산을 통해 구한 g
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `AvaragePooling2D` {#classAvaragePooling2D}
 
 ```
@@ -616,7 +630,7 @@ class AvaragePooling2D
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -628,7 +642,7 @@ class AvaragePooling2D
 `public inline virtual int `[`ForwardPropagate`](#classAvaragePooling2D_1a9f1c1689f694564e669877834a661ec6)`(int pTime)` | 
 `public inline virtual int `[`BackPropagate`](#classAvaragePooling2D_1a7ac66b567e2ed27c16e9a501d7cbcf5a)`(int pTime)` | 
 
-## Members
+### Members
 
 #### `public inline  `[`AvaragePooling2D`](#classAvaragePooling2D_1a5562be05630dade6f325154bab08cf78)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int maskRow,int maskCol,int strideRow,int strideCol,std::string pName,int pLoadflag)` {#classAvaragePooling2D_1a5562be05630dade6f325154bab08cf78}
 
@@ -644,6 +658,8 @@ class AvaragePooling2D
 
 #### `public inline virtual int `[`BackPropagate`](#classAvaragePooling2D_1a7ac66b567e2ed27c16e9a501d7cbcf5a)`(int pTime)` {#classAvaragePooling2D_1a7ac66b567e2ed27c16e9a501d7cbcf5a}
 
+---
+
 # class `BatchNormalize` {#classBatchNormalize}
 
 ```
@@ -651,7 +667,7 @@ class BatchNormalize
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -670,7 +686,7 @@ class BatchNormalize
 `public inline virtual int `[`SetModeAccumulate`](#classBatchNormalize_1a01bfe41e2200672f179704ba71c044a0)`()` | 
 `public inline virtual int `[`SetModeInference`](#classBatchNormalize_1a0ecddabe78a70f92f150f83428eecabc)`()` | 
 
-## Members
+### Members
 
 #### `public inline  `[`BatchNormalize`](#classBatchNormalize_1a4605ef6bc6c23d61101f1eebc013d5bf)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,`[`Operator`](#classOperator)`< DTYPE > * pScale,`[`Operator`](#classOperator)`< DTYPE > * pBias,int pIsChannelwise,std::string pName)` {#classBatchNormalize_1a4605ef6bc6c23d61101f1eebc013d5bf}
 
@@ -700,6 +716,8 @@ class BatchNormalize
 
 #### `public inline virtual int `[`SetModeInference`](#classBatchNormalize_1a0ecddabe78a70f92f150f83428eecabc)`()` {#classBatchNormalize_1a0ecddabe78a70f92f150f83428eecabc}
 
+---
+
 # class `BatchNormalizeLayer` {#classBatchNormalizeLayer}
 
 ```
@@ -711,7 +729,7 @@ class BatchNormalizeLayer
 
 Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 Batch Normalization Layer의 기능을 수행한다
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -719,7 +737,7 @@ Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 Batch Normal
 `public inline virtual  `[`~BatchNormalizeLayer`](#classBatchNormalizeLayer_1a53b3cc13dbea61c9845277bfbc88c935)`()` | [BatchNormalizeLayer](#classBatchNormalizeLayer) 클래스 소멸자
 `public inline int `[`Alloc`](#classBatchNormalizeLayer_1ad61e05b3ff8a276a1021671d1e2af814)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int pIsChannelwise,std::string pName)` | Batch Normalize Layer 그래프를 동적으로 할당 및 구성하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`BatchNormalizeLayer`](#classBatchNormalizeLayer_1ab72f27059f143d70809c44186c3aec2a)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int pIsChannelwise,std::string pName)` {#classBatchNormalizeLayer_1ab72f27059f143d70809c44186c3aec2a}
 
@@ -751,6 +769,8 @@ TRUE
 
 **See also**: BatchNormalize<DTYPE>::BatchNormalize([Operator<DTYPE>](#classOperator) *pInput, [Operator<DTYPE>](#classOperator) *pScale, [Operator<DTYPE>](#classOperator) *pBias, int pIsChannelwise = TRUE, std::string pName = NULL) [Module<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator)](#classModule_1a7a8ca0c6ddde4bffde9d806ff64ba614)
 
+---
+
 # class `BEGAN` {#classBEGAN}
 
 ```
@@ -758,7 +778,7 @@ class BEGAN
   : public GAN< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -780,7 +800,7 @@ class BEGAN
 `public float `[`ComputeConvergenceMeasure`](#classBEGAN_1ade9b978d04828413c248e6418d23b67c)`()` | 
 `public float `[`GetConvergenceMeasure`](#classBEGAN_1a06ba784c4b1956fd1de5d11ba766fdde)`()` | 
 
-## Members
+### Members
 
 #### `public  `[`BEGAN`](#classBEGAN_1a691d96dc6bc0f76f7a45f92b32ec1f0f)`()` {#classBEGAN_1a691d96dc6bc0f76f7a45f92b32ec1f0f}
 
@@ -816,6 +836,8 @@ class BEGAN
 
 #### `public float `[`GetConvergenceMeasure`](#classBEGAN_1a06ba784c4b1956fd1de5d11ba766fdde)`()` {#classBEGAN_1a06ba784c4b1956fd1de5d11ba766fdde}
 
+---
+
 # class `BEGANDiscriminatorLoss` {#classBEGANDiscriminatorLoss}
 
 ```
@@ -823,7 +845,7 @@ class BEGANDiscriminatorLoss
   : public LossFunction< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -834,7 +856,7 @@ class BEGANDiscriminatorLoss
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`ForwardPropagate`](#classBEGANDiscriminatorLoss_1ae4ea63a8093be7984d96c1d7c31663bf)`(int pTime)` | LossFunction의 순전파를 수행하는 메소드
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classBEGANDiscriminatorLoss_1af0637d48c60d55b356aaed92c8b24401)`(int pTime)` | LossFunction의 역전파를 수행하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`BEGANDiscriminatorLoss`](#classBEGANDiscriminatorLoss_1a010715fe26fff2e5e007ed15ea9c5655)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,`[`Operator`](#classOperator)`< DTYPE > * pLabel,std::string pName)` {#classBEGANDiscriminatorLoss_1a010715fe26fff2e5e007ed15ea9c5655}
 
@@ -870,6 +892,8 @@ LossFunction의 역전파를 수행하는 메소드
 #### Returns
 NULL
 
+---
+
 # class `BEGANGeneratorLoss` {#classBEGANGeneratorLoss}
 
 ```
@@ -877,7 +901,7 @@ class BEGANGeneratorLoss
   : public LossFunction< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -888,7 +912,7 @@ class BEGANGeneratorLoss
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`ForwardPropagate`](#classBEGANGeneratorLoss_1a49c3bcc602a251960dbf5f150a8cd4c3)`(int pTime)` | LossFunction의 순전파를 수행하는 메소드
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classBEGANGeneratorLoss_1a1e6802c0db50cc63f1e1537f818d89ad)`(int pTime)` | LossFunction의 역전파를 수행하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`BEGANGeneratorLoss`](#classBEGANGeneratorLoss_1a08d4ff8cf1d6c1928f6d505593b09044)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,`[`Operator`](#classOperator)`< DTYPE > * pLabel,std::string pName)` {#classBEGANGeneratorLoss_1a08d4ff8cf1d6c1928f6d505593b09044}
 
@@ -924,6 +948,8 @@ LossFunction의 역전파를 수행하는 메소드
 #### Returns
 NULL
 
+---
+
 # class `ConcatenateChannelWise` {#classConcatenateChannelWise}
 
 ```
@@ -931,7 +957,7 @@ class ConcatenateChannelWise
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -941,7 +967,7 @@ class ConcatenateChannelWise
 `public inline virtual int `[`ForwardPropagate`](#classConcatenateChannelWise_1ae37a10c31cf4635de1fae1245b872193)`(int pTime)` | 
 `public inline virtual int `[`BackPropagate`](#classConcatenateChannelWise_1a2d4fe7b4d6901c4a2330d5c533c974b2)`(int pTime)` | 
 
-## Members
+### Members
 
 #### `public inline  `[`ConcatenateChannelWise`](#classConcatenateChannelWise_1a6b96ab6f8de1e8827f37299eef63d293)`(`[`Operator`](#classOperator)`< DTYPE > * pInput0,`[`Operator`](#classOperator)`< DTYPE > * pInput1,std::string pName,int pLoadflag)` {#classConcatenateChannelWise_1a6b96ab6f8de1e8827f37299eef63d293}
 
@@ -953,6 +979,8 @@ class ConcatenateChannelWise
 
 #### `public inline virtual int `[`BackPropagate`](#classConcatenateChannelWise_1a2d4fe7b4d6901c4a2330d5c533c974b2)`(int pTime)` {#classConcatenateChannelWise_1a2d4fe7b4d6901c4a2330d5c533c974b2}
 
+---
+
 # class `Container` {#classContainer}
 
 저장하기 위한 Queue에 해당하는 클래스
@@ -961,7 +989,7 @@ class ConcatenateChannelWise
 
 기본 queue 구조에 인덱스를 이용한 접근 및 역순으로 접근 등 추가적인 메소드가 구현되어 있다.
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -978,7 +1006,7 @@ class ConcatenateChannelWise
 `public inline DTYPE `[`GetElement`](#classContainer_1a127e7b9fa3de03c7f7f866190fd1c585)`(unsigned int index)` | 
 `public inline DTYPE & `[`operator[]`](#classContainer_1a884d3c64b1d6556018585569d8f00994)`(unsigned int index)` | []연산자 오버로딩
 
-## Members
+### Members
 
 #### `public inline  `[`Container`](#classContainer_1ab2bf85021abd93687431712eec397bd6)`()` {#classContainer_1ab2bf85021abd93687431712eec397bd6}
 
@@ -1055,6 +1083,8 @@ Queue에서 파라미터로 받은 인덱스에 해당하는 ELement를 반환�
 #### Returns
 m_aElement[index]
 
+---
+
 # class `Convolution2D` {#classConvolution2D}
 
 ```
@@ -1062,7 +1092,7 @@ class Convolution2D
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1077,7 +1107,7 @@ class Convolution2D
 `public inline int * `[`GetStrideList`](#classConvolution2D_1a16d798fd391ebf68199013aa1c95d02c)`()` | 
 `public inline int * `[`GetPaddingList`](#classConvolution2D_1a8f2665a6a9a2ad89ecd60d0119188968)`()` | 
 
-## Members
+### Members
 
 #### `public inline  `[`Convolution2D`](#classConvolution2D_1a5beb3b40bafb285ae8e3263090750629)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,`[`Operator`](#classOperator)`< DTYPE > * pWeight,int stride1,int stride2,std::string pName,int pLoadflag)` {#classConvolution2D_1a5beb3b40bafb285ae8e3263090750629}
 
@@ -1195,6 +1225,8 @@ Convolution의 미분 값(weight * this_delta, input * this_delta)을 계산하�
 
 #### `public inline int * `[`GetPaddingList`](#classConvolution2D_1a8f2665a6a9a2ad89ecd60d0119188968)`()` {#classConvolution2D_1a8f2665a6a9a2ad89ecd60d0119188968}
 
+---
+
 # class `ConvolutionLayer2D` {#classConvolutionLayer2D}
 
 ```
@@ -1206,7 +1238,7 @@ class ConvolutionLayer2D
 
 Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 2-Dimensional convolution Layer의 기능을 수행한다
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1214,7 +1246,7 @@ Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 2-Dimensiona
 `public inline virtual  `[`~ConvolutionLayer2D`](#classConvolutionLayer2D_1a12099a1799e812c7de9341844518e105)`()` | [ConvolutionLayer2D](#classConvolutionLayer2D) 클래스 소멸자
 `public inline int `[`Alloc`](#classConvolutionLayer2D_1a6d951dcc0de4424e417ea0eba30d48ba)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int pNumInputChannel,int pNumOutputChannel,int pNumKernelRow,int pNumKernelCol,int pStrideRow,int pStrideCol,int pPaddingRow,int pPaddingCol,int use_bias,std::string pName)` | 2D convolution Layer 그래프를 동적으로 할당 및 구성하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`ConvolutionLayer2D`](#classConvolutionLayer2D_1a0a51514f4250ab566ff1a29ede2846c0)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int pNumInputChannel,int pNumOutputChannel,int pNumKernelRow,int pNumKernelCol,int pStrideRow,int pStrideCol,int pPadding,int use_bias,std::string pName)` {#classConvolutionLayer2D_1a0a51514f4250ab566ff1a29ede2846c0}
 
@@ -1264,6 +1296,8 @@ TRUE
 
 **See also**: [Convolution2D<DTYPE>::Convolution2D](#classConvolution2D_1a5beb3b40bafb285ae8e3263090750629)([Operator<DTYPE>](#classOperator) *pInput, [Operator<DTYPE>](#classOperator) *pWeight, int stride1, int stride2, std::string pName = "NO NAME") AddColWise<DTYPE>::AddColWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) [Module<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator)](#classModule_1a7a8ca0c6ddde4bffde9d806ff64ba614)
 
+---
+
 # class `CrossEntropy` {#classCrossEntropy}
 
 ```
@@ -1275,7 +1309,7 @@ Metric를 이용해 뉴럴 네트워크의 손실 함수를 계산하는 클래�
 
 Cross Entropy 계산식을 이용해 뉴럴 네트워크의 순전파를 통해 계산된 출력 Tensor와 레이블 값의 손실 함수를 계산한다
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1287,7 +1321,7 @@ Cross Entropy 계산식을 이용해 뉴럴 네트워크의 순전파를 통해 
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`ForwardPropagate`](#classCrossEntropy_1a4d4f5ad7e88301644ab173ef75b5eee9)`(int pTime)` | [CrossEntropy](#classCrossEntropy) LossFunction의 순전파를 수행하는 메소드
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classCrossEntropy_1addeb5ba89138297799b21d118ede3602)`(int pTime)` | [CrossEntropy](#classCrossEntropy) LossFunction의 역전파를 수행하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`CrossEntropy`](#classCrossEntropy_1a9a33d1185ee453c393860c3a1552f628)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,`[`Operator`](#classOperator)`< DTYPE > * pLabel,int epsilon)` {#classCrossEntropy_1a9a33d1185ee453c393860c3a1552f628}
 
@@ -1384,9 +1418,11 @@ TRUE
 #### Returns
 NULL
 
+---
+
 # class `DataLoader` {#classDataLoader}
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1407,7 +1443,7 @@ NULL
 `public inline int `[`GetNumOfEachDatasetMember`](#classDataLoader_1a89fffabc92f8592855ab4d32fc6f3b30)`()` | 
 `public inline `[`Dataset`](#classDataset)`< DTYPE > * `[`GetDataset`](#classDataLoader_1a0880559eeabd33ada6e4ca43af4b0a0f)`()` | 
 
-## Members
+### Members
 
 #### `public  `[`DataLoader`](#classDataLoader_1ab068b9fb61b022430a5fd4e357c48b00)`(`[`Dataset`](#classDataset)`< DTYPE > * dataset,int batchSize,int useShuffle,int numOfWorker,int dropLast)` {#classDataLoader_1ab068b9fb61b022430a5fd4e357c48b00}
 
@@ -1441,9 +1477,11 @@ NULL
 
 #### `public inline `[`Dataset`](#classDataset)`< DTYPE > * `[`GetDataset`](#classDataLoader_1a0880559eeabd33ada6e4ca43af4b0a0f)`()` {#classDataLoader_1a0880559eeabd33ada6e4ca43af4b0a0f}
 
+---
+
 # class `Dataset` {#classDataset}
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1466,7 +1504,7 @@ NULL
 `public inline virtual int `[`GetPositiveIndex`](#classDataset_1ac15d95710ec3ad2fcb29137d53041da4)`(int idx)` | 
 `public inline virtual int `[`GetNegativeIndex`](#classDataset_1a2163594d7e797e4188e251157e6f01c5)`(int idx)` | 
 
-## Members
+### Members
 
 #### `public  `[`Dataset`](#classDataset_1a117a5cf499442026ec65539e86d323b8)`()` {#classDataset_1a117a5cf499442026ec65539e86d323b8}
 
@@ -1504,6 +1542,8 @@ NULL
 
 #### `public inline virtual int `[`GetNegativeIndex`](#classDataset_1a2163594d7e797e4188e251157e6f01c5)`(int idx)` {#classDataset_1a2163594d7e797e4188e251157e6f01c5}
 
+---
+
 # class `Dropout` {#classDropout}
 
 ```
@@ -1511,7 +1551,7 @@ class Dropout
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1523,7 +1563,7 @@ class Dropout
 `public inline virtual int `[`ForwardPropagate`](#classDropout_1ad9a0170b88f230007ecc496a12de3f84)`(int pTime)` | 
 `public inline virtual int `[`BackPropagate`](#classDropout_1ad501c062c1975206e8854f22881ddf14)`(int pTime)` | 
 
-## Members
+### Members
 
 #### `public inline  `[`Dropout`](#classDropout_1acb7090ba8045011c8c5175e83fcdeb30)`(`[`Operator`](#classOperator)`< DTYPE > * pInput)` {#classDropout_1acb7090ba8045011c8c5175e83fcdeb30}
 
@@ -1539,9 +1579,11 @@ class Dropout
 
 #### `public inline virtual int `[`BackPropagate`](#classDropout_1ad501c062c1975206e8854f22881ddf14)`(int pTime)` {#classDropout_1ad501c062c1975206e8854f22881ddf14}
 
+---
+
 # class `FewShotClassifier` {#classFewShotClassifier}
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1552,7 +1594,7 @@ class Dropout
 `public void `[`AddReference`](#classFewShotClassifier_1ad7cbd965fb4147a540b5bb18febba51f)`(const char * className,float * pRefSample)` | 
 `public int `[`FindClass`](#classFewShotClassifier_1acfd408b46029fa1a3815ed7d49e40e6d)`(const char * className)` | 
 
-## Members
+### Members
 
 #### `public  `[`FewShotClassifier`](#classFewShotClassifier_1afd4cd751b6242a6c83315d1213d04831)`(int inputDim,int featureDim,const std::vector< std::string > vClassName,`[`NeuralNetwork`](#classNeuralNetwork)`< float > * pNN,int noRef,int * pRefLabel,float * pRefSample,int batchSize)` {#classFewShotClassifier_1afd4cd751b6242a6c83315d1213d04831}
 
@@ -1566,6 +1608,8 @@ class Dropout
 
 #### `public int `[`FindClass`](#classFewShotClassifier_1acfd408b46029fa1a3815ed7d49e40e6d)`(const char * className)` {#classFewShotClassifier_1acfd408b46029fa1a3815ed7d49e40e6d}
 
+---
+
 # class `GAN` {#classGAN}
 
 ```
@@ -1573,7 +1617,7 @@ class GAN
   : public NeuralNetwork< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1618,7 +1662,7 @@ class GAN
 `public int `[`ResetDiscriminatorLossFunctionGradient`](#classGAN_1a803492a2eec163d90a55cb98d5daaccb)`()` | 
 `public void `[`Clip`](#classGAN_1a2991d95a56c002de500944a8a52f57c0)`(float min,float max)` | 
 
-## Members
+### Members
 
 #### `public  `[`GAN`](#classGAN_1a485a7890354d931d2f727384ee8060b5)`()` {#classGAN_1a485a7890354d931d2f727384ee8060b5}
 
@@ -1700,6 +1744,8 @@ class GAN
 
 #### `public void `[`Clip`](#classGAN_1a2991d95a56c002de500944a8a52f57c0)`(float min,float max)` {#classGAN_1a2991d95a56c002de500944a8a52f57c0}
 
+---
+
 # class `GaussianNoiseGenerator` {#classGaussianNoiseGenerator}
 
 ```
@@ -1707,7 +1753,7 @@ class GaussianNoiseGenerator
   : public NoiseGenerator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1724,7 +1770,7 @@ class GaussianNoiseGenerator
 `public inline virtual int `[`ForwardPropagate`](#classGaussianNoiseGenerator_1a03d74cffd843533fbfc230e0d9d912fe)`(int pTime)` | 
 `public inline virtual int `[`BackPropagate`](#classGaussianNoiseGenerator_1aeaddb74aeb0ccd9bbd24c0fd04570dab)`(int pTime)` | 
 
-## Members
+### Members
 
 #### `public inline  `[`GaussianNoiseGenerator`](#classGaussianNoiseGenerator_1ac5b197b17864d63111ede68afc20bfca)`(int pTimeSize,int pBatchSize,int pChannelSize,int pRowSize,int pColSize,float mean,float stddev,IsTruncated pTruncated,IsUseTime pAnswer,std::string pName)` {#classGaussianNoiseGenerator_1ac5b197b17864d63111ede68afc20bfca}
 
@@ -1750,6 +1796,8 @@ class GaussianNoiseGenerator
 
 #### `public inline virtual int `[`BackPropagate`](#classGaussianNoiseGenerator_1aeaddb74aeb0ccd9bbd24c0fd04570dab)`(int pTime)` {#classGaussianNoiseGenerator_1aeaddb74aeb0ccd9bbd24c0fd04570dab}
 
+---
+
 # class `GlobalAvaragePooling2D` {#classGlobalAvaragePooling2D}
 
 ```
@@ -1759,7 +1807,7 @@ class GlobalAvaragePooling2D
 
 Row * Colunm 공간을 GlobalAvaragePooling하는 클래스.
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1769,7 +1817,7 @@ Row * Colunm 공간을 GlobalAvaragePooling하는 클래스.
 `public inline virtual int `[`ForwardPropagate`](#classGlobalAvaragePooling2D_1ae506cb847b78140a1ee89812992aca97)`(int pTime)` | GlobalAvaragePooling2D의 ForwardPropagate 매소드
 `public inline virtual int `[`BackPropagate`](#classGlobalAvaragePooling2D_1aa80e1155774c758544558dcc91a260a9)`(int pTime)` | GlobalAvaragePooling2D의 BackPropagate 매소드
 
-## Members
+### Members
 
 #### `public inline  `[`GlobalAvaragePooling2D`](#classGlobalAvaragePooling2D_1a9e1592091dd62880912d9d258c7363ad)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,std::string pName,int pLoadflag)` {#classGlobalAvaragePooling2D_1a9e1592091dd62880912d9d258c7363ad}
 
@@ -1818,6 +1866,8 @@ Input_grad에 계산한 Gradient / m_divisor 한 값을 더한다.
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `GradientDescentOptimizer` {#classGradientDescentOptimizer}
 
 ```
@@ -1825,7 +1875,7 @@ class GradientDescentOptimizer
   : public Optimizer< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -1841,7 +1891,7 @@ class GradientDescentOptimizer
 `public inline virtual int `[`UpdateParameter`](#classGradientDescentOptimizer_1ae9ee1f4f549d532d5011ce6ac6848976)`(`[`Operator`](#classOperator)`< DTYPE > * pParameter)` | 파라미터 값들을 업데이트 하는 메소드
 `public inline int `[`UpdateParameter`](#classGradientDescentOptimizer_1a5f8c15ae8c990f306f36c287f05d258e)`(`[`Operator`](#classOperator)`< DTYPE > * pParameter,`[`Tensor`](#classTensor)`< DTYPE > * pVelocity)` | 파라미터 값들을 업데이트 하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`GradientDescentOptimizer`](#classGradientDescentOptimizer_1a308ba6cac844c89e54471859d5da6285)`(`[`Container](#classContainer)< [Operator`](#classOperator)`< DTYPE > * > * pParameterContainer,float pLearningRate,OptimizeDirection pOptimizeDirection)` {#classGradientDescentOptimizer_1a308ba6cac844c89e54471859d5da6285}
 
@@ -1979,6 +2029,8 @@ momentum과 pVelocity의 곱과 learnung_rate와 gradient의 곱으로 pVelocity
 #### Returns
 성공 시 TURE
 
+---
+
 # class `HingeLoss` {#classHingeLoss}
 
 ```
@@ -1990,7 +2042,7 @@ Metric를 이용해 뉴럴 네트워크의 손실 함수를 계산하는 클래�
 
 Hinge Loss 계산 식을 이용해 뉴럴 네트워크의 순전파를 통해 계산된 출력 Tensor와 레이블 값의 손실 함수를 계산한다
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -2003,7 +2055,7 @@ Hinge Loss 계산 식을 이용해 뉴럴 네트워크의 순전파를 통해 �
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`ForwardPropagate`](#classHingeLoss_1ad839f1997f80de41ca4da2282b85e0f9)`(int timeIdx)` | GPU 동작 모드에서의 [HingeLoss](#classHingeLoss) LossFunction의 순전파를 수행하는 메소드
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classHingeLoss_1abc6ab97e970a292e9611b9ec2739a9f3)`(int pTime)` | GPU 동작 모드에서의 [HingeLoss](#classHingeLoss) LossFunction의 역전파를 수행하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`HingeLoss`](#classHingeLoss_1a1fd8f684e9fc55fa6f520cc6d9e95240)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,`[`Operator`](#classOperator)`< DTYPE > * pLabel,float theta)` {#classHingeLoss_1a1fd8f684e9fc55fa6f520cc6d9e95240}
 
@@ -2105,9 +2157,11 @@ GPU 동작 모드에서의 [HingeLoss](#classHingeLoss) LossFunction의 역전�
 #### Returns
 NULL
 
+---
+
 # class `KNearestNeighbor` {#classKNearestNeighbor}
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -2118,7 +2172,7 @@ NULL
 `public int `[`Recognize`](#classKNearestNeighbor_1a6f3d5f4a8ea89282e79d742950b842f0)`(float * pInput,int k)` | 
 `public float `[`GetAccuracy`](#classKNearestNeighbor_1a032c332fb53270577542c5bc1eb2588d)`(int noTestSamples,int * pTestLabels,float * pTestVectors,int k)` | 
 
-## Members
+### Members
 
 #### `public inline  `[`KNearestNeighbor`](#classKNearestNeighbor_1addce391444a16e29943d4f366107ea21)`()` {#classKNearestNeighbor_1addce391444a16e29943d4f366107ea21}
 
@@ -2132,6 +2186,8 @@ NULL
 
 #### `public float `[`GetAccuracy`](#classKNearestNeighbor_1a032c332fb53270577542c5bc1eb2588d)`(int noTestSamples,int * pTestLabels,float * pTestVectors,int k)` {#classKNearestNeighbor_1a032c332fb53270577542c5bc1eb2588d}
 
+---
+
 # class `Linear` {#classLinear}
 
 ```
@@ -2143,7 +2199,7 @@ class Linear
 
 Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 fully connected layer의 기능을 수행한다
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -2151,7 +2207,7 @@ Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 fully connec
 `public inline virtual  `[`~Linear`](#classLinear_1a93788848749be1d68d444bd40d8d9bc1)`()` | [Linear](#classLinear) 클래스 소멸자
 `public inline int `[`Alloc`](#classLinear_1a83d01a67c02c7d09c34129bd900366e0)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int pNumInputCol,int pNumOutputCol,int use_bias,std::string pName)` | [Linear(Fully Connected)](#classLinear) Layer 그래프를 동적으로 할당 및 구성하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`Linear`](#classLinear_1aa748db4f994e9ced4e6727ed28859864)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int pNumInputCol,int pNumOutputCol,int use_bias,std::string pName)` {#classLinear_1aa748db4f994e9ced4e6727ed28859864}
 
@@ -2187,6 +2243,8 @@ TRUE
 
 **See also**: MatMul<DTYPE>::MatMul(Operator<DTYPE> *pWeight, Operator<DTYPE> *pInput, std::string pName) AddColWise<DTYPE>::AddColWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) [Module<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator)](#classModule_1a7a8ca0c6ddde4bffde9d806ff64ba614)
 
+---
+
 # class `LongArray` {#classLongArray}
 
 데이터를 저장하고 관리하는 클래스.
@@ -2197,7 +2255,7 @@ TRUE
 
 데이터를 초기화하고 CPU와 GPU간 데이터의 이동을 가능하게 한다.
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -2217,7 +2275,7 @@ TRUE
 `public int `[`Save`](#classLongArray_1ac4039a1f176738fc44ef8f8c28aa0d50)`(FILE * fp)` | LongArray의 데이터를 파일에 저장하는 메소드.
 `public int `[`Load`](#classLongArray_1a76e8e08d27340622fb9a82603da15bd4)`(FILE * fp)` | 
 
-## Members
+### Members
 
 #### `public  `[`LongArray`](#classLongArray_1a0e448aa621a5a40584f4db3bee5f27b3)`(unsigned int pCapacity)` {#classLongArray_1a0e448aa621a5a40584f4db3bee5f27b3}
 
@@ -2329,13 +2387,15 @@ fwrite함수를 통해 *fileForSave가 가리키는 파일에 LongArray데이터
 
 #### `public int `[`Load`](#classLongArray_1a76e8e08d27340622fb9a82603da15bd4)`(FILE * fp)` {#classLongArray_1a76e8e08d27340622fb9a82603da15bd4}
 
+---
+
 # class `LossFunction` {#classLossFunction}
 
 손실 함수를 계산하는 클래스
 
 뉴럴 네트워크의 순전파를 통해 계산된 출력 Tensor와 레이블 값을 비교해 손실 함수를 계산한다.
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -2361,7 +2421,7 @@ fwrite함수를 통해 *fileForSave가 가리키는 파일에 LongArray데이터
 `public int `[`ResetResult`](#classLossFunction_1a218be336d4c24afd3ca91ee58ea600e0)`()` | Result 텐서의 ELement를 0으로 초기화하는 메소드
 `public int `[`ResetGradient`](#classLossFunction_1a3c75534f1638c50c062ae129e322aee0)`()` | Gradient 텐서의 ELement를 0으로 초기화하는 메소드
 
-## Members
+### Members
 
 #### `public  `[`LossFunction`](#classLossFunction_1ad16b1ebac0244fcf6f527e541f0b022d)`(std::string pName)` {#classLossFunction_1ad16b1ebac0244fcf6f527e541f0b022d}
 
@@ -2491,6 +2551,8 @@ Gradient 텐서의 Device 멤버 변수가 CPU인 경우 CPU 메모리에서 초
 #### Returns
 Gradient 텐서의 Device 멤버 변수가 Invalid한 값을 가지고 있는 경우 FALSE를 그 외의 경우 TRUE를 반환한다.
 
+---
+
 # class `LRelu` {#classLRelu}
 
 ```
@@ -2498,7 +2560,7 @@ class LRelu
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -2510,7 +2572,7 @@ class LRelu
 `public inline virtual int `[`ForwardPropagate`](#classLRelu_1a9c7970df9d473b47301d42ffe3838c1b)`(int pTime)` | LRelu의 ForwardPropagate 매소드.
 `public inline virtual int `[`BackPropagate`](#classLRelu_1a8322f90cae9c6c0c704fc8ad87a3c2e5)`(int pTime)` | LRelu의 BackPropagate매소드.
 
-## Members
+### Members
 
 #### `public inline  `[`LRelu`](#classLRelu_1a890bd4b4423289342bf76cd8dec4ded2)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,float negativeSlope,int pLoadflag)` {#classLRelu_1a890bd4b4423289342bf76cd8dec4ded2}
 
@@ -2583,6 +2645,8 @@ result값이 0보다 클 경우 input_delta에 더하고,
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `MatMul` {#classMatMul}
 
 ```
@@ -2590,7 +2654,7 @@ class MatMul
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -2601,7 +2665,7 @@ class MatMul
 `public inline virtual int `[`ForwardPropagate`](#classMatMul_1a44c66bf3826370257a718bf974a2af68)`(int pTime)` | MatMul의 ForwardPropagate매소드.
 `public inline virtual int `[`BackPropagate`](#classMatMul_1aebaeb2eee8735a3bdb1c7f2bc64a96a8)`(int pTime)` | MatMul의 BackPropagate 매소드.
 
-## Members
+### Members
 
 #### `public inline  `[`MatMul`](#classMatMul_1afd77f3abc4bc600c045b74a634952ae8)`(`[`Operator`](#classOperator)`< DTYPE > * pWeight,`[`Operator`](#classOperator)`< DTYPE > * pInput,std::string pName,int pLoadflag)` {#classMatMul_1afd77f3abc4bc600c045b74a634952ae8}
 
@@ -2672,6 +2736,8 @@ weight_gradient에는 input * this_delta값을 더해준다.
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `Maxpooling2D` {#classMaxpooling2D}
 
 ```
@@ -2679,7 +2745,7 @@ class Maxpooling2D
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -2691,7 +2757,7 @@ class Maxpooling2D
 `public inline virtual int `[`ForwardPropagate`](#classMaxpooling2D_1ac70d30d579150b568f3c24e9a35ce81f)`(int pTime)` | Maxpooling2D의 ForwardPropagate 매소드.
 `public inline virtual int `[`BackPropagate`](#classMaxpooling2D_1ad9fbf7ae3ead0362607d12116c0e8bfe)`(int pTime)` | Maxpooling2D의 BackPropagate 매소드.
 
-## Members
+### Members
 
 #### `public inline  `[`Maxpooling2D`](#classMaxpooling2D_1a884f8b84ac999382d21ee08b3e040d17)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int maskRow,int maskCol,int strideRow,int strideCol,std::string pName,int pLoadflag)` {#classMaxpooling2D_1a884f8b84ac999382d21ee08b3e040d17}
 
@@ -2788,6 +2854,8 @@ Maxpooling2D의 BackPropagate 매소드.
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `Module` {#classModule}
 
 ```
@@ -2801,7 +2869,7 @@ Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 단일 Opera
 
 Module은 하나의 Operator처럼 뉴럴 네트워크 안에서 작동한다
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -2844,7 +2912,7 @@ Module은 하나의 Operator처럼 뉴럴 네트워크 안에서 작동한다
 `public virtual int `[`SaveComponents`](#classModule_1a4e7ab899a27e1f29c16d12e12ce51c5f)`(char * nameOfDir)` | 
 `public virtual int `[`LoadComponents`](#classModule_1af089e75acd169b00241e3b33b9406da5)`(char * nameOfDir)` | 
 
-## Members
+### Members
 
 #### `public  `[`Module`](#classModule_1ab8bf888e5ed0b51674053f4f3012b777)`(std::string pName)` {#classModule_1ab8bf888e5ed0b51674053f4f3012b777}
 
@@ -3024,6 +3092,8 @@ Module의 Device 멤버변수를 CPU로 전환하고, Excutable [Operator](#clas
 
 #### `public virtual int `[`LoadComponents`](#classModule_1af089e75acd169b00241e3b33b9406da5)`(char * nameOfDir)` {#classModule_1af089e75acd169b00241e3b33b9406da5}
 
+---
+
 # class `MSE` {#classMSE}
 
 ```
@@ -3035,7 +3105,7 @@ Squared Error) Metric를 이용해 뉴럴 네트워크의 손실 함수를 계�
 
 [MSE(Mean Squared Error)](#classMSE) 계산 식을 이용해 뉴럴 네트워크의 순전파를 통해 계산된 출력 Tensor와 레이블 값의 손실 함수를 계산한다
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -3046,7 +3116,7 @@ Squared Error) Metric를 이용해 뉴럴 네트워크의 손실 함수를 계�
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classMSE_1a90e2d9b6a762af5caaf9da8e8f611e80)`(int pTime)` | [MSE(Mean Squared Error)](#classMSE) LossFunction의 역전파를 수행하는 메소드
 `public inline DTYPE `[`Error`](#classMSE_1a2259437b634090e2e74f44254f5276d8)`(DTYPE pred,DTYPE ans)` | 
 
-## Members
+### Members
 
 #### `public inline  `[`MSE`](#classMSE_1abb2d56ecf64d8e9d173912bba69e1e41)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,`[`Operator`](#classOperator)`< DTYPE > * pLabel,std::string pName)` {#classMSE_1abb2d56ecf64d8e9d173912bba69e1e41}
 
@@ -3107,6 +3177,8 @@ NULL
 
 #### `public inline DTYPE `[`Error`](#classMSE_1a2259437b634090e2e74f44254f5276d8)`(DTYPE pred,DTYPE ans)` {#classMSE_1a2259437b634090e2e74f44254f5276d8}
 
+---
+
 # class `NagOptimizer` {#classNagOptimizer}
 
 ```
@@ -3114,7 +3186,7 @@ class NagOptimizer
   : public Optimizer< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -3127,7 +3199,7 @@ class NagOptimizer
 `public inline virtual int `[`UpdateParameter`](#classNagOptimizer_1a58a02e3959b18c588ff7629766375c3d)`(`[`Operator`](#classOperator)`< DTYPE > * pParameter)` | UpdateParameter default 함수
 `public inline int `[`UpdateParameter`](#classNagOptimizer_1a4ac96ef206ce18f94570dfb6373b259f)`(`[`Operator`](#classOperator)`< DTYPE > * pParameter,`[`Tensor`](#classTensor)`< DTYPE > * pVelocity)` | 파라미터 값들을 업데이트 하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`NagOptimizer`](#classNagOptimizer_1a750cdedf0a089eb87691a76ce6e0969b)`(`[`Container](#classContainer)< [Operator`](#classOperator)`< DTYPE > * > * pParameterContainer,float pLearningRate,float momentum,OptimizeDirection pOptimizeDirection)` {#classNagOptimizer_1a750cdedf0a089eb87691a76ce6e0969b}
 
@@ -3242,6 +3314,8 @@ signed_learning_rate와 pUnbiasedMomentum곱을 root가 적용된 pUnbiasedVeloc
 #### Returns
 성공 시 TURE
 
+---
+
 # class `NeuralNetwork` {#classNeuralNetwork}
 
 ```
@@ -3253,7 +3327,7 @@ class NeuralNetwork
 
 [Operator](#classOperator), [Module](#classModule), Loss Function, [Optimizer](#classOptimizer) 클래스를 생성 및 활용해 뉴럴 네트워크를 구성하고 학습시킨다
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -3285,7 +3359,7 @@ class NeuralNetwork
 `public `[`Operator`](#classOperator)`< DTYPE > * `[`SearchOperator`](#classNeuralNetwork_1a28f8478e6b84704f11b52cfa6c291a81)`(std::string pName)` | 
 `public void `[`InputToFeature`](#classNeuralNetwork_1abb8436142f9031d3c7385b5a7f274442)`(int inDim,int noSample,float * pSamples,int outDim,float * pFeatures,int batchSize)` | 
 
-## Members
+### Members
 
 #### `public  `[`NeuralNetwork`](#classNeuralNetwork_1a20d3f6e11c5829f2cd33a5201d730f15)`()` {#classNeuralNetwork_1a20d3f6e11c5829f2cd33a5201d730f15}
 
@@ -3511,6 +3585,8 @@ TRUE
 
 #### `public void `[`InputToFeature`](#classNeuralNetwork_1abb8436142f9031d3c7385b5a7f274442)`(int inDim,int noSample,float * pSamples,int outDim,float * pFeatures,int batchSize)` {#classNeuralNetwork_1abb8436142f9031d3c7385b5a7f274442}
 
+---
+
 # class `NoiseGenerator` {#classNoiseGenerator}
 
 ```
@@ -3522,7 +3598,7 @@ class NoiseGenerator
 
 [Operator](#classOperator) 형식이지만 Tensor를 저장하는 용도로만 사용
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -3530,7 +3606,7 @@ class NoiseGenerator
 `public inline  `[`NoiseGenerator`](#classNoiseGenerator_1a7d16c1f9aa5bace194c7bfff7e9e0d3c)`(`[`Shape`](#classShape)` * pShape,std::string pName)` | 
 `public inline  `[`~NoiseGenerator`](#classNoiseGenerator_1a0d7e50b7fe67c356c65023f4d672e4cf)`()` | 
 
-## Members
+### Members
 
 #### `public inline  `[`NoiseGenerator`](#classNoiseGenerator_1a0914cd702e5a449df57ca18a5771d157)`(int pTimeSize,int pBatchSize,int pChannelSize,int pRowSize,int pColSize,std::string pName)` {#classNoiseGenerator_1a0914cd702e5a449df57ca18a5771d157}
 
@@ -3538,11 +3614,13 @@ class NoiseGenerator
 
 #### `public inline  `[`~NoiseGenerator`](#classNoiseGenerator_1a0d7e50b7fe67c356c65023f4d672e4cf)`()` {#classNoiseGenerator_1a0d7e50b7fe67c356c65023f4d672e4cf}
 
+---
+
 # class `Operator` {#classOperator}
 
 본 프래임워크의 가장 작은 연산 단위.
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -3596,7 +3674,7 @@ class NoiseGenerator
 `public virtual int `[`Load`](#classOperator_1a16d495a83c27bad4aeacd6ce4569a8f7)`(FILE * fp)` | 
 `public virtual int `[`Save`](#classOperator_1afd997818c44df1bdf94385cc1611d0e7)`(FILE * fp)` | 
 
-## Members
+### Members
 
 #### `public  `[`Operator`](#classOperator_1acd1324c1a03947cd33fb88b445a0a39a)`(std::string pName,int pLoadflag)` {#classOperator_1acd1324c1a03947cd33fb88b445a0a39a}
 
@@ -3696,9 +3774,11 @@ class NoiseGenerator
 
 #### `public virtual int `[`Save`](#classOperator_1afd997818c44df1bdf94385cc1611d0e7)`(FILE * fp)` {#classOperator_1afd997818c44df1bdf94385cc1611d0e7}
 
+---
+
 # class `Optimizer` {#classOptimizer}
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -3721,7 +3801,7 @@ class NoiseGenerator
 `public float `[`GetWeightDecayRate`](#classOptimizer_1ac95806a3d3897f54cf1c3da8525db2e9)`() const` | 
 `public int `[`ResetParameterGradient`](#classOptimizer_1a6afc4f5bf1b0da229aafeefe5ae2bb12)`()` | Trainable [Tensor](#classTensor) Container의 Operator들의 Gradient를 초기화하는 메소드
 
-## Members
+### Members
 
 #### `public  `[`Optimizer`](#classOptimizer_1aceb51b5bd9ed8a62dbc89c224402fe9a)`(`[`Operator`](#classOperator)`< DTYPE > ** pParameters,float pLearningRate,OptimizeDirection pOptimizeDirection)` {#classOptimizer_1aceb51b5bd9ed8a62dbc89c224402fe9a}
 
@@ -3840,6 +3920,8 @@ Trainable [Tensor](#classTensor) Container의 Operator들의 Gradient를 초기�
 #### Returns
 TRUE Operator<DTYPE>::ResetGradient()
 
+---
+
 # class `PRelu` {#classPRelu}
 
 ```
@@ -3847,7 +3929,7 @@ class PRelu
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -3859,7 +3941,7 @@ class PRelu
 `public inline virtual int `[`ForwardPropagate`](#classPRelu_1ad14b9b7c039f16cac149b083c1fd091d)`(int pTime)` | PRelu의 ForwardPropagate 매소드.
 `public inline virtual int `[`BackPropagate`](#classPRelu_1ac4bf8caf03e220deb028d81fb60de372)`(int pTime)` | PRelu의 BackPropagate매소드.
 
-## Members
+### Members
 
 #### `public inline  `[`PRelu`](#classPRelu_1af1ed227113a7afffeed338913cdfcc86)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,`[`Operator`](#classOperator)`< DTYPE > * pWeight,int pLoadflag)` {#classPRelu_1af1ed227113a7afffeed338913cdfcc86}
 
@@ -3934,6 +4016,8 @@ weight_delta는 result값이 0보다 클 경우 0에 더하고,
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `ReconstructionError` {#classReconstructionError}
 
 ```
@@ -3941,7 +4025,7 @@ class ReconstructionError
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -3951,7 +4035,7 @@ class ReconstructionError
 `public inline virtual int `[`ForwardPropagate`](#classReconstructionError_1a467a2f8d2f5c9b110962bb9e3e3e3bfd)`(int pTime)` | 
 `public inline virtual int `[`BackPropagate`](#classReconstructionError_1a8bc001621b3e481734ad8c4628a664f1)`(int pTime)` | 
 
-## Members
+### Members
 
 #### `public inline  `[`ReconstructionError`](#classReconstructionError_1a42bb64ce990b27859ce8f3e5b96d627a)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,`[`Operator`](#classOperator)`< DTYPE > * pLabel,std::string pName)` {#classReconstructionError_1a42bb64ce990b27859ce8f3e5b96d627a}
 
@@ -3963,6 +4047,8 @@ class ReconstructionError
 
 #### `public inline virtual int `[`BackPropagate`](#classReconstructionError_1a8bc001621b3e481734ad8c4628a664f1)`(int pTime)` {#classReconstructionError_1a8bc001621b3e481734ad8c4628a664f1}
 
+---
+
 # class `Recurrent` {#classRecurrent}
 
 ```
@@ -3970,7 +4056,7 @@ class Recurrent
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -3982,7 +4068,7 @@ class Recurrent
 `public inline int `[`ForwardPropagate`](#classRecurrent_1ad5bdcf85fb28e8e8b64edab2a5da615f)`(int pTime,int pThreadNum)` | 
 `public inline int `[`BackPropagate`](#classRecurrent_1a70db063ca6efe80e69af73cd67e0789c)`(int pTime,int pThreadNum)` | 
 
-## Members
+### Members
 
 #### `public inline  `[`Recurrent`](#classRecurrent_1a3562481a571babfb398903433aef90a5)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,`[`Operator`](#classOperator)`< DTYPE > * pWeightXH,`[`Operator`](#classOperator)`< DTYPE > * pWeightHH,`[`Operator`](#classOperator)`< DTYPE > * pWeightHY)` {#classRecurrent_1a3562481a571babfb398903433aef90a5}
 
@@ -3998,6 +4084,8 @@ class Recurrent
 
 #### `public inline int `[`BackPropagate`](#classRecurrent_1a70db063ca6efe80e69af73cd67e0789c)`(int pTime,int pThreadNum)` {#classRecurrent_1a70db063ca6efe80e69af73cd67e0789c}
 
+---
+
 # class `Relu` {#classRelu}
 
 ```
@@ -4005,7 +4093,7 @@ class Relu
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -4017,7 +4105,7 @@ class Relu
 `public inline virtual int `[`ForwardPropagate`](#classRelu_1aceeba8398158f592380232690e2e90ec)`(int pTime)` | Relu의 ForwardPropagate 매소드.
 `public inline virtual int `[`BackPropagate`](#classRelu_1a7c41f1cf4e9cad9efb70fdbc9b6d7ea3)`(int pTime)` | Relu의 BackPropagate매소드.
 
-## Members
+### Members
 
 #### `public inline  `[`Relu`](#classRelu_1a4f35caa00fa86940cdc1a65933108418)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int pLoadflag)` {#classRelu_1a4f35caa00fa86940cdc1a65933108418}
 
@@ -4078,6 +4166,8 @@ result값이 0보다 클 경우 input_delta에 더하고, 0보다 작을 경우 
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `ReShape` {#classReShape}
 
 ```
@@ -4085,7 +4175,7 @@ class ReShape
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -4099,7 +4189,7 @@ class ReShape
 `public inline virtual int `[`ForwardPropagate`](#classReShape_1a85b38b417b41399119460adbc6e9be40)`(int pTime)` | ReShape의 ForwardPropagate 매소드
 `public inline virtual int `[`BackPropagate`](#classReShape_1a707731ef524b6abc57de318d56960558)`(int pTime)` | ReShape의 BackPropagate 매소드.
 
-## Members
+### Members
 
 #### `public inline  `[`ReShape`](#classReShape_1a8889691defdc4983f9b41ca045d11365)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int pRowSize,int pColSize,std::string pName,int pLoadflag)` {#classReShape_1a8889691defdc4983f9b41ca045d11365}
 
@@ -4218,6 +4308,8 @@ input_delta에 this_delta값을 더한다.
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `RMSPropOptimizer` {#classRMSPropOptimizer}
 
 ```
@@ -4225,7 +4317,7 @@ class RMSPropOptimizer
   : public Optimizer< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -4239,7 +4331,7 @@ class RMSPropOptimizer
 `public inline int `[`UpdateParameter`](#classRMSPropOptimizer_1a166ce01205a276ebfe7260d03d6c5a3c)`(`[`Operator`](#classOperator)`< DTYPE > * pParameter,`[`Tensor`](#classTensor)`< DTYPE > * m_pMeanSquared)` | 파라미터 값들을 업데이트 하는 메소드
 `public inline int `[`UpdateParameter`](#classRMSPropOptimizer_1a1e9bcebf06655abf5380b83c36c89bf2)`(`[`Operator`](#classOperator)`< DTYPE > * pParameter,`[`Tensor`](#classTensor)`< DTYPE > * m_pMeanSquared,`[`Tensor`](#classTensor)`< DTYPE > * m_pMeanGrad)` | 파라미터 값들을 업데이트 하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`RMSPropOptimizer`](#classRMSPropOptimizer_1a4cdaa40c01f87df1c5836946fa441113)`(`[`Container](#classContainer)< [Operator`](#classOperator)`< DTYPE > * > * pParameterContainer,float pLearningRate,float decay,float epsilon,bool centered,OptimizeDirection pOptimizeDirection)` {#classRMSPropOptimizer_1a4cdaa40c01f87df1c5836946fa441113}
 
@@ -4381,6 +4473,8 @@ m_decay 가중치로 조정된 m_pMeanSquared, gradinet로 m_pMeanSquared 업데
 #### Returns
 성공 시 TURE
 
+---
+
 # class `Sequential` {#classSequential}
 
 ```
@@ -4388,7 +4482,7 @@ class Sequential
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -4398,7 +4492,7 @@ class Sequential
 `public inline int `[`ForwardPropagate`](#classSequential_1a94b9a0a9690d3eabdba4ce7e6dc9bf40)`()` | 
 `public inline int `[`BackPropagate`](#classSequential_1a6857585bbadfa1175483341a56d72523)`()` | 
 
-## Members
+### Members
 
 #### `public inline  `[`Sequential`](#classSequential_1acae5d700ca6c1ff7f235514b81ebffa3)`(int numOfOperator,...)` {#classSequential_1acae5d700ca6c1ff7f235514b81ebffa3}
 
@@ -4410,13 +4504,15 @@ class Sequential
 
 #### `public inline int `[`BackPropagate`](#classSequential_1a6857585bbadfa1175483341a56d72523)`()` {#classSequential_1a6857585bbadfa1175483341a56d72523}
 
+---
+
 # class `Shape` {#classShape}
 
 정보를 담고 있는 Shape을 저장하고 관리하는 클래스
 
 Tensor의 차원 정보를 담고 있는 Shape을 저장하고 관리하는 클래스
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -4436,7 +4532,7 @@ Tensor의 차원 정보를 담고 있는 Shape을 저장하고 관리하는 클�
 `public int `[`ReShape`](#classShape_1ac33a6b0013bd8e66b86a61e03cc131ce)`(int pRank,...)` | [Shape](#classShape) 각 축의 Dimension정보를 초기화 하는 메소드.
 `public int `[`SetDeviceCPU`](#classShape_1a053362e2b59b2965bdcb765d9158003c)`()` | [Shape](#classShape) 클래스의 Device 멤버 변수를 CPU로 변경한다.
 
-## Members
+### Members
 
 #### `public  `[`Shape`](#classShape_1a2a7cd5aaf62c49a15140e8fc042d68a2)`(int pSize0,int pSize1,int pSize2,int pSize3,int pSize4)` {#classShape_1a2a7cd5aaf62c49a15140e8fc042d68a2}
 
@@ -4626,6 +4722,8 @@ m_idOfDevice
 #### Returns
 TRUE
 
+---
+
 # class `Sigmoid` {#classSigmoid}
 
 ```
@@ -4633,7 +4731,7 @@ class Sigmoid
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -4644,7 +4742,7 @@ class Sigmoid
 `public inline virtual int `[`BackPropagate`](#classSigmoid_1aab45c095325c1a08c0433d071acee4fc)`(int pTime)` | SIGMOID의 BackPropagate 매소드.
 `public inline DTYPE `[`SIGMOID`](#classSigmoid_1aa4c668309336cef433d98b56abd3cda7)`(DTYPE data)` | SIGMOID 함수
 
-## Members
+### Members
 
 #### `public inline  `[`Sigmoid`](#classSigmoid_1a30edeafdf59c9729cec91dda2f40611e)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,std::string pName,int pLoadflag)` {#classSigmoid_1a30edeafdf59c9729cec91dda2f40611e}
 
@@ -4704,6 +4802,8 @@ SIGMOID 함수
 #### Returns
 data를 SIGMOID함수에 넣은 결과 값.
 
+---
+
 # class `Softmax` {#classSoftmax}
 
 ```
@@ -4711,7 +4811,7 @@ class Softmax
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -4725,7 +4825,7 @@ class Softmax
 `public inline virtual int `[`BackPropagate`](#classSoftmax_1a397299ec79b62770e6696996be661f41)`(int pTime)` | softmax의 BackPropagate 매소드.
 `public inline DTYPE `[`Max`](#classSoftmax_1a575f0dfcdf281af95c020b03b6ee4fb7)`(`[`Tensor`](#classTensor)`< DTYPE > * input,int start,int end)` | 파라미터로 받은 Tensor에서 가장 큰 값을 반환하는 함수.
 
-## Members
+### Members
 
 #### `public inline  `[`Softmax`](#classSoftmax_1ab07477db41c81b4febd7cc7604c372a5)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,DTYPE epsilon,int pLoadflag)` {#classSoftmax_1ab07477db41c81b4febd7cc7604c372a5}
 
@@ -4814,6 +4914,8 @@ softmax의 미분 값을 구하여 input_delta에 넣어준다.
 #### Returns
 input Tensor의 값들 중 가장 큰 값..
 
+---
+
 # class `SoftmaxCrossEntropy` {#classSoftmaxCrossEntropy}
 
 ```
@@ -4827,7 +4929,7 @@ Cross Entropy 계산 식을 이용해 뉴럴 네트워크의 순전파를 통해
 
 [Softmax](#classSoftmax) Function을 뉴럴 네트워크의 마지막 Operator로 사용해 뉴럴 네트워크의 Gradient 계산을 용이하게 한다
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -4840,7 +4942,7 @@ Cross Entropy 계산 식을 이용해 뉴럴 네트워크의 순전파를 통해
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classSoftmaxCrossEntropy_1a74ade47b66aa72fd0b712ed0e5cb18c3)`(int pTime)` | [Softmax](#classSoftmax)[CrossEntropy](#classCrossEntropy) LossFunction의 역전파를 수행하는 메소드
 `public inline DTYPE `[`Max`](#classSoftmaxCrossEntropy_1a2f9be5e8bec2ef55ec57a8d7cbb902be)`(`[`Tensor`](#classTensor)`< DTYPE > * input,int start,int end)` | 지정된 범위 안에서 입력 Tensor의 데이터 값 중 최댓값을 반환하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`SoftmaxCrossEntropy`](#classSoftmaxCrossEntropy_1a0190d98c392818fee9d3d3e2668ecb76)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,`[`Operator`](#classOperator)`< DTYPE > * pLabel,DTYPE epsilon,std::string pName)` {#classSoftmaxCrossEntropy_1a0190d98c392818fee9d3d3e2668ecb76}
 
@@ -4945,6 +5047,8 @@ NULL
 #### Returns
 지정된 범위 안에서 입력 Tensor의 데이터 값의 최댓값
 
+---
+
 # class `Switch` {#classSwitch}
 
 ```
@@ -4952,7 +5056,7 @@ class Switch
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -4966,7 +5070,7 @@ class Switch
 `public inline virtual int `[`ForwardPropagate`](#classSwitch_1a560d3a9c26ab6a09ca6189c556da225c)`(int pTime)` | 
 `public inline virtual int `[`BackPropagate`](#classSwitch_1a39c9f3cf791c861696814d5aca4c1075)`(int pTime)` | 
 
-## Members
+### Members
 
 #### `public inline  `[`Switch`](#classSwitch_1adc84c8b3706ee8d27d590eaa161fe8a4)`(`[`Operator`](#classOperator)`< DTYPE > * pInput0,`[`Operator`](#classOperator)`< DTYPE > * pInput1,int pLoadflag)` {#classSwitch_1adc84c8b3706ee8d27d590eaa161fe8a4}
 
@@ -4986,6 +5090,8 @@ class Switch
 
 #### `public inline virtual int `[`BackPropagate`](#classSwitch_1a39c9f3cf791c861696814d5aca4c1075)`(int pTime)` {#classSwitch_1a39c9f3cf791c861696814d5aca4c1075}
 
+---
+
 # class `Tanh` {#classTanh}
 
 ```
@@ -4993,7 +5099,7 @@ class Tanh
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5003,7 +5109,7 @@ class Tanh
 `public inline virtual int `[`ForwardPropagate`](#classTanh_1ac7f3f0ff7e6a8f41d3cdec5ac1bf6439)`(int pTime)` | Tanh의 ForwardPropagate 매소드
 `public inline virtual int `[`BackPropagate`](#classTanh_1a461a7d2e40e24b754dc440293996fff2)`(int pTime)` | Tanh의 BackPropagate 매소드.
 
-## Members
+### Members
 
 #### `public inline  `[`Tanh`](#classTanh_1aa6d97169d17ed3d91129261a372c4b3c)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,std::string pName,int pLoadflag)` {#classTanh_1aa6d97169d17ed3d91129261a372c4b3c}
 
@@ -5052,6 +5158,8 @@ result값으로 tanh의 미분 값을 계산하여 input_delta에 더한다.
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `Tensor` {#classTensor}
 
 저장하고 관리하는 클래스
@@ -5062,7 +5170,7 @@ Tensor클래스는 Shape와 LongArray를 이용하여 Tensor의 모양과 데이
 
 Operator클래스에서 m_aaResult(ForwardPropagate한 값)와 m_aaGradient(BackPropagate한 값)을 저장한다.
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5101,7 +5209,7 @@ Operator클래스에서 m_aaResult(ForwardPropagate한 값)와 m_aaGradient(Back
 `public void `[`Clip`](#classTensor_1a1fbf9588e12fba1c08fb673e77d18a33)`(float min,float max)` | 
 `public void `[`MultiplyScalar`](#classTensor_1a9fb8c0ccec9bb0ea615e3d2c7551d6bf)`(unsigned int pTime,float pScalar)` | 
 
-## Members
+### Members
 
 #### `public  `[`Tensor`](#classTensor_1aa20e4455987cf99194c00bd46286f8bf)`(int pSize0,int pSize1,int pSize2,int pSize3,int pSize4,IsUseTime pAnswer)` {#classTensor_1aa20e4455987cf99194c00bd46286f8bf}
 
@@ -5171,13 +5279,15 @@ Operator클래스에서 m_aaResult(ForwardPropagate한 값)와 m_aaGradient(Back
 
 #### `public void `[`MultiplyScalar`](#classTensor_1a9fb8c0ccec9bb0ea615e3d2c7551d6bf)`(unsigned int pTime,float pScalar)` {#classTensor_1a9fb8c0ccec9bb0ea615e3d2c7551d6bf}
 
+---
+
 # class `Tensorholder` {#classTensorholder}
 
 Result만 사용하기 위한 클래스.
 
 주로 Network의 input, label값을 저장하기 위해 구현되었다.
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5190,7 +5300,7 @@ Result만 사용하기 위한 클래스.
 `public inline void `[`SetTensor`](#classTensorholder_1a7ea9ae1a6146391965e7d351be8e8c1f)`(`[`Tensor`](#classTensor)`< DTYPE > * pTensor)` | 파라미터로 받은 Tensor를 Result로 설정한다.
 `public inline void `[`FeedTensor`](#classTensorholder_1ab4e8ab628467d10a19951648cba83c40)`(`[`Tensor`](#classTensor)`< DTYPE > * pTensor)` | 파라미터로 받은 Tensor를 Result로 설정한다.
 
-## Members
+### Members
 
 #### `public inline  `[`Tensorholder`](#classTensorholder_1abe241533158621e13d68ee4f24264623)`(`[`Tensor`](#classTensor)`< DTYPE > * pTensor,std::string pName,int pTrainable,int pLoadflag)` {#classTensorholder_1abe241533158621e13d68ee4f24264623}
 
@@ -5286,6 +5396,8 @@ SetIsTensorholder를 통해 Tensorholder임을 설정하고, pTensor의 Shape과
 #### Parameters
 * `pTensor` Result로 설정 할 [Tensor](#classTensor).
 
+---
+
 # class `TransposedConvolution2D` {#classTransposedConvolution2D}
 
 ```
@@ -5293,7 +5405,7 @@ class TransposedConvolution2D
   : public Operator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5306,7 +5418,7 @@ class TransposedConvolution2D
 `public inline virtual int `[`ForwardPropagate`](#classTransposedConvolution2D_1ada8f56cda24d89a955744add42df8742)`(int pTime)` | TransposedConvolution2D의 ForwardPropagate 메소드.
 `public inline virtual int `[`BackPropagate`](#classTransposedConvolution2D_1a30821ce98f67cb3157a8749c70f2a12f)`(int pTime)` | TRANSPOSEDCONVOLUTION_2D의 BackPropagate 메소드.
 
-## Members
+### Members
 
 #### `public inline  `[`TransposedConvolution2D`](#classTransposedConvolution2D_1a4823926469a618fa912baf03150954dc)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,`[`Operator`](#classOperator)`< DTYPE > * pWeight,int stride1,int stride2,std::string pName,int pLoadflag)` {#classTransposedConvolution2D_1a4823926469a618fa912baf03150954dc}
 
@@ -5420,6 +5532,8 @@ TransposedConvolution의 미분 값(weight * this_delta, input * this_delta)을 
 #### Returns
 성공 시 TRUE.
 
+---
+
 # class `TransposedConvolutionLayer2D` {#classTransposedConvolutionLayer2D}
 
 ```
@@ -5431,7 +5545,7 @@ class TransposedConvolutionLayer2D
 
 Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 2-Dimensional Transposedconvolution Layer의 기능을 수행한다
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5439,7 +5553,7 @@ Operator들을 뉴럴 네트워크의 서브 그래프로 구성해 2-Dimensiona
 `public inline virtual  `[`~TransposedConvolutionLayer2D`](#classTransposedConvolutionLayer2D_1a8f44ef6a070ba74789ff1eed98e60ab2)`()` | [TransposedConvolutionLayer2D](#classTransposedConvolutionLayer2D) 클래스 소멸자
 `public inline int `[`Alloc`](#classTransposedConvolutionLayer2D_1a2e301be572bc7ece3487c7bc6f9f031e)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int pNumInputChannel,int pNumOutputChannel,int pNumKernelRow,int pNumKernelCol,int pStrideRow,int pStrideCol,int pPaddingRow,int pPaddingCol,int use_bias,std::string pName)` | 2D TransposedConvolution Layer 그래프를 동적으로 할당 및 구성하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`TransposedConvolutionLayer2D`](#classTransposedConvolutionLayer2D_1a7d9568737d2ea26cee8bfab6c0293577)`(`[`Operator`](#classOperator)`< DTYPE > * pInput,int pNumInputChannel,int pNumOutputChannel,int pNumKernelRow,int pNumKernelCol,int pStrideRow,int pStrideCol,int pPadding,int use_bias,std::string pName)` {#classTransposedConvolutionLayer2D_1a7d9568737d2ea26cee8bfab6c0293577}
 
@@ -5489,6 +5603,8 @@ TRUE
 
 **See also**: [TransposedConvolutionLayer2D<DTYPE>::TransposedConvolutionLayer2D](#classTransposedConvolutionLayer2D_1a7d9568737d2ea26cee8bfab6c0293577)([Operator<DTYPE>](#classOperator) *pInput, [Operator<DTYPE>](#classOperator) *pWeight, int stride1, int stride2, std::string pName = "NO NAME") AddColWise<DTYPE>::AddColWise(Operator<DTYPE> *pInput, Operator<DTYPE> *pBias, std::string pName) [Module<DTYPE>::AnalyzeGraph(Operator<DTYPE> *pResultOperator)](#classModule_1a7a8ca0c6ddde4bffde9d806ff64ba614)
 
+---
+
 # class `TripletLoss` {#classTripletLoss}
 
 ```
@@ -5496,7 +5612,7 @@ class TripletLoss
   : public LossFunction< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5508,7 +5624,7 @@ class TripletLoss
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`ForwardPropagate`](#classTripletLoss_1a2feac7ce4fd47d6d1d2c87dc850fae47)`(int pTime)` | LossFunction의 순전파를 수행하는 메소드
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classTripletLoss_1a40d30a0c03da6f8ef5a9cfdaddbba1f0)`(int pTime)` | LossFunction의 역전파를 수행하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`TripletLoss`](#classTripletLoss_1a23bba0ec84bc8109fa5610018e449f90)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,DTYPE margin,std::string pName)` {#classTripletLoss_1a23bba0ec84bc8109fa5610018e449f90}
 
@@ -5546,6 +5662,8 @@ LossFunction의 역전파를 수행하는 메소드
 #### Returns
 NULL
 
+---
+
 # class `UniformNoiseGenerator` {#classUniformNoiseGenerator}
 
 ```
@@ -5553,7 +5671,7 @@ class UniformNoiseGenerator
   : public NoiseGenerator< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5567,7 +5685,7 @@ class UniformNoiseGenerator
 `public inline virtual int `[`ForwardPropagate`](#classUniformNoiseGenerator_1a14a686b99bb811bb7bf8bfeaf8ddba8c)`(int pTime)` | 
 `public inline virtual int `[`BackPropagate`](#classUniformNoiseGenerator_1a5165db89c318df8f72e73b4fa3f14be7)`(int pTime)` | 
 
-## Members
+### Members
 
 #### `public inline  `[`UniformNoiseGenerator`](#classUniformNoiseGenerator_1a95696eba2f5b4068da94b4227503a02f)`(int pTimeSize,int pBatchSize,int pChannelSize,int pRowSize,int pColSize,float pLowerLimit,float pUpperLimit,IsUseTime pAnswer,std::string pName)` {#classUniformNoiseGenerator_1a95696eba2f5b4068da94b4227503a02f}
 
@@ -5587,6 +5705,8 @@ class UniformNoiseGenerator
 
 #### `public inline virtual int `[`BackPropagate`](#classUniformNoiseGenerator_1a5165db89c318df8f72e73b4fa3f14be7)`(int pTime)` {#classUniformNoiseGenerator_1a5165db89c318df8f72e73b4fa3f14be7}
 
+---
+
 # class `VanillaGANDiscriminatorLoss` {#classVanillaGANDiscriminatorLoss}
 
 ```
@@ -5594,7 +5714,7 @@ class VanillaGANDiscriminatorLoss
   : public LossFunction< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5606,7 +5726,7 @@ class VanillaGANDiscriminatorLoss
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`ForwardPropagate`](#classVanillaGANDiscriminatorLoss_1a8780b4f5d982cae80f5daf9206c83675)`(int pTime)` | LossFunction의 순전파를 수행하는 메소드
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classVanillaGANDiscriminatorLoss_1ac458b5ad199bcf7d0945618ee36c02d5)`(int pTime)` | LossFunction의 역전파를 수행하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`VanillaGANDiscriminatorLoss`](#classVanillaGANDiscriminatorLoss_1a768fb6d1ee98c8759f94d750bc020691)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,`[`Operator`](#classOperator)`< DTYPE > * pLabel,DTYPE epsilon,std::string pName)` {#classVanillaGANDiscriminatorLoss_1a768fb6d1ee98c8759f94d750bc020691}
 
@@ -5644,6 +5764,8 @@ LossFunction의 역전파를 수행하는 메소드
 #### Returns
 NULL
 
+---
+
 # class `VanillaGANGeneratorLoss` {#classVanillaGANGeneratorLoss}
 
 ```
@@ -5651,7 +5773,7 @@ class VanillaGANGeneratorLoss
   : public LossFunction< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5663,7 +5785,7 @@ class VanillaGANGeneratorLoss
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`ForwardPropagate`](#classVanillaGANGeneratorLoss_1ae6499cffcfe3ca5755b10eea036bec58)`(int pTime)` | LossFunction의 순전파를 수행하는 메소드
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classVanillaGANGeneratorLoss_1ab6bff598db3fd349585638e0efb47c6a)`(int pTime)` | LossFunction의 역전파를 수행하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`VanillaGANGeneratorLoss`](#classVanillaGANGeneratorLoss_1ab47c3b1dd2a1f56e0696aac2b049c2b0)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,`[`Operator`](#classOperator)`< DTYPE > * pLabel,DTYPE epsilon,std::string pName)` {#classVanillaGANGeneratorLoss_1ab47c3b1dd2a1f56e0696aac2b049c2b0}
 
@@ -5701,9 +5823,11 @@ LossFunction의 역전파를 수행하는 메소드
 #### Returns
 NULL
 
+---
+
 # class `WData` {#classWData}
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5715,7 +5839,7 @@ NULL
 `public inline virtual int `[`GetCapacity`](#classWData_1af8f92f28b659824b59a55eabfde4cd0a)`()` | 
 `public inline DTYPE & `[`operator[]`](#classWData_1a649cada43f6bedfd6039a59c52fecf19)`(int idx)` | 
 
-## Members
+### Members
 
 #### `public DTYPE * `[`m_aData`](#classWData_1ad36845cd4699b9ab85a5ca524ab912aa) {#classWData_1ad36845cd4699b9ab85a5ca524ab912aa}
 
@@ -5731,6 +5855,8 @@ NULL
 
 #### `public inline DTYPE & `[`operator[]`](#classWData_1a649cada43f6bedfd6039a59c52fecf19)`(int idx)` {#classWData_1a649cada43f6bedfd6039a59c52fecf19}
 
+---
+
 # class `WGANDiscriminatorLoss` {#classWGANDiscriminatorLoss}
 
 ```
@@ -5738,7 +5864,7 @@ class WGANDiscriminatorLoss
   : public LossFunction< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5749,7 +5875,7 @@ class WGANDiscriminatorLoss
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`ForwardPropagate`](#classWGANDiscriminatorLoss_1ad788399d3f79109e938873c1217c4fda)`(int pTime)` | LossFunction의 순전파를 수행하는 메소드
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classWGANDiscriminatorLoss_1a1ebcb93edef6fee4c8a05cadfdfd4b4c)`(int pTime)` | LossFunction의 역전파를 수행하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`WGANDiscriminatorLoss`](#classWGANDiscriminatorLoss_1a4c87bb209bfcd5200f4eed964db52e08)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,`[`Operator`](#classOperator)`< DTYPE > * pLabel,std::string pName)` {#classWGANDiscriminatorLoss_1a4c87bb209bfcd5200f4eed964db52e08}
 
@@ -5785,6 +5911,8 @@ LossFunction의 역전파를 수행하는 메소드
 #### Returns
 NULL
 
+---
+
 # class `WGANGeneratorLoss` {#classWGANGeneratorLoss}
 
 ```
@@ -5792,7 +5920,7 @@ class WGANGeneratorLoss
   : public LossFunction< DTYPE >
 ```  
 
-## Summary
+### Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
@@ -5803,7 +5931,7 @@ class WGANGeneratorLoss
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`ForwardPropagate`](#classWGANGeneratorLoss_1a5354d9a780b8be53775610526787b3ec)`(int pTime)` | LossFunction의 순전파를 수행하는 메소드
 `public inline virtual `[`Tensor`](#classTensor)`< DTYPE > * `[`BackPropagate`](#classWGANGeneratorLoss_1a36f645111dde1d73aa924ed539486286)`(int pTime)` | LossFunction의 역전파를 수행하는 메소드
 
-## Members
+### Members
 
 #### `public inline  `[`WGANGeneratorLoss`](#classWGANGeneratorLoss_1a8341d62f2b2a4bec46a9d4eb96c2c133)`(`[`Operator`](#classOperator)`< DTYPE > * pOperator,`[`Operator`](#classOperator)`< DTYPE > * pLabel,std::string pName)` {#classWGANGeneratorLoss_1a8341d62f2b2a4bec46a9d4eb96c2c133}
 
