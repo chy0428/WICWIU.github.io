@@ -10,6 +10,10 @@
 
         이 튜토리얼을 학습하면 매우 간단하고 쉽게 **CUDA** 의 첫걸음을 뗄 수 있어서 강추합니다. 이 튜토리얼을 학습하고 **CUDA** 의 공식 Programming Guide 를 학습하는 것을 권장합니다.
 
+- [Awesome-GPU](https://github.com/Jokeren/Awesome-GPU)
+
+- [Awesome-CUDA](https://github.com/Erkaman/Awesome-CUDA)
+
 여기에서는 간단하게 **CUDA** 프로그래밍을 알아보겠습니다.
 
 ## CUDA 기초
