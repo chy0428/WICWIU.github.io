@@ -7,13 +7,13 @@
 
 !!! example 
 
-    *Example*:
+    === "Result"
 
-    직각 삼각형의 두 직각변 \$a , b\$ 를 각각 한 변으로 하는 정사각형 면적의 합은 빗변 \$c\$ 를 한 변으로 하는 정사각형의 면적과 같다. 이를 피타고라스 정리 \$a ^{2} + b ^{2} = c ^{2}\$ 라고 한다.
+        직각 삼각형의 두 직각변 $a , b$ 를 각각 한 변으로 하는 정사각형 면적의 합은 빗변 $c$ 를 한 변으로 하는 정사각형의 면적과 같다. 이를 피타고라스 정리 $a ^{2} + b ^{2} = c ^{2}$ 라고 한다.
+    
+    === "Example"
 
-    *Result*:
-
-    직각 삼각형의 두 직각변 $a , b$ 를 각각 한 변으로 하는 정사각형 면적의 합은 빗변 $c$ 를 한 변으로 하는 정사각형의 면적과 같다. 이를 피타고라스 정리 $a ^{2} + b ^{2} = c ^{2}$ 라고 한다.
+        직각 삼각형의 두 직각변 \$a , b\$ 를 각각 한 변으로 하는 정사각형 면적의 합은 빗변 \$c\$ 를 한 변으로 하는 정사각형의 면적과 같다. 이를 피타고라스 정리 \$a ^{2} + b ^{2} = c ^{2}\$ 라고 한다.
 
 ## 디스플레이 수식
 
@@ -21,21 +21,21 @@
 
 !!! example 
 
-    *Example*:
+    === "Result"
 
-    \$m \times n\$ 행렬 \$\mathbf{A}\$, \$n \times p\$ 행렬 \$\mathbf{B}\$ 에 대한 행렬곱은 \$m \times p\$ 행렬 
+        $m \times n$ 행렬 $\mathbf{A}$, $n \times p$ 행렬 $\mathbf{B}$ 에 대한 행렬곱은 $m \times p$ 행렬 
 
-    \$\$ \mathbf{AB} = \begin{pmatrix} \sum_{k=1}^{n}A _{1k}B _{k1}& \sum_{k=1}^{n}A _{1k}B _{k2}& \dots& \sum_{k=1}^{n}A _{1k}B _{kp} \\ \sum_{k=1}^{n}A _{2k}B _{k1}& \sum_{k=1}^{n}A _{2k}B _{k2}& \dots& \sum_{k=1}^{n}A _{2k}B _{kp} \\ \vdots& \vdots& \ddots& \vdots \\ \sum_{k=1}^{n}A _{mk}B _{k1}& \sum_{k=1}^{n}A _{mk}B _{k2}& \dots& \sum_{k=1}^{n}A _{mk}B _{kp} \\ \end{pmatrix} \$\$
+        $$ \mathbf{AB} = \begin{pmatrix} \sum_{k=1}^{n}A _{1k}B _{k1}& \sum_{k=1}^{n}A _{1k}B _{k2}& \dots& \sum_{k=1}^{n}A _{1k}B _{kp} \\ \sum_{k=1}^{n}A _{2k}B _{k1}& \sum_{k=1}^{n}A _{2k}B _{k2}& \dots& \sum_{k=1}^{n}A _{2k}B _{kp} \\ \vdots& \vdots& \ddots& \vdots \\ \sum_{k=1}^{n}A _{mk}B _{k1}& \sum_{k=1}^{n}A _{mk}B _{k2}& \dots& \sum_{k=1}^{n}A _{mk}B _{kp} \\ \end{pmatrix} $$
 
-    이다.
+        이다.
 
-    *Result*:
+    === "Example"
 
-    $m \times n$ 행렬 $\mathbf{A}$, $n \times p$ 행렬 $\mathbf{B}$ 에 대한 행렬곱은 $m \times p$ 행렬 
+        \$m \times n\$ 행렬 \$\mathbf{A}\$, \$n \times p\$ 행렬 \$\mathbf{B}\$ 에 대한 행렬곱은 \$m \times p\$ 행렬 
 
-    $$ \mathbf{AB} = \begin{pmatrix} \sum_{k=1}^{n}A _{1k}B _{k1}& \sum_{k=1}^{n}A _{1k}B _{k2}& \dots& \sum_{k=1}^{n}A _{1k}B _{kp} \\ \sum_{k=1}^{n}A _{2k}B _{k1}& \sum_{k=1}^{n}A _{2k}B _{k2}& \dots& \sum_{k=1}^{n}A _{2k}B _{kp} \\ \vdots& \vdots& \ddots& \vdots \\ \sum_{k=1}^{n}A _{mk}B _{k1}& \sum_{k=1}^{n}A _{mk}B _{k2}& \dots& \sum_{k=1}^{n}A _{mk}B _{kp} \\ \end{pmatrix} $$
+        \$\$ \mathbf{AB} = \begin{pmatrix} \sum_{k=1}^{n}A _{1k}B _{k1}& \sum_{k=1}^{n}A _{1k}B _{k2}& \dots& \sum_{k=1}^{n}A _{1k}B _{kp} \\ \sum_{k=1}^{n}A _{2k}B _{k1}& \sum_{k=1}^{n}A _{2k}B _{k2}& \dots& \sum_{k=1}^{n}A _{2k}B _{kp} \\ \vdots& \vdots& \ddots& \vdots \\ \sum_{k=1}^{n}A _{mk}B _{k1}& \sum_{k=1}^{n}A _{mk}B _{k2}& \dots& \sum_{k=1}^{n}A _{mk}B _{kp} \\ \end{pmatrix} \$\$
 
-    이다.
+        이다.
 
 ---
 
