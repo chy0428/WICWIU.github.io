@@ -14,22 +14,22 @@
 
 이 페이지가 만들어진 이유를 알고 싶다면 다음을 클릭해주세요!
 
-[About](https://wicwiu.github.io/about/){: .md-button .md-button--primary }
+[About](about.md){: .md-button .md-button--primary }
 
 ## WICWIU 개발 가이드
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 프로젝트에 참여하고 싶다면 다음을 클릭하여 가이드를 확인하세요!
 
-[WICWIU 개발 가이드](https://wicwiu.github.io/dev/wicwiu/about/){: .md-button .md-button--primary }
+[WICWIU 개발 가이드](dev/wicwiu/about.md){: .md-button .md-button--primary }
 
 ## API
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 **API** 를 확인해보세요!
 
-[API](https://wicwiu.github.io/api/){: .md-button .md-button--primary }
+[API](api.md){: .md-button .md-button--primary }
 
 ## WICWIU 문서 작성하기 가이드
 
 [**WICWIU Github Pages**](https://wicwiu.github.io/) 에 문서를 작성하고 싶다면 다음을 클릭하여 가이드를 확인하세요!
 
-[WICWIU Github Pages 문서 작성 가이드](https://wicwiu.github.io/write/markdown/){: .md-button .md-button--primary }
+[WICWIU Github Pages 문서 작성 가이드](write/markdown.md){: .md-button .md-button--primary }

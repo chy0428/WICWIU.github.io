@@ -15,6 +15,10 @@ nav:
       - 2. WICWIU 신경망 구성: dev/wicwiu/nn.md
       - 3. WICWIU 로 학습하기: dev/wicwiu/learn.md
       - 4. WICWIU 코드 같이보기: dev/wicwiu/code.md
+    - Git:
+      - Collaborate with Git: dev/Git/git.md
+      - Commit/PR protocol: dev/Git/message.md
+      - Update forked repo: dev/Git/update.md
     - GPU Acceleration:
       - cuda: dev/GPU/cuda.md
   - 이곳에 문서 작성하기:
@@ -38,12 +42,11 @@ theme:
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js
   - javascripts/config.js
-  # - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 extra_css:
-  - stylesheets/gradient-dark.css
-  # - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/gradient-dark.min.css
+  - stylesheets/config.css
 
 extra:
   social:
@@ -61,7 +64,6 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
-  - pymdownx.tabbed
   - pymdownx.critic
   - pymdownx.betterem:
       smart_enable: all
