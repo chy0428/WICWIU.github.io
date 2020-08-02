@@ -40,4 +40,16 @@ nav:
     - RNN: RNN.md
 ```
 
-그리고 **commit**, **push** 후 **Pull Requests** 를 하면 됩니다.
+## Preview
+
+하지만 추가되거나 변경된 `.md` 파일들을 **commit** 하기 전에 꼭 추가된 `.md` 파일이 어떻게 랜더링되는지 **Preivew** 를 통해 확인해야 합니다. **Preview** 를 보는 방법은 다음과 같습니다. 
+
+1. `pip install mkdocs-material` 명령어로 **MkDocs** 와 **Material for MkDocs** 를 설치합니다.
+
+    !!! note
+
+        **Windows** 시스템에서는 `python -m pip install mkdocs-material` 명령어를 실행해야 할 수도 있습니다.
+
+2. `mkdocs serve` 를 실행합니다. 그러면 `http://localhost:8000` 에 **Preview** 서버가 열립니다. 
+
+이곳에서 추가되거나 변경된 `.md` 파일이 원하는대로 잘 나오는지 확인해주세요. 그리고 **commit**, **push** 후 **Pull Requests** 를 하면 됩니다.
