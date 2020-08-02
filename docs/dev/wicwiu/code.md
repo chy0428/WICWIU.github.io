@@ -32,6 +32,10 @@
 
 # WICWIU 코드 살펴보기
 
+!!! tip
+
+    `makefile` 의 문법에 대한 기초가 부족하다면 [Makefile 기초 문법](../makefile/makefile.md) 를 참고하세요!
+
 ## Compile `src/` 
 
 `src/` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 라이브러리 디렉토리입니다. 이것을 컴파일하는 `makefile` 를 같이 살펴보겠습니다.
