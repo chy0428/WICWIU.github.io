@@ -140,6 +140,6 @@ button.md-clipboard
 }
 
 div.arithmatex {
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
 }
