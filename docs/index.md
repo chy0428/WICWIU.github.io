@@ -22,6 +22,12 @@
 
 [WICWIU 개발 가이드](https://wicwiu.github.io/dev/wicwiu/about/){: .md-button .md-button--primary }
 
+## API
+
+[**WICWIU**](https://github.com/WICWIU/WICWIU) 의 **API** 를 확인해보세요!
+
+[API](https://wicwiu.github.io/api/){: .md-button .md-button--primary }
+
 ## WICWIU 문서 작성하기 가이드
 
 [**WICWIU Github Pages**](https://wicwiu.github.io/) 에 문서를 작성하고 싶다면 다음을 클릭하여 가이드를 확인하세요!
