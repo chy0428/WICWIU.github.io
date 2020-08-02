@@ -139,7 +139,7 @@ button.md-clipboard
   color: #AEFBFF;
 }
 
-.arithmatex{
-  overflow-x: visible !important;
-  overflow-y: visible !important;
+.md-typeset div.arithmate {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
