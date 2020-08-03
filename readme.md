@@ -24,8 +24,6 @@
 
 [**WICWIU Github Pages**](https://wicwiu.github.io/) 에 작성할 것들을 메모해둔 것입니다.
 
-- mkdocs 에 의해 markdown 파일로 쉽게 페이지 추가하는 법
-
 - 코딩 생산성 높이기 & 여러가지 필수 기술들
 
   - Docker : https://github.com/ccss17/ProgrammerBase/blob/master/docker.md
@@ -43,18 +41,6 @@
     - 시스템 모니터링 top &rarr; htop &rarr; gotop
     
     - GPU 모니터링 nvidia-smi &rarr; nvtop
-
-- CUDA 프로그래밍
-
-  - https://cuda-tutorial.readthedocs.io/en/latest/
-
-  - https://docs.nvidia.com/cuda/
-
-  - https://ericzhng.github.io/eric-blogs/2018/10/11/vs-code-cuda/
-
-  - https://github.com/Jokeren/Awesome-GPU
-
-  - https://github.com/Erkaman/Awesome-CUDA
 
 - [makefile](https://ccss17.github.io/makefile.html)
 
