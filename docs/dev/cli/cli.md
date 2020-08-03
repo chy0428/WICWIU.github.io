@@ -31,6 +31,27 @@
 |`g`|`git`|
 |`q`|`exit`|
 
+!!! info
+
+    `alias t=tmux` 명령어로 `alias` 를 지정할 수 있습니다. 하지만 이것을 매번 로그인할 때마다 입력하기 귀찮기 때문에 `zsh` 쉘 사용 유저라면 `.zshrc` 또는 `.zsh_aliases` 에
+
+    ```shell
+    alias t=tmux
+    alias v=vim
+    alias c=clear
+    alias cs='cd ..'
+    alias ls='lsd --icon never'
+    alias cl='clear;ls'
+    alias l='ls'
+    alias la='ls -a'
+    alias ll='ls -la'
+    alias lt='ls --tree'
+    alias g='git'
+    alias q='exix'
+    ```
+
+    을 입력해두면 됩니다. `bash` 쉘 사용 유저라면 `.bashrc` 또는 `.bash_aliases` 에 입력하면 되는 것입니다.
+
 # 더 빨라진 git
 
 `git` 은 지원하는 지능이 하도 많다보니 내부적으로 `alias` 를 지원합니다. 가령 `git commit -m` 이라는 명령어를 매번 입력하기가 너무 귀찮아서 견딜 수가 없으니까 다음 명령어를 입력하여 `alias` 를 지정할 수 있습니다. 
