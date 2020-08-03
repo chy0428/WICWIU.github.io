@@ -177,9 +177,11 @@ $ bat test.txt
 |`git pull origin master`|`g plom`|
 |**총합 `213` 개**|**총합 `79` 개**|
 
-이러한 `git` 레포지토리 관리 패턴은 코딩을 할 때마다 반복되는데, 이 패턴을 개발자로 살아가면서 적게 잡아서 **10000** 번 반복한다고 한다면, 여러분은 **10000 * 213 = 2백 13만** 번 칠 것을 **10000 * 79 = 79만** 만쳤습니다. 
+!!! tip
 
-즉, 똑같은 일을 하는데 **134만** 번의 타자를 안 친것입니다!
+  이러한 `git` 레포지토리 관리 패턴은 코딩을 할 때마다 반복되는데, 이 패턴을 개발자로 살아가면서 적게 잡아서 **10000** 번 반복한다고 한다면, 여러분은 **10000 * 213 = 2백 13만** 번 칠 것을 **10000 * 79 = 79만** 만쳤습니다. 
+
+  즉, 똑같은 일을 하는데 **134만** 번의 타자를 안 친것입니다!
 
 # CLI 업그레이드
 
@@ -188,7 +190,7 @@ $ bat test.txt
 **[`lsd`](https://github.com/Peltoche/lsd)** 는 구식인 `ls` 명령어를 최신식으로 대체한 프로그램입니다. `ls` 와 `lsd` 를 비교해보겠습니다.
 
 <div align="center">
-<img src="https://user-images.githubusercontent.com/16812446/81694909-dd7d3200-949c-11ea-902b-d0d11c496f44.png" width="50%" height="auto">
+<img src="https://user-images.githubusercontent.com/16812446/81694909-dd7d3200-949c-11ea-902b-d0d11c496f44.png" width="80%" height="auto">
 </div>
 
 `lsd` 는 컬러풀하게 출력결과를 보여줘서 가독성이 훨씬 올려줍니다. 
@@ -198,7 +200,7 @@ $ bat test.txt
     `lsd --icon never` 에서 `--icon never` 옵션은 아이콘을 출력하지 않는 옵션입니다. 이는 순수 CLI 환경에서 필요한 옵션이기 때문에 만약 GUI 환경(**macOS** 이나 리눅스 데스크탑 환경)에서 아이콘을 설치하고 `--icon never` 옵션을 제거하고 `lsd` 를 실행하면 다음과 같이 아이콘도 함께 출력되어 가독성이 훨씬 올라가는 것을 알 수 있습니다. 
 
     <div align="center">
-    <img src="https://user-images.githubusercontent.com/16812446/81695205-45cc1380-949d-11ea-96e9-21f0f3c56dca.png" width="50%" height="auto">
+    <img src="https://user-images.githubusercontent.com/16812446/81695205-45cc1380-949d-11ea-96e9-21f0f3c56dca.png" width="80%" height="auto">
     </div>
 
 ## `cat` ➜ `bat`
@@ -240,19 +242,19 @@ $ bat test.txt
 `top` 명령어는 시스템의 리소스 상태(RAM, CPU 등) 을 출력해주는 좋은 프로그램입니다. 기존의 `top` 은 다음과 같이 약간은 밋밋하게 시스템의 상태를 출력해주었습니다.
 
 <div align="center">
-<img src="https://user-images.githubusercontent.com/16812446/82143677-8f8f7200-9880-11ea-9f4e-7cbf6ed05b69.gif" width="50%" height="auto">
+<img src="https://user-images.githubusercontent.com/16812446/82143677-8f8f7200-9880-11ea-9f4e-7cbf6ed05b69.gif" width="70%" height="auto">
 </div>
 
 하지만 [`htop`](https://github.com/hishamhm/htop) 은 다음과 같이 색깔도 칠하고 메모리와 CPU 상태를 핸드폰 배터리 바처럼 보여줍니다. 
 
 <div align="center">
-<img src="https://user-images.githubusercontent.com/16812446/82143686-a3d36f00-9880-11ea-8b4c-941f6b640b1e.gif" width="50%" height="auto">
+<img src="https://user-images.githubusercontent.com/16812446/82143686-a3d36f00-9880-11ea-8b4c-941f6b640b1e.gif" width="70%" height="auto">
 </div>
 
 마지막으로 [`gotop`](https://github.com/cjbassi/gotop) 은 다음과 같이 완벽한 그래프로 시스템의 상태를 직관적으로 출력해줍니다.
 
 <div align="center">
-<img src="https://user-images.githubusercontent.com/16812446/82143720-f3b23600-9880-11ea-9f1b-7a24784cf541.gif" width="70%" height="auto">
+<img src="https://user-images.githubusercontent.com/16812446/82143720-f3b23600-9880-11ea-9f1b-7a24784cf541.gif" width="90%" height="auto">
 </div>
 
 !!! note
@@ -298,13 +300,13 @@ $ tldr tar
 기존의 파이썬 인터프리터는 다음과 같이 실행됬었습니다.
 
 <div align="center">
-<img src="https://user-images.githubusercontent.com/16812446/84473704-7b466580-acc4-11ea-99b0-c8b69d923f3c.gif" width="70%" height="auto">
+<img src="https://user-images.githubusercontent.com/16812446/84473704-7b466580-acc4-11ea-99b0-c8b69d923f3c.gif" width="80%" height="auto">
 </div>
 
 하지만 `bpython` 을 사용하면 다음과 같이 코드 하이라이팅, 자동 완성, 함수 추천 기능, 자동 인덴트 등의 기능을 사용할 수 있습니다. 
 
 <div align="center">
-<img src="https://user-images.githubusercontent.com/16812446/84473719-84373700-acc4-11ea-91a8-d0985210e9ce.gif" width="70%" height="auto">
+<img src="https://user-images.githubusercontent.com/16812446/84473719-84373700-acc4-11ea-91a8-d0985210e9ce.gif" width="90%" height="auto">
 </div>
 
 희미한 글씨로 자동 완성 추천 기능이 발동되면 방향키 <kbd>&rarr;</kbd> 를 눌러서 자동완성을 시켜보세요.
