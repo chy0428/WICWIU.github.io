@@ -54,7 +54,37 @@ CFLAGS = -O2 -std=c++11
 
 ENABLE_CUDNN = -D__CUDNN__
 DFLAGS = -g -D__DEBUG__
+```
 
+- **1행** : 
+
+    `Suffix`, `CPP` 파일을 Object 파일로 변환시켜주는 내장 규칙입니다.
+
+- **3행** :
+
+    [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 정적 라이브러리입니다.
+
+- **4행** :
+
+    컴파일 옵션입니다.
+
+- **6행** :
+
+    cuDNN 사용 여부 플래그입니다. 
+
+    !!! warning
+
+        cuDNN 미 설치 및 미 사용 시 주석처리를 해야합니다.
+
+- **7행** : 
+
+    디버그 코드 사용 여부 플래그입니다. 
+
+    !!! warning
+
+        미 사용 시 주석처리를 해야합니다.
+
+```makefile linenums="9"
 INCLUDE_PATH = -I/usr/local/cuda/include
 LIB_PATH = -L. -L/usr/local/cuda/lib64
 
@@ -68,7 +98,31 @@ else
 	LINKER = g++
 	LFLAGS = -lpthread
 endif
+```
 
+- **9행** :
+
+    전처리 과정에서 CUDA 헤더 파일을 탐색할 디렉토리를 설정합니다.
+
+- **10행** :
+
+    CUDA 라이브러리를 탐색할 디렉토리를 설정합니다.
+
+- **12행** :
+
+    컴파일러를 정의합니다.
+
+- **13행** :
+
+    CUDA 파일 용 컴파일러를 정의합니다.
+
+- **15행~21행** :
+
+    cuDNN 사용 시, NVCC 링커 사용 및 `cudart`, `cudnn`, `pthread` 라이브러리를 사용합니다.
+
+    cuDNN 미 사용 시, `g++` 링커 사용 및 `pthread` 라이브러리를 사용합니다.
+
+```makefile linenums="23"
 AR = ar
 
 SRCS = \
@@ -87,7 +141,25 @@ ifdef	ENABLE_CUDNN
 endif
 
 all:	$(FRAMEWORK_LIB)
+```
 
+- **25행~27행** :
+
+    `.cpp` 소스 코드 파일을 정의합니다.
+
+- **29행** :
+
+    `SRCS` 의 `.cpp` 파일을 각각 컴파일해 `.o` 파일(오브젝트 파일)들을 생성합니다.
+
+- **31행~38행** :
+
+    cuDNN 사용 시, `CUDA_SRC/` 의 `.cu` 파일을 각각 컴파일해 `.o` 파일들을 생성합니다.
+
+- **40행** : 
+
+    컴파일 시작 타겟입니다. `FRAMEWORK_LIB` 의 의존성을 확인합니다.
+
+```makefile linenums="42"
 .cpp.o:
 	$(CC) $(CFLAGS) $(DFLAGS) $(ENABLE_CUDNN) $(INCLUDE_PATH) $(LIB_PATH) -c $< -o $@
 
@@ -105,127 +177,15 @@ clean:
 	rm -rf *.o $(OBJS) $(CUDA_OBJS) $(FRAMEWORK_LIB)
 ```
 
-- **1행** : `.SUFFIXES = .cpp .o`
-
-    `Suffix`, `CPP` 파일을 Object 파일로 변환시켜주는 내장 규칙입니다.
-
-- **3행** : `FRAMEWORK_LIB = lib/library.a`
-
-    [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 정적 라이브러리입니다.
-
-- **4행** : `CFLAGS = -O2 -std=c++11`
-
-    컴파일 옵션입니다.
-
-- **6행** : `ENABLE_CUDNN = -D__CUDNN__`
-
-    cuDNN 사용 여부 플래그입니다. 
-
-    !!! warning
-
-        cuDNN 미 설치 및 미 사용 시 주석처리를 해야합니다.
-
-- **7행** : `DFLAGS = -g -D__DEBUG__`
-
-    디버그 코드 사용 여부 플래그입니다. 
-
-    !!! warning
-
-        미 사용 시 주석처리를 해야합니다.
-
-- **9행** : `INCLUDE_PATH = -I/usr/local/cuda/include`
-
-    전처리 과정에서 CUDA 헤더 파일을 탐색할 디렉토리를 설정합니다.
-
-- **10행** : `LIB_PATH = -L. -L/usr/local/cuda/lib64`
-
-    CUDA 라이브러리를 탐색할 디렉토리를 설정합니다.
-
-- **12행** : `CC = g++`
-
-    컴파일러를 정의합니다.
-
-- **13행** : `NVCC = nvcc`
-
-    CUDA 파일 용 컴파일러를 정의합니다.
-
-- **15행~21행** :
-
-    ```
-    ifdef	ENABLE_CUDNN
-        LINKER = nvcc
-        LFLAGS = -lcudart -lcudnn -lpthread
-    else
-        LINKER = g++
-        LFLAGS = -lpthread
-    endif
-    ```
-
-    cuDNN 사용 시, NVCC 링커 사용 및 `cudart`, `cudnn`, `pthread` 라이브러리를 사용합니다.
-
-    cuDNN 미 사용 시, `g++` 링커 사용 및 `pthread` 라이브러리를 사용합니다.
-
-- **25행~27행** :
-
-    ```
-    SRCS = \
-        src/Utils.cpp	\
-        src/Shape.cpp	\
-    ```
-
-    `.cpp` 소스 코드 파일을 정의합니다.
-
-- **29행** : `OBJS = ${SRCS:.cpp=.o}`
-
-    `SRCS` 의 `.cpp` 파일을 각각 컴파일해 `.o` 파일(오브젝트 파일)들을 생성합니다.
-
-- **31행~38행** :
-
-    ```
-    ifdef	ENABLE_CUDNN
-        CUDA_SRCS = \
-            src/Utils_CUDA.cu \
-            src/Optimizer/AdamOptimizer_CUDA.cu \
-            src/Operator/Concatenate_CUDA.cu
-            
-        CUDA_OBJS = ${CUDA_SRCS:.cu=.o}
-    endif
-    ```
-
-    cuDNN 사용 시, `CUDA_SRC/` 의 `.cu` 파일을 각각 컴파일해 `.o` 파일들을 생성합니다.
-
-- **40행** : `all:	$(FRAMEWORK_LIB)`
-
-    컴파일 시작 타겟입니다. `FRAMEWORK_LIB` 의 의존성을 확인합니다.
-
 - **42행~43행** : 
-
-    ```
-    .cpp.o:
-        $(CC) $(CFLAGS) $(DFLAGS) $(ENABLE_CUDNN) $(INCLUDE_PATH) $(LIB_PATH) -c $< -o $@
-    ```
 
     주어진 파일을 옵션들을 이용해 컴파일하여 같은 이름의 오브젝트 파일을 생성합니다.
 
 - **45행~49행** :
 
-    ```
-    src/Utils_CUDA.o: src/Utils_CUDA.cu
-        $(NVCC) $(CFLAGS) $(DFLAGS) $(ENABLE_CUDNN) $(INCLUDE_PATH) -c $< -o $@
-    src/Optimizer/AdamOptimizer_CUDA.o: src/Optimizer/AdamOptimizer_CUDA.cu
-        $(NVCC) $(CFLAGS) $(DFLAGS) $(ENABLE_CUDNN) $(INCLUDE_PATH) -c $< -o $@
-    src/Operator/Concatenate_CUDA.o: src/Operator/Concatenate_CUDA.cu
-        $(NVCC) $(CFLAGS) $(DFLAGS) $(ENABLE_CUDNN) $(INCLUDE_PATH) -c $< -o $@
-    ```
-
     해당 `.cu` 파일의 의존성을 확인하고 옵션들을 이용해 컴파일하여 같은 이름의 오브젝트 파일을 생성합니다.
 
 - **52행~53행** :
-
-    ```
-    $(FRAMEWORK_LIB): $(OBJS) $(CUDA_OBJS)
-        $(AR) rcs $@ $(OBJS) $(CUDA_OBJS)
-    ```
 
     `OBJS`, `CUDA_OBJS` 의 의존성을 확인하고, `FRAMEWORK_LIB`, `OBJS`, `CUDA_OBJS` 의 `.o` 파일들을 가지고 아카이브 파일을 만듭니다.
 
@@ -256,8 +216,25 @@ CC = g++
 NVCC = nvcc
 
 FRAMEWORK_LIB = ../../lib/library.a
+```
 
+- **6행** :
 
+    라이브러리 사용 플래그, `cudart`, `cudnn`, `pthread`, `jpeg`, `turbojpeg` 라이브러리를 사용합니다.
+
+- **8행** :
+
+    전처리 과정에서 CUDA 헤더 파일을 탐색할 디렉토리를 설정합니다.
+
+- **9행** :
+
+    CUDA 라이브러리를 탐색할 디렉토리를 설정합니다.
+
+- **14행** :
+
+    프레임워크 라이브러리 아카이브 파일을 정의합니다.
+
+```makefile linenums="17"
 SRCS = \
 	../../src/Shape.cpp	\
 	../../src/LongArray.cpp	\
@@ -287,66 +264,23 @@ clean_all:
 	make clean -C ../..
 ```
 
-- **6행** : `LFLAGS = -lcudart -lcudnn -lpthread -ljpeg -lturbojpeg`
-
-    라이브러리 사용 플래그, `cudart`, `cudnn`, `pthread`, `jpeg`, `turbojpeg` 라이브러리를 사용합니다.
-
-- **8행** : `INCLUDE_PATH = -I/usr/local/cuda/include -I/opt/libjpeg-turbo/include -I/opt/libjpeg-turbo/lib64`
-
-    전처리 과정에서 CUDA 헤더 파일을 탐색할 디렉토리를 설정합니다.
-
-- **9행** : `LIB_PATH = -L. -L/usr/local/cuda/lib64 -L/opt/libjpeg-turbo/lib64`
-
-    CUDA 라이브러리를 탐색할 디렉토리를 설정합니다.
-
-- **14행** : `FRAMEWORK_LIB = ../../lib/library.a`
-
-    프레임워크 라이브러리 아카이브 파일을 정의합니다.
-
 - **17행~25행** : 
-
-    ```makefile
-    SRCS = \
-        ../../src/Shape.cpp	\
-        ../../src/LongArray.cpp	\
-        ../../src/Tensor.cpp	\
-        ../../src/Operator.cpp	\
-        ../../src/LossFunction.cpp	\
-        ../../src/Optimizer.cpp	\
-        ../../src/Module.cpp	\
-        ../../src/NeuralNetwork.cpp
-    ```
 
     `.cpp` 소스 코드 파일, 아카이브 파일의 의존성 확인을 위해 정의하는 변수입니다.
 
-- **27행** : `all: main`
+- **27행** :
 
     시작 타겟, `main` 파일의 의존성을 확인합니다.
 
 - **29행~30행** :
 
-    ```makefile
-    .cpp.o:
-        $(CC) $(CFLAGS) $(DFLAGS) $(ENABLE_CUDNN) $(INCLUDE_PATH) $(LIB_PATH) -c $< -o $@
-    ```
-
     주어진 파일을 옵션들을 이용해 컴파일하여 같은 이름의 오브젝트 파일을 생성합니다.
 
 - **32행~33행** :
 
-    ```makefile
-    main: main.o $(FRAMEWORK_LIB)
-        $(NVCC) $(CFLAGS) $(ENABLE_CUDNN) $(DFLAGS) $(LFLAGS) $(INCLUDE_PATH) $(LIB_PATH) -o $@ $(FRAMEWORK_LIB) main.o
-    ```
-
     `main.o` 파일과 `FRAMEWORK_LIB` 의 의존성을 확인하고,  옵션들을 이용해 `FRAMEWORK_LIB` 과 `main.o` 파일을 `main` 파일로 링크한다.
 
--**35행~36행** :
-
-    ```makefile
-    $(FRAMEWORK_LIB): $(SRC)
-        make -C ../..
-    ```
+- **35행~36행** :
 
     지정된 경로에서 `make` 실행
 
@@ -463,3 +397,108 @@ DataLoader<float> * test_dataloader = new DataLoader<float>(test_dataset, BATCH,
 - **26~30행** :
 
     MNIST 데이터셋과 데이터로더를 생성합니다.
+
+```c++ linenums="62"
+// ======================= Train =======================
+float train_accuracy = 0.f;
+float train_avg_loss = 0.f;
+
+net->SetModeTrain();
+
+startTime = clock();
+
+for (int j = 0; j < LOOP_FOR_TRAIN; j++) {
+    //dataset->CreateTrainDataPair(BATCH);
+    std::vector<Tensor<float> *> * temp =  train_dataloader->GetDataFromGlobalBuffer();
+    // printf("%d\r\n", temp->size());
+
+    Tensor<float> *x_t = (*temp)[0];
+    Tensor<float> *l_t = (*temp)[1];
+    delete temp;
+
+#ifdef __CUDNN__
+    x_t->SetDeviceGPU(GPUID); 
+    l_t->SetDeviceGPU(GPUID);
+#endif  // __CUDNN__
+    // std::cin >> temp;
+    net->FeedInputTensor(2, x_t, l_t);
+    net->ResetParameterGradient();
+    net->Train();
+    // std::cin >> temp;
+    train_accuracy += net->GetAccuracy();
+    train_avg_loss += net->GetLoss();
+
+    printf("\rTrain complete percentage is %d / %d -> loss : %f, acc : %f"  /*(ExcuteTime : %f)*/,
+            j + 1, LOOP_FOR_TRAIN,
+            train_avg_loss / (j + 1),
+            train_accuracy / (j + 1)
+            /*nProcessExcuteTime*/);
+    fflush(stdout);
+}
+endTime            = clock();
+nProcessExcuteTime = ((double)(endTime - startTime)) / CLOCKS_PER_SEC;
+printf("\n(excution time per epoch : %f)\n\n", nProcessExcuteTime);
+```
+
+- **72행~77행**:
+
+    MNIST 데이터셋으로부터 이미지와 정답레이블을 받아 저장합니다.
+
+- **79행~82행**:
+
+    cuDNN 을 사용 할 경우,  `placeholder` 의 `device` 를 `GPU` 로 설정한다.
+
+- **84행~86행**:
+
+    신경망에 데이터셋(손글씨 이미지, 정답레이블)를 만들어 넣고 신경망의 Gradient 값을 초기화 하고 학습하는 과정을 반복한다.
+
+```c++ linenums="102"
+// ======================= Test ======================
+float test_accuracy = 0.f;
+float test_avg_loss = 0.f;
+
+net->SetModeInference();
+
+for (int j = 0; j < (int)LOOP_FOR_TEST; j++) {
+    //dataset->CreateTestDataPair(BATCH);
+    std::vector<Tensor<float> *> * temp =  test_dataloader->GetDataFromGlobalBuffer();
+    // printf("%d\r\n", temp->size());
+
+    Tensor<float> *x_t = (*temp)[0];
+    Tensor<float> *l_t = (*temp)[1];
+    delete temp;
+
+#ifdef __CUDNN__
+    x_t->SetDeviceGPU(GPUID);
+    l_t->SetDeviceGPU(GPUID);
+#endif  // __CUDNN__
+
+    net->FeedInputTensor(2, x_t, l_t);
+    net->Test();
+
+    test_accuracy += net->GetAccuracy();
+    test_avg_loss += net->GetLoss();
+
+    printf("\rTest complete percentage is %d / %d -> loss : %f, acc : %f",
+            j + 1, LOOP_FOR_TEST,
+            test_avg_loss / (j + 1),
+            test_accuracy / (j + 1));
+    fflush(stdout);
+}
+```
+
+- **106행**:
+
+    신경망을 테스트 모드(gradient 를 계산하지 않음)로 전환합니다.
+    
+- **110행~115행**:
+    
+    MNIST 데이터셋으로부터 이미지와 정답레이블을 받아 저장합니다.
+
+- **122행~123행**:
+
+    신경망에 데이터(image, label)를 입력하고 테스트를 진행합니다.  
+    
+- **125행~126행**:
+
+    정확도와 손실을 측정한다.

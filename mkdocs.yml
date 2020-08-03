@@ -32,6 +32,7 @@ nav:
     - Step 5. 컨텐츠 탭: write/tab.md
     - Step 6. 버튼 넣기: write/button.md
     - Step 7. 수식 보여주기: write/math.md
+    - Step 8. API 작성: write/api.md
 
 theme: 
   name: material

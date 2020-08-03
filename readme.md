@@ -28,10 +28,6 @@
 
   - Docker : https://github.com/ccss17/ProgrammerBase/blob/master/docker.md
 
-  - Git : https://github.com/ccss17/ProgrammerBase/blob/master/git.md
-
-  - Markdown : https://github.com/ccss17/ProgrammerBase/blob/master/markdown.md
-
   - VSCode 와 Git 연동해서 겁나 편하게 사용하기 : https://github.com/ccss17/ProgrammerBase/blob/master/vscode.md
 
   - 딥러닝 할때 tmux 로 편하게 하기 : https://github.com/ccss17/ProgrammerBase/blob/master/tmux.md
@@ -42,13 +38,9 @@
     
     - GPU 모니터링 nvidia-smi &rarr; nvtop
 
-- [makefile](https://ccss17.github.io/makefile.html)
-
 - [how to understand large c++ code](https://www.google.com/search?client=firefox-b-d&q=how+to+understand+large+c%2B%2B+code)
 
 - [아무도 가르쳐 주지 않는 것](https://velog.io/@mowinckel/%EC%95%84%EB%AC%B4%EB%8F%84-%EA%B0%80%EB%A5%B4%EC%B3%90-%EC%A3%BC%EC%A7%80-%EC%95%8A%EB%8A%94-%EA%B2%83?fbclid=IwAR33Cn25eV-5MaqBWZPhA5uj_bReJLRVbhn6yewssYsh2tGO38T-iTDxnFQ)
-
-- [WICWIU Documentation](https://github.com/WICWIU/WICWIU/tree/master/Documentation) 포팅
 
 - [Google C++ Style](https://google.github.io/styleguide/cppguide.html) 
 
@@ -61,6 +53,16 @@
   - https://github.com/isocpp/CppCoreGuidelines
 
   - https://github.com/lefticus/cppbestpractices
+
+  - Unix 철학
+
+    - https://medium.com/ingeniouslysimple/philosophy-of-unix-development-aa0104322491
+
+    - https://subscription.packtpub.com/book/networking_and_servers/9781788998475/1/ch01lvl1sec12/the-unix-philosophy-in-a-nutshell
+
+    - https://joone.net/2017/05/20/9-%EC%9C%A0%EB%8B%89%EC%8A%A4-%EC%B2%A0%ED%95%99-2/
+
+    - https://ko.wikipedia.org/wiki/%EC%9C%A0%EB%8B%89%EC%8A%A4_%EC%B2%A0%ED%95%99
 
 - Memory Leak
 
