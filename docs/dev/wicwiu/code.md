@@ -505,12 +505,15 @@ for (int j = 0; j < (int)LOOP_FOR_TEST; j++) {
 
 ---
 
-## Tutorials `tutorials/ImageNet`
+## Tutorials `tutorials/ImageNet` (ResNet)
 
 `tutorials/ImageNet` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다.
 
 ### Tutorials `tutorials/ImageNet/net/my_Resnet.hpp`
+
 `tutorials/ImageNet/net/my_Resnet.hpp` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 에서 **ResNet** 으로 ImageNet 데이터셋을 학습하기 위한 인공신경망을 구성하는 예제입니다. ImageNet 튜토리얼의 신경망 모델은 다음과 같이 정의됩니다. 
+
+`ResNet` 은 다음과 같은 여러 개의 `BasicBlock(residual block)` 을 적층시켜 구성됩니다.
 
 [:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU/blob/master/tutorials/ImageNet/net/my_Resnet.hpp)
 
@@ -562,8 +565,6 @@ public:
     }
 };
 ```
-
-[**WICWIU**](https://github.com/WICWIU/WICWIU) 의 ResNet 은 여러 개의 `BasicBlock(residual block)` 을 적층시켜 구성합니다.
 
 - **20행~32행**:
 
@@ -678,3 +679,593 @@ template<typename DTYPE> NeuralNetwork<DTYPE>* Resnet34(Tensorholder<DTYPE> *pIn
 - **131행~137행** 
 
     `ResNet` 의 종류는 `BasicBlock` 내부의 채널 수를 다르게 함으로써 나누어집니다.
+
+### Tutorials `tutorials/ImageNet/main.cpp`
+
+`tutorials/ImageNet/main.cpp` 은 
+
+[:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU/blob/master/tutorials/ImageNet/main.cpp)
+
+```c++ linenums="19"
+int main(int argc, char const *argv[]) {
+    ...
+    // create input, label data placeholder -> Tensorholder
+    Tensorholder<float> *x     = new Tensorholder<float>(1, BATCH, 1, 1, 150528, "x");
+    Tensorholder<float> *label = new Tensorholder<float>(1, BATCH, 1, 1, 1000, "label");
+
+    // ======================= Select net ===================
+    NeuralNetwork<float> *net = Resnet18<float>(x, label, NUMBER_OF_CLASS);
+    // NeuralNetwork<float> *net = Resnet34<float>(x, label, NUMBER_OF_CLASS);
+    // NeuralNetwork<float> *net = DenseNetLite<float>(x, label, NUMBER_OF_CLASS);
+    net->PrintGraphInformation();
+
+    // ======================= Prepare Data ===================
+    ImageNetDataReader<float> *train_data_reader = new ImageNetDataReader<float>(BATCH, 25, TRUE);
+    train_data_reader->UseNormalization(TRUE, mean, stddev);
+    train_data_reader->UseRandomHorizontalFlip();
+    // train_data_reader->UseRandomVerticalFlip();
+
+    ImageNetDataReader<float> *test_data_reader = new ImageNetDataReader<float>(BATCH, 25, FALSE);
+    test_data_reader->UseNormalization(TRUE, mean, stddev);
+
+    train_data_reader->StartProduce();
+    test_data_reader->StartProduce();
+```
+
+- **21행~23행**:
+
+    데이터 placeholder 를 만든다.
+
+- **26행**:
+
+    사전에 정의된 인공신경망을 생성한다.
+
+- **32행~34행**:
+
+    `ImageNet` 데이터는 **random crop**, **normalization**, **random Filp** 과정을 거쳐 전처리 된다.
+
+```c++ linenums="106"
+        // ======================= Train =======================
+        ...
+        net->SetModeTrain();
+
+        for (int j = 0; j < LOOP_FOR_TRAIN; j++) {
+            data = train_data_reader->GetDataFromBuffer();
+
+    #ifdef __CUDNN__
+            data[0]->SetDeviceGPU(GPUID);  
+            data[1]->SetDeviceGPU(GPUID);
+    #endif  // __CUDNN__
+            net->FeedInputTensor(2, data[0], data[1]);
+            delete data;
+            data = NULL;
+            net->ResetParameterGradient();
+            net->Train();
+```
+
+- **111행~117행**:
+
+    전처리된 데이터를 버퍼로부터 가져와 신경망에 넣는다.
+
+- **120행~121행**:
+
+    Gradient를 초기화 한 뒤 학습하는 과정을 반복한다.
+
+```c++ linenums="155"
+// ======================= Test ======================
+...
+net->SetModeInference();
+
+for (int j = 0; j < (int)LOOP_FOR_TEST; j++) {
+    data = test_data_reader->GetDataFromBuffer();
+
+#ifdef __CUDNN__
+    data[0]->SetDeviceGPU(GPUID);  // 異뷀썑 ?먮룞???꾩슂
+    data[1]->SetDeviceGPU(GPUID);
+#endif  // __CUDNN__
+
+    net->FeedInputTensor(2, data[0], data[1]);
+    delete data;
+    data = NULL;
+    net->Test();
+
+    test_avg_accuracy      += net->GetAccuracy(NUMBER_OF_CLASS);
+    test_avg_top5_accuracy += net->GetTop5Accuracy(NUMBER_OF_CLASS);
+    test_avg_loss          += net->GetLoss();
+
+    printf("\r%d / %d -> avg_loss : %0.4f, avg_acc : %0.4f, avg_top5_acc : %0.4f"  /*(ExcuteTime : %f)*/,
+            j + 1, LOOP_FOR_TEST,
+            test_avg_loss / (j + 1),
+            test_avg_accuracy / (j + 1),
+            test_avg_top5_accuracy / (j + 1));
+    fflush(stdout);
+}
+```
+
+- **157행**:
+
+    신경망을 inference 모드로 전환 한다. 
+
+- **160행~170행**:
+
+    전처리된 데이터를 버퍼로부터 가져와 신경망에 넣어 정확도와 손실을 측정한다. 
+
+- **172행~181행**:
+
+    정확도와 손실을 출력한다. 
+
+---
+
+## Tutorials `tutorials/ImageNet` (DenseNet)
+
+`tutorials/ImageNet` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다.
+
+### Tutorials `tutorials/ImageNet/net/my_Densenet.hpp`
+
+`tutorials/ImageNet/net/my_Densenet.hpp` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 에서 **DenseNet** 으로 ImageNet 데이터셋을 학습하기 위한 인공신경망을 구성하는 예제입니다. 신경망 모델은 다음과 같이 정의됩니다. 
+
+`DenseNet` 은 다음과 같은 여러 개의 `DenseNetBlock` 을 적층시켜 구성됩니다.
+
+[:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU/blob/master/tutorials/ImageNet/net/my_Densenet.hpp)
+
+```c++ linenums="6"
+
+template<typename DTYPE> class DenseNetBlock : public Module<DTYPE>{
+private:
+public:
+    DenseNetBlock(Operator<DTYPE> *pInput, int pNumInputChannel, int pGrowthRate, std::string pName = NULL) : Module<DTYPE>(pName) {
+        Alloc(pInput, pNumInputChannel, pGrowthRate, pName);
+    }
+
+    virtual ~DenseNetBlock() {}
+
+    int Alloc(Operator<DTYPE> *pInput, int pNumInputChannel, int pGrowthRate, std::string pName) {
+        this->SetInput(pInput);
+
+        Operator<DTYPE> *remember = pInput;
+        Operator<DTYPE> *out      = pInput;
+
+        // 1
+        out = new BatchNormalizeLayer<DTYPE>(out, TRUE, "DenseNetBlock_BN1" + pName);
+        out = new Relu<DTYPE>(out, "DenseNetBlock_Relu1" + pName);
+        out = new ConvolutionLayer2D<DTYPE>(out, pNumInputChannel, 4 * pGrowthRate, 1, 1, 1, 1, 0, FALSE, "DenseNetBlock_Conv1" + pName);
+
+        // 2
+        out = new BatchNormalizeLayer<DTYPE>(out, TRUE, "DenseNetBlock_BN2" + pName);
+        out = new Relu<DTYPE>(out, "DenseNetBlock_Relu2" + pName);
+        out = new ConvolutionLayer2D<DTYPE>(out, 4 * pGrowthRate, pGrowthRate, 3, 3, 1, 1, 1, FALSE, "DenseNetBlock_Conv2" + pName);
+
+        // Concat
+        out = new ConcatenateChannelWise<float>(remember, out, "DenseNetBlock_ConCat");
+
+        this->AnalyzeGraph(out);
+
+        return TRUE;
+    }
+};
+```
+
+- **20행~41행**:
+
+    `DenseNet` 은 이와 같이 정의됩니다.
+
+```c++ linenums="40"
+template<typename DTYPE> class Transition : public Module<DTYPE>{
+private:
+public:
+    Transition(Operator<DTYPE> *pInput, int pNumInputChannel, int pNumOutputChannel, std::string pName = NULL) : Module<DTYPE>(pName) {
+        Alloc(pInput, pNumInputChannel, pNumOutputChannel, pName);
+    }
+
+    virtual ~Transition() {}
+
+    int Alloc(Operator<DTYPE> *pInput, int pNumInputChannel, int pNumOutputChannel, std::string pName) {
+        this->SetInput(pInput);
+
+        Operator<DTYPE> *out = pInput;
+
+        // 1
+        out = new BatchNormalizeLayer<DTYPE>(out, TRUE, "Transition_BN" + pName);
+        out = new Relu<DTYPE>(out, "Transition_Relu" + pName);
+        out = new ConvolutionLayer2D<DTYPE>(out, pNumInputChannel, pNumOutputChannel, 1, 1, 1, 1, 0, FALSE, "Transition_Conv" + pName);
+
+        // Avg Pooling
+        out = new AvaragePooling2D<float>(out, 2, 2, 2, 2, 0, "AVG");
+
+        this->AnalyzeGraph(out);
+
+        return TRUE;
+    }
+};
+```
+
+- **40행~66행**:
+
+    `DenseNetBlock` 을 연결하는 `Transition` 은 위와 같이 정의됩니다.
+
+```c++ linenums="68"
+template<typename DTYPE> class DenseNet : public NeuralNetwork<DTYPE>{
+private:
+    int m_numInputChannel;
+    int m_numOutputChannel;
+    int m_growthRate;
+    float m_reduction;
+
+public:
+    DenseNet(Tensorholder<DTYPE> *pInput, Tensorholder<DTYPE> *pLabel, std::string pBlockType, int pNumOfBlock1, int pNumOfBlock2, int pNumOfBlock3, int pNumOfBlock4, int pGrowthRate = 12, float pReduction = 0.5, int pNumOfClass = 1000) {
+        Alloc(pInput, pLabel, pBlockType, pNumOfBlock1, pNumOfBlock2, pNumOfBlock3, pNumOfBlock4, pGrowthRate, pReduction, pNumOfClass);
+    }
+
+    virtual ~DenseNet() {}
+
+    int Alloc(Tensorholder<DTYPE> *pInput, Tensorholder<DTYPE> *pLabel, std::string pBlockType, int pNumOfBlock1, int pNumOfBlock2, int pNumOfBlock3, int pNumOfBlock4, int pGrowthRate, float pReduction, int pNumOfClass) {
+        this->SetInput(2, pInput, pLabel);
+
+        m_numInputChannel = 2 * pGrowthRate;
+        m_growthRate      = pGrowthRate;
+        m_reduction       = pReduction;
+
+        Operator<DTYPE> *out = pInput;
+
+        // ReShape
+        out = new ReShape<DTYPE>(out, 3, 224, 224, "ReShape");
+        // out = new BatchNormalizeLayer<DTYPE>(out, TRUE, "BN0");
+
+        // 1
+        out = new ConvolutionLayer2D<DTYPE>(out, 3, m_numInputChannel, 7, 7, 2, 2, 3, FALSE, "Conv");
+        out = new BatchNormalizeLayer<DTYPE>(out, TRUE, "BN0");
+        out = new Relu<DTYPE>(out, "Relu0");
+
+        out                = this->MakeLayer(out, m_numInputChannel, pBlockType, pNumOfBlock1, 1, "Block1");
+        m_numInputChannel += pNumOfBlock1 * m_growthRate;
+        m_numOutputChannel = (int)(floor(m_numInputChannel * m_reduction));
+        out                = new Transition<DTYPE>(out, m_numInputChannel, m_numOutputChannel, "Trans1");
+        m_numInputChannel  = m_numOutputChannel;
+
+        out                = this->MakeLayer(out, m_numOutputChannel, pBlockType, pNumOfBlock2, 1, "Block2");
+        m_numInputChannel += pNumOfBlock2 * m_growthRate;
+        m_numOutputChannel = (int)(floor(m_numInputChannel * m_reduction));
+        out                = new Transition<DTYPE>(out, m_numInputChannel, m_numOutputChannel, "Trans2");
+        m_numInputChannel  = m_numOutputChannel;
+
+        out                = this->MakeLayer(out, m_numOutputChannel, pBlockType, pNumOfBlock3, 1, "Block3");
+        m_numInputChannel += pNumOfBlock3 * m_growthRate;
+        m_numOutputChannel = (int)(floor(m_numInputChannel * m_reduction));
+        out                = new Transition<DTYPE>(out, m_numInputChannel, m_numOutputChannel, "Trans3");
+        m_numInputChannel  = m_numOutputChannel;
+
+        out                = this->MakeLayer(out, m_numOutputChannel, pBlockType, pNumOfBlock4, 1, "Block4");
+        m_numInputChannel += pNumOfBlock4 * m_growthRate;
+        m_numOutputChannel = (int)(floor(m_numInputChannel * m_reduction));
+        out                = new Transition<DTYPE>(out, m_numInputChannel, m_numOutputChannel, "Trans4");
+        m_numInputChannel  = m_numOutputChannel;
+
+        out = new GlobalAvaragePooling2D<DTYPE>(out, "Avg Pooling");
+
+        out = new ReShape<DTYPE>(out, 1, 1, m_numInputChannel, "ReShape");
+
+        out = new Linear<DTYPE>(out, m_numInputChannel, pNumOfClass, TRUE, "Classification");
+
+        this->AnalyzeGraph(out);
+
+        // ======================= Select LossFunction Function ===================
+        this->SetLossFunction(new SoftmaxCrossEntropy<float>(out, pLabel, "SCE"));
+        // SetLossFunction(new MSE<float>(out, label, "MSE"));
+
+        // ======================= Select Optimizer ===================
+        // this->SetOptimizer(new GradientDescentOptimizer<float>(this->GetParameter(), 0.000001, 0.9, 5e-4, MINIMIZE));
+        // this->SetOptimizer(new GradientDescentOptimizer<float>(this->GetParameter(), 0.001, MINIMIZE));
+        this->SetOptimizer(new AdamOptimizer<float>(this->GetParameter(), 0.001, 0.9, 0.999, 1e-08, 5e-4, MINIMIZE));
+
+        return TRUE;
+    }
+
+    Operator<DTYPE>* MakeLayer(Operator<DTYPE> *pInput, int pNumOfChannel, std::string pBlockType, int pNumOfBlock, int pStride, std::string pName = NULL) {
+        if (pNumOfBlock == 0) {
+            return pInput;
+        } else if ((pBlockType == "DenseNetBlock") && (pNumOfBlock > 0)) {
+            Operator<DTYPE> *out = pInput;
+
+            for (int i = 0; i < pNumOfBlock; i++) {
+                out            = new DenseNetBlock<DTYPE>(out, pNumOfChannel, m_growthRate, pName);
+                pNumOfChannel += m_growthRate;
+            }
+
+            return out;
+        } else if ((pBlockType == "Bottleneck") && (pNumOfBlock > 0)) {
+            return NULL;
+        } else return NULL;
+    }
+};
+
+template<typename DTYPE> NeuralNetwork<DTYPE>* DenseNet121(Tensorholder<DTYPE> *pInput, Tensorholder<DTYPE> *pLabel, int pNumOfClass) {
+    return new DenseNet<DTYPE>(pInput, pLabel, "DenseNetBlock", 6, 12, 24, 16, 12, 0.5, pNumOfClass);
+}
+
+template<typename DTYPE> NeuralNetwork<DTYPE>* DenseNetLite(Tensorholder<DTYPE> *pInput, Tensorholder<DTYPE> *pLabel, int pNumOfClass) {
+    return new DenseNet<DTYPE>(pInput, pLabel, "DenseNetBlock", 2, 3, 6, 4, 32, 0.5, pNumOfClass);
+}
+```
+
+- **92행~121행**:
+
+    [**WICWIU**](https://github.com/WICWIU/WICWIU) 튜토리얼의 `DenseNet` 은 $4$ 개의 `DenseNetBlock` 과 각각의 `DenseNetBlock` 사이를 잇는 4개의 `Transition` 으로 정의됩니다.
+
+## Tutorials `tutorials/GAN/VanillaGAN` 
+`tutorials/GAN/VanillaGAN` 은 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다.
+
+[**WICWIU**](https://github.com/WICWIU/WICWIU) 의 `GAN` 은 `Generator` 와 `Discriminator` 를 각각 구성한다.
+
+### Tutorials `tutorials/GAN/VanillaGAN/net/my_Generator.hpp` 
+
+[**WICWIU**](https://github.com/WICWIU/WICWIU) 의 `GAN` 튜토리얼의 `Generator` 는 다음과 같이 정의됩니다.
+
+[:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU/blob/master/tutorials/GAN/VanillaGAN/net/my_Generator.hpp)
+
+```c++ linenums="6"
+template<typename DTYPE> class my_Generator : public NeuralNetwork<DTYPE> {
+public:
+    my_Generator(Operator<float> *z){
+        Alloc(z);
+    }
+
+    virtual ~my_Generator() {
+    }
+
+    int Alloc(Operator<float> *z){
+        this->SetInput(z);
+
+        Operator<float> *out = z;
+
+        // ======================= layer 1 ======================
+        out = new Linear<float>(out, 100, 128, TRUE, "G_L1");
+
+        // ======================= layer 2 ======================
+        out = new Linear<float>(out, 128, 256, TRUE, "G_L2");
+        out = new BatchNormalizeLayer<DTYPE>(out, FALSE, "G_BN1");
+        out = new LRelu<float>(out, 0.2, "G_LRelu1");
+        // out = new Relu<float>(out, "G_Relu1");
+
+        // ======================= layer 3 ======================
+        out = new Linear<float>(out, 256, 512, TRUE, "G_L3");
+        out = new BatchNormalizeLayer<DTYPE>(out, FALSE, "G_BN2");
+        out = new LRelu<float>(out, 0.2, "G_LRelu2");
+        // out = new Relu<float>(out, "G_Relu2");
+
+        // ======================= layer 4 ======================
+        out = new Linear<float>(out, 512, 1024, TRUE, "G_L4");
+        out = new BatchNormalizeLayer<DTYPE>(out, FALSE, "G_BN3");
+        out = new LRelu<float>(out, 0.2, "G_LRelu3");
+        // out = new Relu<float>(out, "G_Relu3");
+
+        // ======================= layer 5 ====================
+        out = new Linear<float>(out, 1024, 784, TRUE, "G_L5");
+        out = new Tanh<float>(out, "Tanh");
+
+        this->AnalyzeGraph(out);
+    }
+};
+```
+
+### Tutorials `tutorials/GAN/VanillaGAN/net/my_Discriminator.hpp` 
+
+[**WICWIU**](https://github.com/WICWIU/WICWIU) 의 `GAN` 튜토리얼의 `Discriminator` 는 다음과 같이 정의됩니다.
+
+[:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU/blob/master/tutorials/GAN/VanillaGAN/net/my_Discriminator.hpp)
+
+```c++ linenums="6"
+template<typename DTYPE> class my_Discriminator : public NeuralNetwork<DTYPE> {
+public:
+    my_Discriminator(Operator<float> *x){
+        Alloc(x);
+    }
+
+    virtual ~my_Discriminator() {
+    }
+
+    int Alloc(Operator<float> *x){
+        this->SetInput(x);
+
+        Operator<float> *out = x;
+
+        // ======================= layer 1 ======================
+        out = new Linear<float>(out, 784, 512, TRUE, "D_L1");
+        out = new LRelu<float>(out, 0.2, "D_LRelu1");
+        // out = new Relu<float>(out, "D_Relu1");
+
+       // ======================= layer 2 ======================
+        out = new Linear<float>(out, 512, 256, TRUE, "D_L2");
+        out = new LRelu<float>(out, 0.2, "D_LRelu2");
+        // out = new Relu<float>(out, "D_Relu2");
+
+        // ======================= layer 3 ======================
+        out = new Linear<float>(out, 256, 1, TRUE, "D_L3");
+        out = new Sigmoid<float>(out, "D_Sigmoid");
+
+        this->AnalyzeGraph(out);
+    }
+};
+```
+
+### Tutorials `tutorials/GAN/VanillaGAN/net/my_GAN.hpp` 
+
+[**WICWIU**](https://github.com/WICWIU/WICWIU) 튜토리얼에서 `Generator` 와 `Discriminator` 의 학습을 제어하는 `GAN` 은 다음과 같이 정의됩니다.
+
+[:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU/blob/master/tutorials/GAN/VanillaGAN/net/my_GAN.hpp)
+
+```c++ linenums="6"
+template<typename DTYPE> class my_GAN : public GAN<DTYPE> {
+public:
+    my_GAN(Tensorholder<float> *z, Tensorholder<float> *x, Tensorholder<float> *label){
+        Alloc(z, x, label);
+    }
+
+    virtual ~my_GAN() {
+    }
+
+    int Alloc(Tensorholder<float> *z, Tensorholder<float> *x, Tensorholder<float> *label){
+        this->SetInput(3, z, x, label);
+
+        this->SetGenerator(new my_Generator<float>(z));
+        this->SetSwitch(new Switch<float>(this->GetGenerator(), x));
+        this->SetDiscriminator(new my_Discriminator<float>(this->GetSwitch()));
+        this->AnalyzeGraph(this->GetDiscriminator());
+
+        this->SetLabel(label);
+
+        // ======================= Select LossFunction ===================
+        this->SetGANLossFunctions(new VanillaGANGeneratorLoss<float>(this->GetDiscriminator(), this->GetLabel(), "VanillaGANGeneratorLoss"), new VanillaGANDiscriminatorLoss<float>(this->GetDiscriminator(), this->GetLabel(), "VanillaGANDiscriminatorLoss"));
+
+        // ======================= Select Optimizer ===================
+        // this->SetGANOptimizers(new GradientDescentOptimizer<float>(this->GetGenerator()->GetParameter(), 0.000001, MINIMIZE), new GradientDescentOptimizer<float>(this->GetDiscriminator()->GetParameter(), 0.000001, MAXIMIZE));
+        // this->SetGANOptimizers(new RMSPropOptimizer<float>(this->GetGenerator()->GetParameter(), 0.0001, 0.9, 1e-08, FALSE, MINIMIZE), new RMSPropOptimizer<float>(this->GetDiscriminator()->GetParameter(), 0.0001, 0.9, 1e-08, FALSE, MAXIMIZE));
+        this->SetGANOptimizers(new AdamOptimizer<float>(this->GetGenerator()->GetParameter(), 0.0002, 0.5, 0.999, 1e-08, MINIMIZE), new AdamOptimizer<float>(this->GetDiscriminator()->GetParameter(), 0.0002, 0.5, 0.999, 1e-08, MINIMIZE));
+    }
+};
+```
+
+### Tutorials `tutorials/GAN/VanillaGAN/main.cpp` 
+
+[**WICWIU**](https://github.com/WICWIU/WICWIU) 튜토리얼에서 사전에 정의된 `GAN` 을 사용하는 `main` 함수는 다음과 같이 정의됩니다.
+
+[:octicons-file-code-24: Source](https://github.com/WICWIU/WICWIU/blob/master/tutorials/GAN/VanillaGAN/main.cpp)
+
+```c++ linenums="13"
+int main(int argc, char const *argv[]) {
+    ...
+    // create input, label data placeholder -> Tensorholder
+    Tensorholder<float> *z     = new Tensorholder<float>(1, BATCH, 1, 1, 100, "z");
+    Tensorholder<float> *x     = new Tensorholder<float>(1, BATCH, 1, 1, 784, "x");
+    Tensorholder<float> *label = new Tensorholder<float>(1, BATCH, 1, 1, 1, "label");
+
+    // create NoiseGenrator
+    GaussianNoiseGenerator<float> *Gnoise = new GaussianNoiseGenerator<float>(1, BATCH, 1, 1, 100, 0, 1);
+
+    // ======================= Select net ===================
+    // GAN<float> *net  = new my_BEGAN<float>(z, x, label);
+    GAN<float> *net  = new my_GAN<float>(z, x, label);
+    //net->Load(filename);
+
+    // ======================= Prepare Data ===================
+    MNISTDataSet<float> *dataset = CreateMNISTDataSet<float>();
+```
+
+- **16행**:
+
+    `Generator` 의 입력으로 사용할 latent variable을 저장 할 변수를 생성한다.
+
+- **25행**:
+
+    사전에 정의한 `GAN` 클래스를 이용해 신경망을 생성한다.
+
+- **29행**:
+
+    MNIST 데이터셋을 저장 할 변수를 생성한다.
+
+```c++ linenums="45"
+//Start make Noise
+Gnoise->StartProduce();
+
+for (int i = epoch + 1; i < EPOCH; i++) {
+    std::cout << "EPOCH : " << i << '\n';
+    // ======================= Train =======================
+    float genLoss  = 0.f;
+    float discLoss = 0.f;
+
+    net->SetModeTrain();
+    startTime = clock();
+
+    for (int j = 0; j < LOOP_FOR_TRAIN; j++) {
+        dataset->CreateTrainDataPair(BATCH);
+
+        Tensor<float> *x_t = dataset->GetTrainFeedImage();
+        Tensor<float> *l_t = dataset->GetTrainFeedLabel();
+        delete l_t;
+        Tensor<float> *z_t = Gnoise->GetNoiseFromBuffer();
+
+#ifdef __CUDNN__
+        x_t->SetDeviceGPU(GPUID);
+        z_t->SetDeviceGPU(GPUID);
+#endif  // __CUDNN__
+        net->FeedInputTensor(2, z_t, x_t);
+        net->ResetParameterGradient();
+        net->TrainDiscriminator();
+
+        z_t = Gnoise->GetNoiseFromBuffer();
+
+#ifdef __CUDNN__
+        z_t->SetDeviceGPU(GPUID);
+#endif  // __CUDNN__
+        net->FeedInputTensor(1, z_t);
+        net->ResetParameterGradient();
+        net->TrainGenerator();
+
+        if((j + 1) % 50 == 0){
+            genLoss  = (*net->GetGeneratorLossFunction()->GetResult())[Index5D(net->GetGeneratorLossFunction()->GetResult()->GetShape(), 0, 0, 0, 0, 0)];
+            discLoss  = (*net->GetDiscriminatorLossFunction()->GetResult())[Index5D(net->GetDiscriminatorLossFunction()->GetResult()->GetShape(), 0, 0, 0, 0, 0)];
+
+            printf("\rTrain complete percentage is %d / %d -> Generator Loss : %f, Discriminator Loss : %f",
+                    j + 1,
+                    LOOP_FOR_TRAIN,
+                    genLoss,
+                    discLoss);
+            fflush(stdout);
+
+            string filePath  = "trained/epoch" + std::to_string(i) + "_" + std::to_string(j + 1) + ".jpg";
+            const char *cstr = filePath.c_str();
+            Tensor2Image<float>(net->GetGenerator()->GetResult(), cstr, 3, 20, 28, 28);
+        }
+    }
+
+    endTime            = clock();
+    nProcessExcuteTime = ((double)(endTime - startTime)) / CLOCKS_PER_SEC;
+    printf("\n(excution time per epoch : %f)\n\n", nProcessExcuteTime);
+```
+
+- **60행**:
+
+    전처리된 데이터를 가져옵니다.
+    
+- **63행**:
+
+    latent 변수를 가져옵니다.
+    
+- **70행~71행**:
+
+    Gradient 를 초기화하고 학습하는 과정을 반복합니다.
+
+- **95** 행:
+
+    `Generator` 에서 생성한 이미지를 일정 step마다 저장한다.
+
+```c++ linenums="103"
+// =======================Test Generate(Save Generated Image)======================
+net->SetModeInference();
+
+for (int j = 0; j < (int)LOOP_FOR_GENERATE; j++) {
+    Tensor<float> *z_t = Gnoise->GetNoiseFromBuffer();
+
+#ifdef __CUDNN__
+    z_t->SetDeviceGPU(GPUID);
+#endif  // __CUDNN__
+
+    net->FeedInputTensor(1, z_t);
+    net->Generate();
+
+    string filePath  = "generated/epoch" + std::to_string(i) + "_" + std::to_string(j + 1) + ".jpg";
+    const char *cstr = filePath.c_str();
+    Tensor2Image<float>(net->GetGenerator()->GetResult(), cstr, 3, 20, 28, 28);
+
+    printf("\rGenerate complete percentage is %d / %d",
+            j + 1,
+            LOOP_FOR_GENERATE);
+    fflush(stdout);
+}
+std::cout << "\n\n";
+
+net->Save(filename);
+```
+
+- **106행~127행**:
+
+    `GAN` 에서는 정확도가 의미있는 것이 아니므로 테스트에서는 `Generator` 에서 이미지를 생성시킨 뒤 저장하는 과정을 반복한다.
