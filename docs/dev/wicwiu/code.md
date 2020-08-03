@@ -414,7 +414,7 @@ public:
 - **9행** :
 
     `ReShape` 함수로 MNIST 손글씨 이미지 `x` 를 `Tensor` 형태로 변환합니다.
-    
+
 - **12행~30행** :
 
     `ConvolutionLayer2D`, `BatchNormalizeLayer`, `Relu`, `Maxpooling` 등의 `Operator` 들로 신경망을 구성합니다. 
