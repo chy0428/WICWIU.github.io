@@ -1150,15 +1150,17 @@ int main(int argc, char const *argv[]) {
     MNISTDataSet<float> *dataset = CreateMNISTDataSet<float>();
 ```
 
-- **11행**:
+- **16행**:
+
+    `Generator` 의 입력으로 사용할 latent variable을 저장 할 변수를 생성한다.
+
+- **25행**:
 
     사전에 정의한 `GAN` 클래스를 이용해 신경망을 생성한다.
 
-- **7행**:
+- **29행**:
 
     MNIST 데이터셋을 저장 할 변수를 생성한다.
-
-Generator의 input으로 사용할 latent variable을 저장 할 변수를 생성한다.
 
 ```c++ linenums="45"
 //Start make Noise
@@ -1220,9 +1222,21 @@ for (int i = epoch + 1; i < EPOCH; i++) {
     printf("\n(excution time per epoch : %f)\n\n", nProcessExcuteTime);
 ```
 
-전처리된 데이터와 생성한 latent variavle을 가지고 Gradient를 초기화하고 학습하는 과정을 반복한다.
+- **60행**:
 
-Generator에서 생성한 이미지를 일정 step마다 저장한다.
+    전처리된 데이터를 가져옵니다.
+    
+- **63행**:
+
+    latent 변수를 가져옵니다.
+    
+- **70행~71행**:
+
+    Gradient 를 초기화하고 학습하는 과정을 반복합니다.
+
+- **95** 행:
+
+    `Generator` 에서 생성한 이미지를 일정 step마다 저장한다.
 
 ```c++ linenums="103"
 // =======================Test Generate(Save Generated Image)======================
@@ -1252,4 +1266,6 @@ std::cout << "\n\n";
 net->Save(filename);
 ```
 
-`GAN` 에서는 정확도가 의미있는 것이 아니므로 테스트에서는 `Generator` 에서 이미지를 생성시킨 뒤 저장하는 과정을 반복한다.
+- **106행~127행**:
+
+    `GAN` 에서는 정확도가 의미있는 것이 아니므로 테스트에서는 `Generator` 에서 이미지를 생성시킨 뒤 저장하는 과정을 반복한다.
