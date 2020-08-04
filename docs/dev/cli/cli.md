@@ -337,7 +337,7 @@ $ nvtop
 <div align="center">
 <figure>
   <img src="https://user-images.githubusercontent.com/16812446/89182986-88e7df80-d5d1-11ea-864c-b939360bb417.png" width="150%" />
-  <figcaption><i>nvida-smi 실행 결과</i></figcaption>
+  <figcaption><i>nvtop 실행 결과</i></figcaption>
 </figure>
 </div>
 
