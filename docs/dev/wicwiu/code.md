@@ -3,7 +3,7 @@
 
 먼저 [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 레이아웃을 다시 살펴보겠습니다.
 
-## Project layout
+# Project layout
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 는 크게 `lib/`, `tutorials/`, `src/` 로 구성되어 있습니다. 세부 디렉토리에 대한 설명은 다음과 같습니다.
 
@@ -36,7 +36,7 @@
 
     `makefile` 의 문법에 대한 기초가 부족하다면 [Makefile 기초 문법](../makefile/makefile.md) 를 참고하세요!
 
-## Compile `src/` 
+# Compile `src/` 
 
 `src/` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 라이브러리 디렉토리입니다. 이것을 컴파일하는 `makefile` 를 같이 살펴보겠습니다.
 
@@ -191,7 +191,7 @@ clean:
 
 ---
 
-## Compile `tutorials/ImageNet/` 
+# Compile `tutorials/ImageNet/` 
 
 `tutorials/ImageNet/` 은 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다. 이것을 컴파일하는 `makefile` 를 같이 살펴보겠습니다.
 
@@ -286,11 +286,11 @@ clean_all:
 
 ---
 
-## Tutorials `tutorials/MNIST`
+# Tutorials `tutorials/MNIST`
 
 `tutorials/MNIST` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다.
 
-### Tutorials `tutorials/MNIST/net/my_CNN.hpp`
+## Tutorials `tutorials/MNIST/net/my_CNN.hpp`
 
 `tutorials/MNIST/net/my_CNN.hpp` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 에서 **CNN** 으로 MNIST 데이터셋을 학습하기 위한 인공신경망을 구성하는 예제입니다. MNIST 튜토리얼의 신경망 모델은 다음과 같이 정의됩니다. 
 
@@ -365,7 +365,7 @@ public:
 
     `SetOptimizer` 함수로 `Optimizer` 를 정의합니다.
 
-### Tutorials `tutorials/MNIST/main.cpp`
+## Tutorials `tutorials/MNIST/main.cpp`
 
 `tutorials/MNIST/main.cpp` 는 `tutorials/MNIST/net/my_CNN.hpp` 에서 정의한 인공신경망을 사용하여 MNIST 손글씨 데이터셋을 학습합니다.
 
@@ -505,11 +505,11 @@ for (int j = 0; j < (int)LOOP_FOR_TEST; j++) {
 
 ---
 
-## Tutorials `tutorials/ImageNet` (ResNet)
+# Tutorials `tutorials/ImageNet` (ResNet)
 
 `tutorials/ImageNet` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다.
 
-### Tutorials `tutorials/ImageNet/net/my_Resnet.hpp`
+## Tutorials `tutorials/ImageNet/net/my_Resnet.hpp`
 
 `tutorials/ImageNet/net/my_Resnet.hpp` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 에서 **ResNet** 으로 ImageNet 데이터셋을 학습하기 위한 인공신경망을 구성하는 예제입니다. ImageNet 튜토리얼의 신경망 모델은 다음과 같이 정의됩니다. 
 
@@ -680,7 +680,7 @@ template<typename DTYPE> NeuralNetwork<DTYPE>* Resnet34(Tensorholder<DTYPE> *pIn
 
     `ResNet` 의 종류는 `BasicBlock` 내부의 채널 수를 다르게 함으로써 나누어집니다.
 
-### Tutorials `tutorials/ImageNet/main.cpp`
+## Tutorials `tutorials/ImageNet/main.cpp`
 
 `tutorials/ImageNet/main.cpp` 은 
 
@@ -796,11 +796,11 @@ for (int j = 0; j < (int)LOOP_FOR_TEST; j++) {
 
 ---
 
-## Tutorials `tutorials/ImageNet` (DenseNet)
+# Tutorials `tutorials/ImageNet` (DenseNet)
 
 `tutorials/ImageNet` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다.
 
-### Tutorials `tutorials/ImageNet/net/my_Densenet.hpp`
+## Tutorials `tutorials/ImageNet/net/my_Densenet.hpp`
 
 `tutorials/ImageNet/net/my_Densenet.hpp` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 에서 **DenseNet** 으로 ImageNet 데이터셋을 학습하기 위한 인공신경망을 구성하는 예제입니다. 신경망 모델은 다음과 같이 정의됩니다. 
 
@@ -991,12 +991,14 @@ template<typename DTYPE> NeuralNetwork<DTYPE>* DenseNetLite(Tensorholder<DTYPE> 
 
     [**WICWIU**](https://github.com/WICWIU/WICWIU) 튜토리얼의 `DenseNet` 은 $4$ 개의 `DenseNetBlock` 과 각각의 `DenseNetBlock` 사이를 잇는 4개의 `Transition` 으로 정의됩니다.
 
-## Tutorials `tutorials/GAN/VanillaGAN` 
+---
+
+# Tutorials `tutorials/GAN/VanillaGAN` 
 `tutorials/GAN/VanillaGAN` 은 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다.
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 `GAN` 은 `Generator` 와 `Discriminator` 를 각각 구성한다.
 
-### Tutorials `tutorials/GAN/VanillaGAN/net/my_Generator.hpp` 
+## Tutorials `tutorials/GAN/VanillaGAN/net/my_Generator.hpp` 
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 `GAN` 튜토리얼의 `Generator` 는 다음과 같이 정의됩니다.
 
@@ -1047,7 +1049,7 @@ public:
 };
 ```
 
-### Tutorials `tutorials/GAN/VanillaGAN/net/my_Discriminator.hpp` 
+## Tutorials `tutorials/GAN/VanillaGAN/net/my_Discriminator.hpp` 
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 `GAN` 튜토리얼의 `Discriminator` 는 다음과 같이 정의됩니다.
 
@@ -1087,7 +1089,7 @@ public:
 };
 ```
 
-### Tutorials `tutorials/GAN/VanillaGAN/net/my_GAN.hpp` 
+## Tutorials `tutorials/GAN/VanillaGAN/net/my_GAN.hpp` 
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 튜토리얼에서 `Generator` 와 `Discriminator` 의 학습을 제어하는 `GAN` 은 다음과 같이 정의됩니다.
 
@@ -1124,7 +1126,7 @@ public:
 };
 ```
 
-### Tutorials `tutorials/GAN/VanillaGAN/main.cpp` 
+## Tutorials `tutorials/GAN/VanillaGAN/main.cpp` 
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 튜토리얼에서 사전에 정의된 `GAN` 을 사용하는 `main` 함수는 다음과 같이 정의됩니다.
 

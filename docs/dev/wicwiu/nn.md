@@ -1,16 +1,14 @@
 
 이곳에서는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 가 어떻게 인공신경망을 구성하는지 설명합니다.
 
-# 인공신경망 구성하기
-
-## 데이터 구조
+# 데이터 구조
 
 <figure>
   <img src="https://user-images.githubusercontent.com/16812446/89108189-6474f180-d471-11ea-94cb-17d40a924109.png" width="90%" />
   <figcaption><i>Tensor, Shape, LongArray 데이터 형식 요약</i></figcaption>
 </figure>
 
-### Class `Tensor`
+## Class `Tensor`
 
 : Class `Tensor` : [**WICWIU**](https://github.com/WICWIU/WICWIU) 에서 인공 신경망 모델의 학습에 이용되는 ^^데이터의 기본 형식^^ 입니다.
 
@@ -22,7 +20,7 @@
 
     [Tensor](https://ko.wikipedia.org/wiki/%ED%85%90%EC%84%9C) 는 물리학의 개념을 차용, 다차원의 정보를 갖는 데이터를 의미합니다. 
 
-### Class `Shape`
+## Class `Shape`
 
 : Class `Shape` : `Tensor` 데이터의 차원에 관한 정보를 담고 있는 클래스입니다. 
     
@@ -30,7 +28,7 @@
 
 계수 변수의 최댓값은 `5` 이고, 각 축은 인공 신경망 학습에서 Time, Batch, Channel, Row, Column 축으로 활용됩니다. 각 ^^축의 차원 정보에 해당하는 변수는 포인터로 선언^^ 되어 있으며, 축의 개수만큼 배열로서 동적으로 할당되어 축의 차원 정보를 나타냅니다. 
 
-### Class `LongArray`
+## Class `LongArray`
 
 <figure>
   <img src="https://user-images.githubusercontent.com/16812446/89108533-3513b400-d474-11ea-881b-3ceb8dd2772e.png" width="80%" />
@@ -43,9 +41,9 @@
 
 논리적으로는 하나의 연속적인 배열이나 물리적으로는 블록으로 나누어져 메모리에 할당됩니다. 각 블록은 Time 축을 기준으로 그 외 나머지 4개의 차원(Batch, Channel, Row, Column)을 갖는 데이터로 분리됩니다.
 
-## 인공신경망 구성 클래스
+# 인공신경망 구성 클래스
 
-### Class `Operator`
+## Class `Operator`
 
 <figure>
   <img src="https://user-images.githubusercontent.com/16812446/89108602-d8fd5f80-d474-11ea-83c7-a2d05cead642.png" width="80%" />
@@ -70,7 +68,7 @@
 
 또한 인공 신경망의 순전파와 역전파를 수행하기 위해 연산의 결과 값과 기울기 벡터를 저장하기 위한 `Tensor` 클래스에 대한 포인터를 저장하는 Container 를 멤버 변수로 갖습니다. 순전파와 역전파에서 사용되는 Weight 파라미터들은 후에 기술할 `NeuralNetwork` 클래스가 포인터들의 Container 로 가지고 있으며, `Operator` 클래스에게 전달합니다. 파생 클래스들은 해당 클래스를 상속하여 각 연산의 기능을 수행합니다.
 
-### Class `Module` 
+## Class `Module` 
 
 <figure>
   <img src="https://user-images.githubusercontent.com/16812446/89108752-fed73400-d475-11ea-9b1d-905d7f1a4e05.png" width="130%" />
@@ -83,9 +81,9 @@
 
 `Module` 클래스는 **너비 우선 탐색(Breadth-First Search)** 방식을 이용해 서브 그래프를 구성하고 연산합니다. `Module` 클래스는 다른 `Module` 클래스를 포함하는 재귀적 구조를 형성할 수 있다. `Module` 클래스는 ^^하나의 단일 `Operator` 클래스와 같이 기능 및 동작^^ 한다. 파생 클래스들은 해당 클래스를 상속하여 각 연산의 기능을 수행한다.
 
-## 신경망 학습 클래스
+# 신경망 학습 클래스
 
-### Class `LossFunction`
+## Class `LossFunction`
 
 <figure>
   <img src="https://user-images.githubusercontent.com/16812446/89108807-7f963000-d476-11ea-8c14-7db61d009a1f.png" width="100%" />
@@ -96,7 +94,7 @@
 
 `Operator` 클래스와는 구분된 독립적인 클래스이며, ^^기울기 벡터를 계산하여 `NeuralNetwork` 의 역전파의 시작 부분을 담당^^ 합니다. 파생 클래스들은 해당 클래스를 상속하여 각 손실 함수의 기능을 수행한다.
 
-### Class `Optimizer`
+## Class `Optimizer`
 
 <figure>
   <img src="https://user-images.githubusercontent.com/16812446/89108835-c7b55280-d476-11ea-9b4a-e053e52935a1.png" width="100%" />
@@ -107,9 +105,9 @@
 
 인공신경망 모델의 역전파 시, 손실 함수에서 계산된 값에 대해서 각 학습 파라미터의 기울기 벡터가 `Tensor` 형태로 계산된다. `Optimizer` 클래스는 이 기울기 벡터에 대한 `Tensor` 들의 포인터를 Container 로 가지고 있습니다. 파생 클래스들은 해당 클래스를 상속하여 각 Optimizer의 기능을 수행한다. 
 
-## 신경망 구성
+# 신경망 구성
 
-### Class `NeuralNetwork`
+## Class `NeuralNetwork`
 
 <figure>
   <img src="https://user-images.githubusercontent.com/16812446/89109037-963d8680-d478-11ea-8d89-248ce99b8a01.png" width="80%" />
