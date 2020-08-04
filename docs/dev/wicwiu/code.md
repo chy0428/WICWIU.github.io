@@ -56,19 +56,19 @@ ENABLE_CUDNN = -D__CUDNN__
 DFLAGS = -g -D__DEBUG__
 ```
 
-- **1행** : 
+- **1** : 
 
     `Suffix`, `CPP` 파일을 Object 파일로 변환시켜주는 내장 규칙입니다.
 
-- **3행** :
+- **3** :
 
     [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 정적 라이브러리입니다.
 
-- **4행** :
+- **4** :
 
     컴파일 옵션입니다.
 
-- **6행** :
+- **6** :
 
     cuDNN 사용 여부 플래그입니다. 
 
@@ -76,7 +76,7 @@ DFLAGS = -g -D__DEBUG__
 
         cuDNN 미 설치 및 미 사용 시 주석처리를 해야합니다.
 
-- **7행** : 
+- **7** : 
 
     디버그 코드 사용 여부 플래그입니다. 
 
@@ -100,23 +100,23 @@ else
 endif
 ```
 
-- **9행** :
+- **9** :
 
     전처리 과정에서 CUDA 헤더 파일을 탐색할 디렉토리를 설정합니다.
 
-- **10행** :
+- **10** :
 
     CUDA 라이브러리를 탐색할 디렉토리를 설정합니다.
 
-- **12행** :
+- **12** :
 
     컴파일러를 정의합니다.
 
-- **13행** :
+- **13** :
 
     CUDA 파일 용 컴파일러를 정의합니다.
 
-- **15행~21행** :
+- **15~21** :
 
     cuDNN 사용 시, NVCC 링커 사용 및 `cudart`, `cudnn`, `pthread` 라이브러리를 사용합니다.
 
@@ -143,19 +143,19 @@ endif
 all:	$(FRAMEWORK_LIB)
 ```
 
-- **25행~27행** :
+- **25~27** :
 
     `.cpp` 소스 코드 파일을 정의합니다.
 
-- **29행** :
+- **29** :
 
     `SRCS` 의 `.cpp` 파일을 각각 컴파일해 `.o` 파일(오브젝트 파일)들을 생성합니다.
 
-- **31행~38행** :
+- **31~38** :
 
     cuDNN 사용 시, `CUDA_SRC/` 의 `.cu` 파일을 각각 컴파일해 `.o` 파일들을 생성합니다.
 
-- **40행** : 
+- **40** : 
 
     컴파일 시작 타겟입니다. `FRAMEWORK_LIB` 의 의존성을 확인합니다.
 
@@ -177,15 +177,15 @@ clean:
 	rm -rf *.o $(OBJS) $(CUDA_OBJS) $(FRAMEWORK_LIB)
 ```
 
-- **42행~43행** : 
+- **42~43** : 
 
     주어진 파일을 옵션들을 이용해 컴파일하여 같은 이름의 오브젝트 파일을 생성합니다.
 
-- **45행~49행** :
+- **45~49** :
 
     해당 `.cu` 파일의 의존성을 확인하고 옵션들을 이용해 컴파일하여 같은 이름의 오브젝트 파일을 생성합니다.
 
-- **52행~53행** :
+- **52~53** :
 
     `OBJS`, `CUDA_OBJS` 의 의존성을 확인하고, `FRAMEWORK_LIB`, `OBJS`, `CUDA_OBJS` 의 `.o` 파일들을 가지고 아카이브 파일을 만듭니다.
 
@@ -218,19 +218,19 @@ NVCC = nvcc
 FRAMEWORK_LIB = ../../lib/library.a
 ```
 
-- **6행** :
+- **6** :
 
     라이브러리 사용 플래그, `cudart`, `cudnn`, `pthread`, `jpeg`, `turbojpeg` 라이브러리를 사용합니다.
 
-- **8행** :
+- **8** :
 
     전처리 과정에서 CUDA 헤더 파일을 탐색할 디렉토리를 설정합니다.
 
-- **9행** :
+- **9** :
 
     CUDA 라이브러리를 탐색할 디렉토리를 설정합니다.
 
-- **14행** :
+- **14** :
 
     프레임워크 라이브러리 아카이브 파일을 정의합니다.
 
@@ -264,23 +264,23 @@ clean_all:
 	make clean -C ../..
 ```
 
-- **17행~25행** : 
+- **17~25** : 
 
     `.cpp` 소스 코드 파일, 아카이브 파일의 의존성 확인을 위해 정의하는 변수입니다.
 
-- **27행** :
+- **27** :
 
     시작 타겟, `main` 파일의 의존성을 확인합니다.
 
-- **29행~30행** :
+- **29~30** :
 
     주어진 파일을 옵션들을 이용해 컴파일하여 같은 이름의 오브젝트 파일을 생성합니다.
 
-- **32행~33행** :
+- **32~33** :
 
     `main.o` 파일과 `FRAMEWORK_LIB` 의 의존성을 확인하고,  옵션들을 이용해 `FRAMEWORK_LIB` 과 `main.o` 파일을 `main` 파일로 링크한다.
 
-- **35행~36행** :
+- **35~36** :
 
     지정된 경로에서 `make` 실행
 
@@ -345,23 +345,23 @@ public:
 };
 ```
 
-- **5행** :
+- **5** :
 
     `SetInput` 함수를 통해 $2$ 가지 입력(`data`, `label`) 이 모델의 학습에 들어간다는 것을 명시합니다.
 
-- **9행** :
+- **9** :
 
     `ReShape` 함수로 MNIST 손글씨 이미지 `x` 를 `Tensor` 형태로 변환합니다.
 
-- **12행~30행** :
+- **12~30** :
 
     `ConvolutionLayer2D`, `BatchNormalizeLayer`, `Relu`, `Maxpooling` 등의 `Operator` 들로 신경망을 구성합니다. 
 
-- **35행** :
+- **35** :
 
     `SetLossFunction` 함수로 손실함수를 정의합니다.
 
-- **39행** :
+- **39** :
 
     `SetOptimizer` 함수로 `Optimizer` 를 정의합니다.
 
@@ -386,15 +386,15 @@ MNISTDataSet<float> *test_dataset = new MNISTDataSet<float>("data/t10k-images-id
 DataLoader<float> * test_dataloader = new DataLoader<float>(test_dataset, BATCH, FALSE, 20, FALSE);
 ```
 
-- **20행~21행** :
+- **20~21** :
 
     `Tensorholder` (placeholder) 클래스로 손글씨 이미지와 정답레이블을 저장 할 변수를 생성합니다.
 
-- **24행** :
+- **24** :
 
     사전에 정의한 `CNN` 신경망을 생성합니다.
 
-- **26~30행** :
+- **26~30** :
 
     MNIST 데이터셋과 데이터로더를 생성합니다.
 
@@ -440,15 +440,15 @@ nProcessExcuteTime = ((double)(endTime - startTime)) / CLOCKS_PER_SEC;
 printf("\n(excution time per epoch : %f)\n\n", nProcessExcuteTime);
 ```
 
-- **72행~77행**:
+- **72~77**:
 
     MNIST 데이터셋으로부터 이미지와 정답레이블을 받아 저장합니다.
 
-- **79행~82행**:
+- **79~82**:
 
     cuDNN 을 사용 할 경우,  `placeholder` 의 `device` 를 `GPU` 로 설정한다.
 
-- **84행~86행**:
+- **84~86**:
 
     신경망에 데이터셋(손글씨 이미지, 정답레이블)를 만들어 넣고 신경망의 Gradient 값을 초기화 하고 학습하는 과정을 반복한다.
 
@@ -487,19 +487,19 @@ for (int j = 0; j < (int)LOOP_FOR_TEST; j++) {
 }
 ```
 
-- **106행**:
+- **106**:
 
     신경망을 테스트 모드(gradient 를 계산하지 않음)로 전환합니다.
     
-- **110행~115행**:
+- **110~115**:
     
     MNIST 데이터셋으로부터 이미지와 정답레이블을 받아 저장합니다.
 
-- **122행~123행**:
+- **122~123**:
 
     신경망에 데이터(image, label)를 입력하고 테스트를 진행합니다.  
     
-- **125행~126행**:
+- **125~126**:
 
     정확도와 손실을 측정한다.
 
@@ -566,11 +566,11 @@ public:
 };
 ```
 
-- **20행~32행**:
+- **20~32**:
 
     `BasicBlock` 은 **Convolution layer**, **BatchNormailze layer**, **Relu** 로 이루어진 2개의 layer와 **skip connection(Short cut)** 으로 이루어집니다.
 
-- **37행**:
+- **37**:
 
     **skip connection** 은 `Addall` `Operator` 로 구현됩니다.
 
@@ -658,11 +658,11 @@ public:
 };
 ```
 
-- **73행~83행**:
+- **73~83**:
 
     [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 `ResNet` 튜토리얼의 인공 신경망은 **Conv**, **BatchNorm** 등의 `Operator` 들과 사전에 정의한 4개의 `BasicBlock` 으로 모델을 구성합니다.
 
-- **98행~104행**:
+- **98~104**:
 
     `SetLossFunction` 과 `SetOptimizer` 를 이용해 손실함수와 `Optimizer` 를 정의합니다.
 
@@ -676,7 +676,7 @@ template<typename DTYPE> NeuralNetwork<DTYPE>* Resnet34(Tensorholder<DTYPE> *pIn
 }
 ```
 
-- **131행~137행** 
+- **131~137** 
 
     `ResNet` 의 종류는 `BasicBlock` 내부의 채널 수를 다르게 함으로써 나누어집니다.
 
@@ -712,15 +712,15 @@ int main(int argc, char const *argv[]) {
     test_data_reader->StartProduce();
 ```
 
-- **21행~23행**:
+- **21~23**:
 
     데이터 placeholder 를 만든다.
 
-- **26행**:
+- **26**:
 
     사전에 정의된 인공신경망을 생성한다.
 
-- **32행~34행**:
+- **32~34**:
 
     `ImageNet` 데이터는 **random crop**, **normalization**, **random Filp** 과정을 거쳐 전처리 된다.
 
@@ -743,11 +743,11 @@ int main(int argc, char const *argv[]) {
             net->Train();
 ```
 
-- **111행~117행**:
+- **111~117**:
 
     전처리된 데이터를 버퍼로부터 가져와 신경망에 넣는다.
 
-- **120행~121행**:
+- **120~121**:
 
     Gradient를 초기화 한 뒤 학습하는 과정을 반복한다.
 
@@ -782,15 +782,15 @@ for (int j = 0; j < (int)LOOP_FOR_TEST; j++) {
 }
 ```
 
-- **157행**:
+- **157**:
 
     신경망을 inference 모드로 전환 한다. 
 
-- **160행~170행**:
+- **160~170**:
 
     전처리된 데이터를 버퍼로부터 가져와 신경망에 넣어 정확도와 손실을 측정한다. 
 
-- **172행~181행**:
+- **172~181**:
 
     정확도와 손실을 출력한다. 
 
@@ -845,7 +845,7 @@ public:
 };
 ```
 
-- **20행~41행**:
+- **20~41**:
 
     `DenseNet` 은 이와 같이 정의됩니다.
 
@@ -879,7 +879,7 @@ public:
 };
 ```
 
-- **40행~66행**:
+- **40~66**:
 
     `DenseNetBlock` 을 연결하는 `Transition` 은 위와 같이 정의됩니다.
 
@@ -987,7 +987,7 @@ template<typename DTYPE> NeuralNetwork<DTYPE>* DenseNetLite(Tensorholder<DTYPE> 
 }
 ```
 
-- **92행~121행**:
+- **92~121**:
 
     [**WICWIU**](https://github.com/WICWIU/WICWIU) 튜토리얼의 `DenseNet` 은 $4$ 개의 `DenseNetBlock` 과 각각의 `DenseNetBlock` 사이를 잇는 4개의 `Transition` 으로 정의됩니다.
 
@@ -1152,15 +1152,15 @@ int main(int argc, char const *argv[]) {
     MNISTDataSet<float> *dataset = CreateMNISTDataSet<float>();
 ```
 
-- **16행**:
+- **16**:
 
     `Generator` 의 입력으로 사용할 latent variable을 저장 할 변수를 생성한다.
 
-- **25행**:
+- **25**:
 
     사전에 정의한 `GAN` 클래스를 이용해 신경망을 생성한다.
 
-- **29행**:
+- **29**:
 
     MNIST 데이터셋을 저장 할 변수를 생성한다.
 
@@ -1224,15 +1224,15 @@ for (int i = epoch + 1; i < EPOCH; i++) {
     printf("\n(excution time per epoch : %f)\n\n", nProcessExcuteTime);
 ```
 
-- **60행**:
+- **60**:
 
     전처리된 데이터를 가져옵니다.
     
-- **63행**:
+- **63**:
 
     latent 변수를 가져옵니다.
     
-- **70행~71행**:
+- **70~71**:
 
     Gradient 를 초기화하고 학습하는 과정을 반복합니다.
 
@@ -1268,6 +1268,6 @@ std::cout << "\n\n";
 net->Save(filename);
 ```
 
-- **106행~127행**:
+- **106~127**:
 
     `GAN` 에서는 정확도가 의미있는 것이 아니므로 테스트에서는 `Generator` 에서 이미지를 생성시킨 뒤 저장하는 과정을 반복한다.

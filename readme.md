@@ -75,3 +75,5 @@
   - https://github.com/baidu-research/baidu-allreduce
 
   - https://github.com/microsoft/DeepSpeed
+
+- markdown snippet

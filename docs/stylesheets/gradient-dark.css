@@ -142,3 +142,7 @@ div.arithmatex {
   overflow-x: visible !important;
   overflow-y: visible !important;
 }
+
+.codehilite .p, .highlight .p {
+  color: #fff !important;
+}

@@ -28,6 +28,18 @@
 
 [API](api.md){: .md-button .md-button--primary }
 
+## WICWIU 협업을 위한 지식 동기화
+
+이곳은 [**WICWIU**](https://github.com/WICWIU/WICWIU) 개발 팀원이 [**WICWIU**](https://github.com/WICWIU/WICWIU) 를 분석하고 인공신경망을 구현하는 코딩을 할 때, 그 과정을 기록하고 공유하여 다른 팀원과 지식을 동기화시키기 위한 공간입니다.
+
+!!! tip 
+
+    어차피 [**WICWIU**](https://github.com/WICWIU/WICWIU) 를 분석하고 코딩한 과정을 다른 팀원에게 설명해야 하므로 그것을 기록으로 남겨서 공유하는 것이 좋습니다. 기록으로 남기는 과정에서 자신의 지식이 더욱 체계적으로 정리가 되고, 이후에 다른 팀들도 분석/코딩 과정을 참고할 수 있기 때문입니다.
+
+| fewshot 팀 | 
+|:---:|
+| [Fewshot Diary](analysis/fewshot/200804.md){: .md-button .md-button--primary } |
+
 ## WICWIU 문서 작성하기 가이드
 
 [**WICWIU Github Pages**](https://wicwiu.github.io/) 에 문서를 작성하고 싶다면 다음을 클릭하여 가이드를 확인하세요!
