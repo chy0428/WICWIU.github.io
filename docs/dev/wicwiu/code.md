@@ -290,7 +290,7 @@ clean_all:
 
 `tutorials/MNIST` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다.
 
-## Tutorials `tutorials/MNIST/net/my_CNN.hpp`
+## `tutorials/MNIST/net/my_CNN.hpp`
 
 `tutorials/MNIST/net/my_CNN.hpp` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 에서 **CNN** 으로 MNIST 데이터셋을 학습하기 위한 인공신경망을 구성하는 예제입니다. MNIST 튜토리얼의 신경망 모델은 다음과 같이 정의됩니다. 
 
@@ -365,7 +365,7 @@ public:
 
     `SetOptimizer` 함수로 `Optimizer` 를 정의합니다.
 
-## Tutorials `tutorials/MNIST/main.cpp`
+## `tutorials/MNIST/main.cpp`
 
 `tutorials/MNIST/main.cpp` 는 `tutorials/MNIST/net/my_CNN.hpp` 에서 정의한 인공신경망을 사용하여 MNIST 손글씨 데이터셋을 학습합니다.
 
@@ -509,7 +509,7 @@ for (int j = 0; j < (int)LOOP_FOR_TEST; j++) {
 
 `tutorials/ImageNet` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다.
 
-## Tutorials `tutorials/ImageNet/net/my_Resnet.hpp`
+## `tutorials/ImageNet/net/my_Resnet.hpp`
 
 `tutorials/ImageNet/net/my_Resnet.hpp` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 에서 **ResNet** 으로 ImageNet 데이터셋을 학습하기 위한 인공신경망을 구성하는 예제입니다. ImageNet 튜토리얼의 신경망 모델은 다음과 같이 정의됩니다. 
 
@@ -680,7 +680,7 @@ template<typename DTYPE> NeuralNetwork<DTYPE>* Resnet34(Tensorholder<DTYPE> *pIn
 
     `ResNet` 의 종류는 `BasicBlock` 내부의 채널 수를 다르게 함으로써 나누어집니다.
 
-## Tutorials `tutorials/ImageNet/main.cpp`
+## `tutorials/ImageNet/main.cpp`
 
 `tutorials/ImageNet/main.cpp` 은 
 
@@ -800,7 +800,7 @@ for (int j = 0; j < (int)LOOP_FOR_TEST; j++) {
 
 `tutorials/ImageNet` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 신경망 모델 예제입니다.
 
-## Tutorials `tutorials/ImageNet/net/my_Densenet.hpp`
+## `tutorials/ImageNet/net/my_Densenet.hpp`
 
 `tutorials/ImageNet/net/my_Densenet.hpp` 는 [**WICWIU**](https://github.com/WICWIU/WICWIU) 에서 **DenseNet** 으로 ImageNet 데이터셋을 학습하기 위한 인공신경망을 구성하는 예제입니다. 신경망 모델은 다음과 같이 정의됩니다. 
 
@@ -998,7 +998,7 @@ template<typename DTYPE> NeuralNetwork<DTYPE>* DenseNetLite(Tensorholder<DTYPE> 
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 `GAN` 은 `Generator` 와 `Discriminator` 를 각각 구성한다.
 
-## Tutorials `tutorials/GAN/VanillaGAN/net/my_Generator.hpp` 
+## `tutorials/GAN/VanillaGAN/net/my_Generator.hpp` 
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 `GAN` 튜토리얼의 `Generator` 는 다음과 같이 정의됩니다.
 
@@ -1049,7 +1049,7 @@ public:
 };
 ```
 
-## Tutorials `tutorials/GAN/VanillaGAN/net/my_Discriminator.hpp` 
+## `tutorials/GAN/VanillaGAN/net/my_Discriminator.hpp` 
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 `GAN` 튜토리얼의 `Discriminator` 는 다음과 같이 정의됩니다.
 
@@ -1089,7 +1089,7 @@ public:
 };
 ```
 
-## Tutorials `tutorials/GAN/VanillaGAN/net/my_GAN.hpp` 
+## `tutorials/GAN/VanillaGAN/net/my_GAN.hpp` 
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 튜토리얼에서 `Generator` 와 `Discriminator` 의 학습을 제어하는 `GAN` 은 다음과 같이 정의됩니다.
 
@@ -1126,7 +1126,7 @@ public:
 };
 ```
 
-## Tutorials `tutorials/GAN/VanillaGAN/main.cpp` 
+## `tutorials/GAN/VanillaGAN/main.cpp` 
 
 [**WICWIU**](https://github.com/WICWIU/WICWIU) 튜토리얼에서 사전에 정의된 `GAN` 을 사용하는 `main` 함수는 다음과 같이 정의됩니다.
 
