@@ -1,4 +1,18 @@
-이곳은 **fewshot-learning** 을 구현하기 위한 [**WICWIU**](https://github.com/WICWIU/WICWIU) 개발팀의 [**WICWIU**](https://github.com/WICWIU/WICWIU) 분석 과정을 기록해두는 곳입니다.
+!!! info
+
+    이곳은 **fewshot-learning** 을 구현하기 위한 [**WICWIU**](https://github.com/WICWIU/WICWIU) 개발팀의 [**WICWIU**](https://github.com/WICWIU/WICWIU) 분석/코딩 과정을 기록해두는 곳입니다.
+
+[**WICWIU** 의 학습 과정은](../../dev/wicwiu/learn.md) 다음과 같이 이루어졌다는 것을 이미 알아보았습니다.
+
+- Step 1. 학습 데이터 &rarr; `Tensor`
+
+- [Step 2. 순전파](step2.md)
+
+- [Step 3. 역전파](step3.md)
+
+- [Step 4. Weight 파라미터 갱신](step4.md)
+
+여기는 fewshot 팀이 "**Step 1. 학습 데이터 &rarr; `Tensor`**" 을 구현하기 위한 과정을 기록해두는 곳입니다.
 
 # Coding: CasiaWebFace Image to vector
 

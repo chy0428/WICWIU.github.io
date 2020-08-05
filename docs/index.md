@@ -38,7 +38,7 @@
 
 | fewshot 팀 | 
 |:---:|
-| [Fewshot Diary](analysis/fewshot/200804.md){: .md-button .md-button--primary } |
+| [Fewshot Diary](analysis/fewshot/step1.md){: .md-button .md-button--primary } |
 
 ## WICWIU 문서 작성하기 가이드
 
