@@ -38,7 +38,11 @@
 
 | fewshot 팀 | 
 |:---:|
-| [Fewshot Diary](analysis/fewshot/200804.md){: .md-button .md-button--primary } |
+| [Fewshot Diary](diary/fewshot/200804.md){: .md-button .md-button--primary } |
+
+!!! info
+
+    [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 개발 팀이라면 다른 팀의 분석/코딩 과정이라도 지식 동기화를 시켜주세요. 혹시 똑같은 코드를 다시 분석한다면 시간낭비가 될 뿐더러 똑같은 분석이 2번 이상 생기면 중복된 내용의 문서가 생겨서 혼란이 초래될 수도 있기 때문입니다.
 
 ## WICWIU 문서 작성하기 가이드
 
