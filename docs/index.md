@@ -32,15 +32,13 @@
 
 이곳은 [**WICWIU**](https://github.com/WICWIU/WICWIU) 개발 팀원이 [**WICWIU**](https://github.com/WICWIU/WICWIU) 를 분석하고 인공신경망을 구현하는 코딩을 할 때, 그 과정을 기록하고 공유하여 다른 팀원과 지식을 동기화시키기 위한 공간입니다.
 
-!!! tip 
-
-    어차피 [**WICWIU**](https://github.com/WICWIU/WICWIU) 를 분석하고 코딩한 과정을 다른 팀원에게 설명해야 하므로 그것을 기록으로 남겨서 공유하는 것이 좋습니다. 기록으로 남기는 과정에서 자신의 지식이 더욱 체계적으로 정리가 되고, 이후에 다른 팀들도 분석/코딩 과정을 참고할 수 있기 때문입니다.
-
 | fewshot 팀 | 
 |:---:|
-| [Fewshot Diary](diary/fewshot/200804.md){: .md-button .md-button--primary } |
+| [Fewshot Diary](doit/fewshot/step1.md){: .md-button .md-button--primary } |
 
 !!! info
+
+    어차피 [**WICWIU**](https://github.com/WICWIU/WICWIU) 를 분석하고 코딩한 과정을 다른 팀원에게 설명해야 하므로 그것을 기록으로 남겨서 공유하는 것이 좋습니다. 기록으로 남기는 과정에서 자신의 지식이 더욱 체계적으로 정리가 되고, 이후에 다른 팀들도 분석/코딩 과정을 참고할 수 있기 때문입니다.
 
     [**WICWIU**](https://github.com/WICWIU/WICWIU) 의 개발 팀이라면 다른 팀의 분석/코딩 과정이라도 지식 동기화를 시켜주세요. 혹시 똑같은 코드를 다시 분석한다면 시간낭비가 될 뿐더러 똑같은 분석이 2번 이상 생기면 중복된 내용의 문서가 생겨서 혼란이 초래될 수도 있기 때문입니다.
 
