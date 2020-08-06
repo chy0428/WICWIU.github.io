@@ -34,7 +34,7 @@
 
 | fewshot 팀 | 
 |:---:|
-| [Fewshot Diary](doit/fewshot/step1.md){: .md-button .md-button--primary } |
+| [Fewshot Diary](doit/fewshot/step1-1.md){: .md-button .md-button--primary } |
 
 !!! info
 

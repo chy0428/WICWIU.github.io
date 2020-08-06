@@ -32,7 +32,8 @@ nav:
       - tmux: dev/cli/tmux.md
   - WICWIU 분석: 
     - fewshot diary:
-      - Step 1. Data &rarr; Tensor: doit/fewshot/step1.md
+      - Step 1 (1). Data &rarr; Tensor: doit/fewshot/step1-1.md
+      - Step 1 (2). Data &rarr; Tensor: doit/fewshot/step1-2.md
       - Step 2. 순전파: doit/fewshot/step2.md
       - Step 3. 역전파: doit/fewshot/step3.md
       - Step 4. 최적화: doit/fewshot/step4.md
