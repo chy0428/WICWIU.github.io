@@ -1,14 +1,46 @@
 # Analysis: Dataset to Tensor
 
-fewshot 팀은 LFW 팀이 개발해둔 코드를 참고할 수 있기 때문에 먼저 LFW 코드를 분석해보았다. [**WICWIU**](https://github.com/WICWIU/WICWIU) 개발 가이드의 [**WICWIU 로 학습하기**](../../dev/wicwiu/learn.md) 의 첫번째 과정이 "**Step 1. 학습 데이터 &rarr; `Tensor`**" 이기 때문에 먼저 학습시켜야할 데이터셋인 **Casia Web Face** 를 `Tensor` 로 변환해야 했다. 그래서 LFW 팀의 코드에서 데이터셋을 `Tensor` 로 변환하는 코드 흐름을 중점으로 분석을 시도해보았다.
-
 !!! note
 
     `tutorials/LFW/` 경로를 `LFW/` 로 축약하여 사용하였다.
 
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
 
-    `LFW` 를 사용하여 인공신경망을 학습하고 테스트하는 `main` 함수를 ^^데이터셋을 `Tensor` 로 변환하여 인공신경망에 입력하는 것을 중심으로 분석^^ 해본다.
+    `vision::Resize::DoTransform` 과 `vision::CenterCrop::DoTransform` 가 데이터셋에 어떤 처리를 하는지 분석해본다.
+
+!!! tldr "분석 지도"
+
+    - [x] `LFW/main.cpp`: `main` 함수
+
+    - [x] `LFW/ImageProcess.hpp`: `Transform` 생성자
+
+    - [x] `LFW/ImageProcess.hpp`: `Resize` 생성자
+
+    - [x] `LFW/ImageProcess.hpp`: `CenterCrop` 생성자
+
+    - [x] `LFW/ImageProcess.hpp`: `Compose` 생성자
+
+    - [x] `src/Dataset.hpp`: `Dataset` 생성자
+
+    - [x] `LFW/LFWDataset.hpp`: `LFWDataset` 생성자
+
+    - [x] `src/Dataset.hpp`: `Dataset::SetLabel` 메소드
+
+    - [x] `LFW/LFWDataset.hpp`: `LFWDataset::CopyData` 메소드
+
+    - [x] `src/Shape.hpp`: `Shape` 생성자
+
+    - [x] `LFW/ImageProcess.hpp`: `vision::Compose::DoTransform` 메소드
+
+    - [ ] `LFW/ImageProcess.hpp`: `vision::Resize::DoTransform` 메소드
+
+    - [ ] `LFW/ImageProcess.hpp`: `vision::CenterCrop::DoTransform` 메소드
+
+    - [ ] `LFW/LFWDataset.hpp`: `LFWDataset::Image2Tensor` 메소드
+
+    - [ ] `LFW/LFWSampler.hpp`: `LFWSampler` 생성자
+
+    - [ ] `LFW/LFWSampler.hpp`: `LFWSampler::GetDataFromGlobalBuffer` 메소드
 
 ## `LFW/ImageProcess.hpp`: `vision::Resize::DoTransform` 메소드
 
@@ -76,10 +108,6 @@ public:
 !!! done "분석 결론"
 
     `m_transform->DoTransform(imgWrp);` 은 데이터셋에 어떤 처리를 해주고 다시 데이터셋에 저장한다. 그러므로 데이터셋을 `Tensor` 를 변환하는 직접적인 코드는 아니다.
-
-!!! info "분석 방향"
-
-    `vision::CenterCrop::DoTransform` 가 데이터셋에 어떤 처리를 하는지 분석해본다.
 
 !!! tldr "분석 지도"
 
@@ -172,10 +200,6 @@ public:
 
     `m_transform->DoTransform(imgWrp);` 은 데이터셋에 어떤 처리를 해주고 다시 데이터셋에 저장한다. 그러므로 데이터셋을 `Tensor` 를 변환하는 직접적인 코드는 아니다.
 
-!!! info "분석 방향"
-
-    이제 실질적으로 데이터셋을 `Tensor` 로 변환해주는 `LFWDataset<DTYPE>::Image2Tensor` 를 분석해본다.
-
 !!! tldr "분석 지도"
 
     - [x] `LFW/main.cpp`: `main` 함수
@@ -255,7 +279,7 @@ template<typename DTYPE> Tensor<DTYPE> *LFWDataset<DTYPE>::Image2Tensor(ImageWra
     
     !!! danger 
     
-        `doValuerScaling` 은 `true` 와 `falst` 를 구분하는 용도로 쓰이기 때문에 `4` 바이트나 되는 `int` 타입이 아닌 `1` 바이트 `bool` 타입에 저장하는 것이 좋아 보인다.
+        `doValuerScaling` 은 `true` 와 `false` 를 구분하는 용도로 쓰이기 때문에 `4` 바이트나 되는 `int` 타입이 아닌 `1` 바이트 `bool` 타입에 저장하는 것이 좋아 보인다.
 
 - **5-7**:
 
@@ -275,9 +299,11 @@ template<typename DTYPE> Tensor<DTYPE> *LFWDataset<DTYPE>::Image2Tensor(ImageWra
 
     `doValuerScaling` 이 `TRUE` 이므로 이 코드가 실행된다.
 
-    `imgBuf` 의 `ro * width * channel + co * channel + ch` 인덱스를 참조하여 `255.0` 로 나눈다. 단지 $1$ 차원 배열에 저장되어 있는 $3$ 차원 데이터를 참조하는 방식으로 보인다.
+    `imgBuf` 의 `ro * width * channel + co * channel + ch` 인덱스를 참조하여 `255.0` 로 나눈다. 단지 $1$ 차원 배열에 저장되어 있는 $3$ 차원 데이터를 참조하는 방식이다.
 
-    이것은 **libjpeg-turbo** 가 압축 해제한 데이터셋이므로 $3$ 차원 데이터셋인 이미지의 실제 데이터를 참조할 때 왜 `ro * width * channel + co * channel + ch` 로 참조하는지는 **libjpeg-turbo** 를 참조해야 할 것 같다. 이는 만약 다른 라이브러리로(가령 `CImg`) 데이터셋을 $1$ 차원 배열로 만들고 그것을 다시 `Tensor` 로 변환한다면 또 다른 방식으로 $1$ 차원 배열의 인덱스를 참조해야 한다는 것을 의미한다.
+    !!! note
+    
+        이것은 **libjpeg-turbo** 가 압축 해제한 데이터셋이므로 $3$ 차원 데이터셋인 이미지의 실제 데이터를 참조할 때 왜 `ro * width * channel + co * channel + ch` 로 참조하는지는 **libjpeg-turbo** 를 참조해야 할 것 같다. 이는 만약 다른 라이브러리로(가령 `CImg`) 데이터셋을 $1$ 차원 배열로 만들고 그것을 다시 `Tensor` 로 변환한다면 또 다른 방식으로 $1$ 차원 배열의 인덱스를 참조해야 한다는 것을 의미한다.
 
     !!! danger
 
@@ -293,9 +319,13 @@ template<typename DTYPE> Tensor<DTYPE> *LFWDataset<DTYPE>::Image2Tensor(ImageWra
         
         그런데 심지어 그 `LFWDataset` 호출형태가 `LFWDataset<float> *train_dataset = new LFWDataset<float>("./data", "lfw_funneled", NUMBER_OF_CLASS, transform);` 이었던 것을 기억하자. 그러므로 `double` 에서 `float` 에서 암시적 형변환이 일어나면서 데이터 손실까지 발생할 수도 있다.
 
-        좀 더 큰 자료형에 대한 암시적 형변환은 애교로 봐줄만 하지만 더 작은 자료형에 대한 암시적 형변환은 프로젝트의 안정성을 심각하게 해친다.
+        좀 더 큰 자료형에 대한 암시적 형변환은 데이터 손실이 없으므로 애교로 봐줄만 하지만 더 작은 자료형에 대한 암시적 형변환은 데이터 손실이 발생할 수도 있으므로 프로젝트의 안정성을 심각하게 해친다.
         
-    어쨌든 `255.0` 로 나눔으로써 데이터를 스케일링한 후 `(*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)]` 에 저장한다.
+    어쨌든 `.jpeg` 의 픽셀값 하나하나를 `255.0` 로 나눔으로써 데이터를 스케일링한 후 `(*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)]` 에 하나하나씩 저장한다.
+
+    !!! danger
+    
+        왜 이런 코드는 **GPU Acceleration** 이 되지 않았을까?
 
 !!! done "분석 결론"
 
@@ -305,7 +335,7 @@ template<typename DTYPE> Tensor<DTYPE> *LFWDataset<DTYPE>::Image2Tensor(ImageWra
 
     $3$차원 데이터셋의 원소 하나 하나를 가져와서 `(*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)]` 에 저장한다.
 
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
 
     `(*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)]` 가 어떤 코드인지 이해해야 한다.
 
@@ -380,19 +410,26 @@ public:
 };
 ```
 
-- **22**:
+- **19**:
 
     `Tensor<DTYPE> *result = Tensor<DTYPE>::Zeros(1, 1, channel, height, width);` 는 이 메소드를 호출한다. 
     
     객체가 생성되기 전에 호출되어야 하므로 `static` 으로 정의되어 있다. 또한 `IsUseTime pAnswer = UseTime` 의 디폴트 파라미터를 사용한다.
 
 ```c++ linenums="1"
-template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Zeros(int pSize0, int pSize1, int pSize2, int pSize3, int pSize4, IsUseTime pAnswer) {
-    return Tensor<DTYPE>::Zeros(new Shape(pSize0, pSize1, pSize2, pSize3, pSize4), pAnswer);
+template<typename DTYPE> Tensor<DTYPE> *Tensor<DTYPE>::Zeros(
+    int pSize0,
+    int pSize1,
+    int pSize2,
+    int pSize3,
+    int pSize4,
+    IsUseTime pAnswer) {
+    return Tensor<DTYPE>::Zeros(
+        new Shape(pSize0, pSize1, pSize2, pSize3, pSize4), pAnswer);
 }
 ```
 
-- **2**:
+- **8-9**:
 
     파라미터 `(1, 1, channel, height, width)` 를 받아서 오버로딩된 `Tensor::Zeros` 를 호출한다.
 
@@ -543,7 +580,7 @@ template<typename DTYPE> int Tensor<DTYPE>::Alloc(Shape *pShape, IsUseTime pAnsw
 
     그런데 `Tensor::Zeros` 가 텐저값들을 $0$ 으로 초기화해주는 메소드라고 했는데 어디에서 $0$ 으로 초기화되었는지 보이지 아직 않는다.
 
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
 
     `(*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)]` 가 어떤 코드인지 분석하기 위하여 `Tensor::operator[]` 를 분석해본다.
 
@@ -621,7 +658,7 @@ inline unsigned int Index5D(Shape *pShape, int ti, int ba, int ch, int ro, int c
 
     하지만 `1` 차원 배열로 변환되었으므로 인덱스를 $i \in \{0, 1, \dots, n\}, j \in \{0, 1, \dots, 7\}$ 인 $i, j$ 에 대하여 $i \times 8 + j$ 로 참조해야 한다.
 
-    이것을 일반화하면 $n \in \mathbb{N}, m \in \mathbb{N}$ 에 대한 $n \times m$ 행렬을 $1 \times nm$ 배열로 변환하여 인덱스를 참조하기 위해서는 $i \in \{0, 1, \dots, n-1\}, j \in \{0, 1, \dots, m-1\}$ 인 $i, j$ 에 대하여 $i \times m + j$ 로 참조해야 한다는 것을 귀납적으로 알 수 있다. 이것을 코드로 변환하면 위와 같은 `Index2D` 함수가 되는 것이다. 
+    이것을 일반화하면 $n \in \mathbb{N}, m \in \mathbb{N}$ 에 대한 $n \times m$ 행렬을 $1 \times nm$ 배열로 변환하여 인덱스를 참조하기 위해서는 $i \in \{0, 1, \dots, n-1\}, j \in \{0, 1, \dots, m-1\}$ 인 $i, j$ 에 대하여 $\boxed{ i \times m + j}$ 로 참조해야 한다는 것을 귀납적으로 알 수 있다. 이것을 코드로 변환하면 위와 같은 `Index2D` 함수가 되는 것이다. 
 
     !!! note 
 
@@ -643,7 +680,7 @@ inline unsigned int Index5D(Shape *pShape, int ti, int ba, int ch, int ro, int c
 
     이것을 일반화하면 $t_1 \in \mathbb{N}, t_2 \in \mathbb{N}, t_3 \in \mathbb{N}$ 에 대한 $t_1 \times t_2 \times t_3$ 텐저를 $1 \times t_1t_2t_3$ 배열로 변환하여 인덱스를 참조하기 위해서는 $i_1 \in \{0, 1, \dots, t_1-1\}, i_2 \in \{0, 1, \dots, t_2-1\}, i_3 \in \{0, 1, \dots, t_3-1\}$ 인 $i_1, i_2, i_3$ 에 대하여 
     
-    $$i_1t_2t_3 + i_2t_3 + i_3 = (i_1t_2 + i_2)t_3 + i_3$$
+    $$\boxed{i_1t_2t_3 + i_2t_3 + i_3 = (i_1t_2 + i_2)t_3 + i_3} $$
     
     로 참조해야 한다는 것을 귀납적으로 알 수 있다. 이것을 코드로 변환하면 위와 같은 `Index3D` 함수가 된다.
 
@@ -661,7 +698,7 @@ inline unsigned int Index5D(Shape *pShape, int ti, int ba, int ch, int ro, int c
 
     인 $i_1, i_2, i_3, i_4, i_5$ 에 대하여 
     
-    $$i_1t_5t_4t_3t_2+i_2t_5t_4t_3+i_3t_5t_4+i_4t_5+i_5 = (((i_1t_2+i_2)t_3+i_3)t_4+i_4)t_5 + i_5$$
+    $$\boxed{i_1t_5t_4t_3t_2+i_2t_5t_4t_3+i_3t_5t_4+i_4t_5+i_5 = (((i_1t_2+i_2)t_3+i_3)t_4+i_4)t_5 + i_5} $$
     
     로 참조해야 한다는 것을 귀납적으로 알 수 있다. 이것을 코드로 변환하면 위와 같은 `Index5D` 함수가 된다.
 
@@ -679,7 +716,11 @@ inline unsigned int Index5D(Shape *pShape, int ti, int ba, int ch, int ro, int c
         ...
         ```
 
-        왜냐하면 `Tensor` 의 형상을 정해줄 때 $\text{channel} \times \text{height} \times \text{width}$ 로 정해줬는데도 `Tensor` 에 `3` 차원 텐저가 `1` 차원 배열로 저장된 `imgBuf` 의 원소를 저장할 때 
+        왜냐하면 `Tensor` 의 형상을 정해줄 때 $\text{channel} \times \text{height} \times \text{width}$ 로 정해줬는데도 `Tensor` 에 `3` 차원 텐저가 `1` 차원 배열로 저장된 `imgBuf` 의 원소를 저장할 때의 인덱싱 방식 
+
+        $$\boxed{i_1t_2t_3 + i_2t_3 + i_3 = (i_1t_2 + i_2)t_3 + i_3} $$
+
+        에 따라
 
         ```c++ 
         ch * height * width + ro * width + co
@@ -698,10 +739,6 @@ inline unsigned int Index5D(Shape *pShape, int ti, int ba, int ch, int ro, int c
 !!! done "분석 결론"
 
     `Index5D` 는 `Shape` 와 데이터셋 각 축의 인덱스가 전달되면 그것에 대응되는 `LongArray` 의 원소의 인덱스를 반환해준다.
-
-!!! info "분석 방향"
-
-    `(*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)]` 가 어떤 코드인지 분석하기 위하여 `Tensor::operator[]` 를 분석해야 한다.
 
 !!! tldr "분석 지도"
 
@@ -786,14 +823,13 @@ template<typename DTYPE> DTYPE& Tensor<DTYPE>::operator[](unsigned int index) {
 
     `(*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)]` 를 이해해보려 했는데 `Tensor::operator[]` 메소드가 인덱스를 그저 `LongArray::operator[]` 로 전달해준다.
 
-
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
 
     `LongArray::operator[]` 을 분석함으로써 `(*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)]` 를 이해해야 한다. 
 
     그런데 `LongArray::operator[]` 을 분석하려면 먼저 `LongArray` 객체의 생성을 이해해야 한다.
 
-    `LongArray` 객체는 `Tensor::Zeros` 메소드 분석 과정에서 `pTime`(`0`번째 축) 과 `pCapacityPerTime`(`1`번째 축부터 마지막 축의 크기까지의 곱) 변수로 `m_aLongArray = new LongArray<DTYPE>(pTime, pCapacityPerTime);` 와 같이 생성되었음을 기억하자.
+    `LongArray` 객체는 `Tensor::Zeros` 메소드 분석 과정에서 `pTime`(`0`번째 축) 과 `pCapacityPerTime`(`1`번째 축부터 마지막 축의 크기까지의 곱) 변수로 `LongArray<DTYPE> * m_aLongArray = new LongArray<DTYPE>(pTime, pCapacityPerTime);` 와 같이 생성되었음을 기억하자.
 
 !!! tldr "분석 지도"
 
@@ -841,7 +877,7 @@ template<typename DTYPE> DTYPE& Tensor<DTYPE>::operator[](unsigned int index) {
 
 !!! help "분석 목표"
 
-    `LongArray` 객체 생성 과정인 `m_aLongArray = new LongArray<DTYPE>(pTime, pCapacityPerTime);` 을 이해하기
+    `LongArray` 객체 생성 과정인 `LongArray<DTYPE> * m_aLongArray = new LongArray<DTYPE>(pTime, pCapacityPerTime);` 을 이해하기
 
     파라미터의 의미는 `pTime`(`0`번째 축) 과 `pCapacityPerTime`(`1`번째 축부터 마지막 축의 크기까지의 곱) 이었음을 기억하자.
 
@@ -944,12 +980,11 @@ template<typename DTYPE> int LongArray<DTYPE>::Alloc(unsigned int pTimeSize, uns
 
         한편 `LongArray` 생성자가 반드시 `Alloc()` 메소드를 호출하는데 이 메소드가 항상 메모리를 `0` 으로 초기화시키므로 `Tensor::Zeros` 메소드의 의미가 무엇인지 알 수 없다. 왜냐하면 다른 `Tensor` 생성자를 호출해도 반드시 `0` 으로 초기화 되기 때문이다.
 
-
 - **13**:
 
     `m_CapacityOfLongArray` 에 `LongArray` 의 총 크기를 저장해준다.
 
-    `pTime`(`0`번째 축) 과 `pCapacityPerTime`(`1`번째 축부터 마지막 축의 크기까지의 곱) 이 `m_TimeSize` 와 `m_CapacityPerTime` 이 되었으므로 즉, 데이터셋의 형상을 모두 곱한 값을 저장해주는 것이다.
+    `pTime`(`0`번째 축) 과 `pCapacityPerTime`(`1`번째 축부터 마지막 축의 크기까지의 곱) 이 `m_TimeSize` 와 `m_CapacityPerTime` 이 되었으므로 데이터셋의 형상을 모두 곱한 값을 저장해주는 것이다.
 
 - **15**:
 
@@ -967,10 +1002,6 @@ template<typename DTYPE> int LongArray<DTYPE>::Alloc(unsigned int pTimeSize, uns
 
     이 `m_aaHostLongArray` 가 `LongArray` 의 실체라고 할 수 있다. 
     
-!!! info "분석 방향"
-
-    이제 `LongArray::operator[]` 을 분석함으로써 `(*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)]` 를 이해해야 한다. 
-
 !!! tldr "분석 지도"
 
     - [x] `LFW/main.cpp`: `main` 함수
@@ -1050,7 +1081,8 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
     for (int ro = 0; ro < height; ro++) {
         for (int co = 0; co < width; co++) {
             for (int ch = 0; ch < channel; ch++) {
-                (*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)] = imgBuf[ro * width * channel + co * channel + ch] / 255.0;
+                (*result)[Index5D(result->GetShape(), 0, 0, ch, ro, co)] =\
+                    imgBuf[ro * width * channel + co * channel + ch] / 255.0;
     ```
 
     에서 `Index5D(result->GetShape(), 0, 0, ch, ro, co)` 가 `index` 로 전달되었음을 기억하자. 
@@ -1059,9 +1091,11 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
 
     결국 `LFWDataset::Image2Tensor` 란 `Index5D(result->GetShape(), 0, 0, ch, ro, co)` 으로 전달된 `index` 로써 `2` 차원 배열 `m_aaHostLongArray[index / m_CapacityPerTime][index % m_CapacityPerTime]` 에 데이터셋 `imgBuf` 의 원소를 하나하나 복사하고 있는 것이다.
 
-    ^^이로써 우리는 데이터셋을 `Tensor`로 변환하는 방법을 이해했다.^^
+    !!! success
+    
+        ^^이로써 우리는 데이터셋을 `Tensor`로 변환하는 방법을 이해했다.^^
 
-    데이터셋을 `Tensor` 로 변환하는 방법이란 (1) 데이터셋을 적절한 방식으로 읽고 (2) 메모리에 저장한 다음 (3) `Tensor` 객체를 데이터셋 형상에 맞춰서 적절히 만들고 (4) 그냥 `Tensor[Index5D(i1, i2, i3, i4, i5)]` 라는 식으로 복사하면 끝이다.
+        데이터셋을 `Tensor` 로 변환하는 방법이란 (1) 데이터셋을 적절한 방식으로 읽고 (2) 메모리에 저장한 다음 (3) `Tensor` 객체를 데이터셋 형상에 맞춰서 적절히 만들고 (4) 그냥 `Tensor[Index5D(i1, i2, i3, i4, i5)]` 라는 식으로 복사하면 끝이다.
 
     !!! danger
     
@@ -1083,7 +1117,7 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
     
     어쨌든 그 `3` 차원 배열, 즉 `3` 차원 데이터셋을 `1` 차원 배열에 저장하기 위한 `index` 가 다시 `2` 차원 배열 `DTYPE ** m_aaHostLongArray` 에 저장되기 위한 인덱스 연산 `[index / m_CapacityPerTime][index % m_CapacityPerTime]` 을 거쳐간다.
 
-    > 대체 왜 `3` 차원 데이터셋을 `5` 차원 `Tensor` 에 저장한 다음 `1` 차원 배열에 저장하기 위한 인덱스 연산을 한 다음 `2` 차원 배열에 저장하는 거지???????????????????????? 왜왜 왜 이렇게 하는거지?
+    > 대체 왜 `3` 차원 데이터셋을 `5` 차원 `Tensor` 에 저장한 다음 `1` 차원 배열에 저장하기 위한 인덱스 연산을 한 다음 `2` 차원 배열에 저장하는 거지???? 왜 이렇게 하는거지?
     
 !!! done "분석 결론"
 
@@ -1091,7 +1125,7 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
 
     **데이터셋을 `Tensor` 로 변환하는 방법이란 (1) 데이터셋을 적절한 방식으로 읽고 (2) 메모리에 저장한 다음 (3) `Tensor` 객체를 데이터셋 형상에 맞춰서 적절히 만들고 (4) 그냥 `Tensor[Index5D(i1, i2, i3, i4, i5)]` 라는 식으로 복사하면 끝이다.**
 
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
 
     분석 지도에 따르면 아직 
 
@@ -1099,7 +1133,7 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
 
     - [ ] `LFW/LFWSampler.hpp`: `LFWSampler::GetDataFromGlobalBuffer` 메소드
 
-    을 분석하지 않았지만 데이터셋을 `Tensro` 로 변환하는 과정을 충분히 이해했으므로 이쯤에서 다른 코드 분석을 그만두고, 코딩을 시작해본다.
+    을 분석하지 않았지만 데이터셋을 `Tensor` 로 변환하는 과정을 충분히 이해했으므로 이쯤에서 다른 코드 분석을 그만두고, 코딩을 시작해본다.
 
     하지만 이후에 물론 `DataLoader` 를 정의해야 할 것이다. 그러나 모든 건 인공신경망 구현을 위한 것이었으므로 코딩을 시작할 기본적인 준비라도 끝나면 일단 할 수 있는 수준까지의 코딩은 해두는 것이 옳은 방향인 것 같다.
 

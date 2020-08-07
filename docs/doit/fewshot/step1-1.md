@@ -244,7 +244,7 @@ fewshot 팀은 LFW 팀이 개발해둔 코드를 참고할 수 있기 때문에 
 
     `tutorials/LFW/` 경로를 `LFW/` 로 축약하여 사용하였다.
 
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
 
     `LFW` 를 사용하여 인공신경망을 학습하고 테스트하는 `main` 함수를 ^^데이터셋을 `Tensor` 로 변환하여 인공신경망에 입력하는 것을 중심으로 분석^^ 해본다.
 
@@ -258,67 +258,59 @@ fewshot 팀은 LFW 팀이 개발해둔 코드를 참고할 수 있기 때문에 
 
     `LFW` 를 사용하여 데이터셋을 가져온 후 학습하고 테스트하는 `main` 함수에서 어떻게 데이터셋을 가져오고 `Tensor` 로 변환하는지 이해하기
 
-```c++ linenums="1" hl_lines="13-15"
-...
+```c++ linenums="1"
 #define NUMBER_OF_CLASS               5749          // for lfw_funneled
 ...
 int main(int argc, char const *argv[])
 {
 ...
-    Tensorholder<float> *x     = new Tensorholder<float>(1, BATCH, 1, 1, 145200, "x");
-    Tensorholder<float> *label = new Tensorholder<float>(1, BATCH, 1, 1, NUMBER_OF_CLASS, "label");
-
     // ======================= Select net ===================
     NeuralNetwork<float> *net = new my_FaceNet<float>(x, label, NUMBER_OF_CLASS);
 ...
     vision::Compose *transform = new vision::Compose({new vision::Resize(224), new vision::CenterCrop(220)});
     LFWDataset<float> *train_dataset = new LFWDataset<float>("./data", "lfw_funneled", NUMBER_OF_CLASS, transform);
     DataLoader<float> *train_dataloader = new LFWSampler<float>(NUMBER_OF_CLASS, train_dataset, BATCH, TRUE, 1, FALSE);
-...
 ```
 
-- **13-15**:
+- **9**:
 
     `Compose` 객체를 `Resize(224)` 와 `Centercrop(220)` 파라미터로 생성한다.
+    
+- **10-11**:
 
-    그리고 `LFWDataset` 을 생성하고 `LFWSampler` 를 만든다. 
+    `LFWDataset` 을 생성하고 `LFWSampler` 를 만든다. 
 
-```c++ linenums="1" hl_lines="5"
-...
+```c++ linenums="1" 
         // ======================= Train =======================
         net->SetModeTrain();
         for (int j = 0; j < loop_for_train; j++) {
             std::vector<Tensor<float> *> * temp =  train_dataloader->GetDataFromGlobalBuffer();
 ...
             net->FeedInputTensor(2, (*temp)[0], (*temp)[1]);
-...
 ```
 
-- **5**:
+- **4**:
 
-    학습을 시작할 때 `LFWSampler::GetDataFromGlobalBuffer` 를 통하여 데이터셋을 `Tensor<float>` 포인터형 벡터에 저장한다.
+    학습을 시작할 때 `LFWSampler::GetDataFromGlobalBuffer` 를 통하여 데이터셋을 `Tensor<float>` 포인터형 벡터 포인터에 저장한다.
 
-- **7**:
+- **6**:
 
     `Tensor` 로 변환된 데이터셋을 신경망에 입력해준다.
 
 ```cpp linenums="1" 
-...
         // ======================= Test ======================
 ...
             for(int i = 0; i < curBatch; i++){
                 dataset.CopyData(batchIdx * BATCH + i, vTestSample[i]);
             }
-
 			net->InputToFeature(INPUT_DIM, vTestSample.size(), &vTestSample[0], FEATURE_DIM, &vTestFeature[0], BATCH);
-...
 ```
 
-- **5**:
+- **4**:
 
     테스트를 할 때에는 `LFWDataset::CopyData` 를 통하여 데이터셋을 `float` 포인터형 벡터에 저장한다.
 
-- **8**:
+- **6**:
 
     여기에서 신경망에 데이터셋을 입력해주는 것 같다.
 
@@ -326,7 +318,7 @@ int main(int argc, char const *argv[])
 
     `main` 함수에서는 인공신경망을 구성한 후 학습 시에는 `LFWSampler::GetDataFromGlobalBuffer` 으로 데이터셋을 마련하고 테스트 시에는 `LFWDataset::CopyData` 로 데이터셋을 마련한다.
 
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
     
     그러므로 `LFWSampler::GetDataFromGlobalBuffer` 와 `LFWDataset::CopyData` 를 분석하면 데이터셋을 어떻게 `Tensor` 로 바꾸어 신경망에 입력할 수 있는지 참고할 수 있다.
 
@@ -405,10 +397,6 @@ public:
 
     `Transform` 은 `DoTransform` 메소드 구조만 갖고 있는 추상클래스이다.
 
-!!! info "분석 방향"
-
-    이제 `new vision::Resize(224)` 를 분석해본다.
-
 !!! tldr "분석 지도"
 
     - [x] `LFW/main.cpp`: `main` 함수
@@ -471,10 +459,6 @@ public:
 !!! done "분석 결론"
 
     `Resize` 객체 생성 과정(`new vision::Resize(224)`) 은 `224` 를 전달받아 `newHeight` 와 `newWidth` 에 저장한다.
-
-!!! info "분석 방향"
-
-    이제 `new vision::CenterCrop(220)` 를 분석해본다.
 
 !!! tldr "분석 지도"
 
@@ -539,16 +523,6 @@ public:
 !!! done "분석 결론"
 
     `CenterCrop` 객체 생성 과정(`new vision::CenterCrop(220)`) 은 `220` 를 전달받아 `m_height` 와 `m_width` 에 저장한다.
-
-!!! info "분석 방향"
-
-    이제 
-
-    ```c++
-    vision::Compose *transform = new vision::Compose({new vision::Resize(224), new vision::CenterCrop(220)});
-    ``` 
-
-    을 분석해본다.
 
 !!! tldr "분석 지도"
 
@@ -625,13 +599,11 @@ public:
     vision::Compose *transform = new vision::Compose({new vision::Resize(224), new vision::CenterCrop(220)});
     ```
     
-    은
-    
-    `{new vision::Resize(224), new vision::CenterCrop(220)}` 을 전달받아 `std::vector<Transform *> m_listOfTransform` 에 저장하고,
+    은 `{new vision::Resize(224), new vision::CenterCrop(220)}` 을 전달받아 `std::vector<Transform *> m_listOfTransform` 에 저장하고,
 
     `std::vector<Transform *> m_listOfTransform` 의 사이즈를 `int m_size` 에 저장한다.
 
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
 
     이제 
 
@@ -744,16 +716,6 @@ template<typename DTYPE> Dataset<DTYPE>::Dataset() {
 
     `Dataset` 객체는 구현되어 있지 않은 추상 클래스이다.
 
-!!! info "분석 방향"
-
-    이제 
-
-    ```c++
-    LFWDataset<float> *train_dataset = new LFWDataset<float>("./data", "lfw_funneled", NUMBER_OF_CLASS, transform);
-    ```
-
-    을 분석해본다.
-
 !!! tldr "분석 지도"
 
     - [x] `LFW/main.cpp`: `main` 함수
@@ -792,26 +754,11 @@ template<typename DTYPE> Dataset<DTYPE>::Dataset() {
 template<typename DTYPE>
 class LFWDataset : public Dataset<DTYPE>{
 private:
-    int m_numOfImg;
-    std::string m_rootPath;
-    std::string m_dataPath;
-    vision::Compose *m_transform;
-    sem_t sem;
-
-    int m_useClasNum;
-    std::vector<std::string> m_className;
-    std::vector<std::string> m_aImagePath;
-    std::vector<int> m_vSamplePerClass;
-    int trigger;
-    int imgNum[20];
-
+...
     void           CheckClassList();
     void           CreateImageListOfEachClass();
-    void           CountSamplePerClass(int maxClass = 0);
-    void           AllocImageBuffer(int idx, ImageWrapper& imgWrp);
-    void           DeleteImageBuffer(ImageWrapper& imgWrp);
+...
     Tensor<DTYPE>* Image2Tensor(ImageWrapper& imgWrp, int doValueScaling);
-
 public:
     LFWDataset(std::string rootPath, std::string dataPath, int useClassNum, vision::Compose *transform) {
         m_rootPath   = rootPath;
@@ -819,7 +766,6 @@ public:
         m_useClasNum = useClassNum;
         m_numOfImg = 0;
         trigger      = 0;
-
         m_transform  = transform;
         assert(m_transform != NULL);
 
@@ -830,37 +776,27 @@ public:
         LogMessageF("lfw_funneled_label.txt", TRUE, "%d samples\n", this->GetLength());
         CountSamplePerClass();
     }
-
-    virtual ~LFWDataset() {
-        Delete();
-    }
-    virtual void                          Alloc();
-    virtual void                          Delete();
-    virtual std::vector<Tensor<DTYPE> *>* GetData(int idx);
-    virtual void                          CopyData(int idx, DTYPE *pDest);             // copy i-th iamge into pDest. (designed for k-NN)
-    std::string& GetImagePath(int idx)   { return m_aImagePath[idx]; }
-    int GetSampleCount(int classId)     { return (classId >= 0 && classId < m_vSamplePerClass.size()) ? m_vSamplePerClass[classId] : 0;}
-    int GetNoMinorClass(int minCount = 2);
-    void Tensor2Image(std::string filename, Tensor<DTYPE> *imgTensor, int doValuerScaling);
-};
 ...
+    virtual void                          Alloc();
+...
+};
 ```
 
 - **1-2**:
 
     `Dataset<DTYPE>` 을 상속받는 클래스 템플릿으로 선언되어 있다.
 
-- **26~32** 
+- **11~16** 
 
     !!! danger
 
         멤버 이니셜라이저를 사용하면 성능이 더 좋아지니까 나중에 바꿔야 할 듯하다.
 
-- **32**:
+- **16**:
 
     `vision::Compose * m_transform` 에 `vision::Compose *transform = new vision::Compose({new vision::Resize(224), new vision::CenterCrop(220)});` 을 저장한다.
 
-- **35**:
+- **19**:
 
     `Alloc` 은 다음과 같이 간단히 정의되어 있다.
 
@@ -870,7 +806,7 @@ public:
 
     `Alloc` 은 단순히 세마포를 초기화해준다.
 
-- **36**:
+- **20**:
 
     `CheckClassList` 는 다음과 같이 정의되어 있다.
 
@@ -888,13 +824,7 @@ public:
                 if (fscanf(pFile, "%s", realValue)) {
                     m_className.push_back((std::string)realValue);
                     while (fgetc(pFile) != '\n') ;
-                } else {
-                    printf("there is something error\n");
-                    exit(-1);
-                }
-            }
         ...
-        fclose(pFile);
     }
     ```
 
@@ -916,10 +846,8 @@ public:
         for (int classNum = 0; classNum < m_useClasNum; classNum++) {
             std::string filePath = m_rootPath + '/' + m_dataPath + '/' + m_className[classNum] + "/list.txt";  // check with printf
             const char *cstr     = filePath.c_str();
-
             FILE *pFile = NULL;
             pFile = fopen(cstr, "r");
-
             char realValue[100];
             int  numOfImageOfClass = 0;
             ...
@@ -930,15 +858,6 @@ public:
                         if (fscanf(pFile, "%s", realValue)) {
                             m_aImagePath.push_back((std::string)(m_className[classNum] + '/' + realValue));
                             vTmpLabel.push_back(classNum);
-                        } else {
-                            printf("there is something error\n");
-                            exit(-1);
-                        }
-                    }
-                } else {
-                    printf("there is something error\n");
-                    exit(-1);
-                }
             ...
             fclose(pFile);
         }
@@ -950,17 +869,19 @@ public:
 
     - **3**:
     
-        https://en.cppreference.com/w/cpp/container/vector/reserve 에 `std::vector<T,Allocator>::reserve` 내용이 있는데 비용이 많이 들어가는 메모리 할당을 필요한 만큼 하도록 해서 속도도 높이고, 메모리 효율도 챙기는 좋은 코드인 것 같다.
+        !!! note
     
-    - **6~10**:
+            https://en.cppreference.com/w/cpp/container/vector/reserve 에 `std::vector<T,Allocator>::reserve` 내용이 있는데 비용이 많이 들어가는 메모리 할당을 필요한 만큼 하도록 해서 속도도 높이고, 메모리 효율도 챙기는 좋은 코드인 것 같다.
+    
+    - **6~9**:
 
         `std::string filePath = m_rootPath + '/' + m_dataPath + '/' + m_className[classNum] + "/list.txt";` 를 읽어서 `pFile` 로 파일을 연다.
     
-    - **12-16**:
+    - **13-16**:
         
         `pFile` 의 한줄을 `realValue` 에 저장한다. 이것을 `atoi` 함수로 `int` 로 변환하여 `numOfImageOfClass` 에 저장한다.
 
-    - **18~20**:
+    - **16~19**:
 
         `numOfImageOfClass` 만큼 `for` 문을 돌면서 `pFile` 다음 라인을 `realValue` 에 읽고 `(std::string)(m_className[classNum] + '/' + realValue)` 을 `std::vecotr<std::string> m_aImagePath` 에 저장한다. 
 
@@ -968,11 +889,11 @@ public:
 
             하지만 C 스타일 형변환과 C 스타일 에러 처리를 해주고 있기 때문에 C++ 스타일 형변환과 `try-catch` 문으로 바꾸어야 할 것 같다.
         
-    - **21**:
+    - **19**:
 
         그리고 `std::vector<int> vTmpLabel;` 에 `classNum` 을 저장한다. `classNum` 은 `0` 부터 `m_useClasNum` 까지의 `int` 이다.
 
-    - **34~35**:
+    - **23-24**:
 
         마지막으로 `m_aImagePath` 벡터 사이즈를 갖고 와서 `m_numOfImg` 에 저장하고 `SetLabel` 함수에 `vTmpLabel` 의 주소값과 함께 전달해준다.
     
@@ -986,7 +907,7 @@ public:
 
     `this->SetLabel(&vTmpLabel[0], m_numOfImg);` 을 호출하면서 생성된다.
 
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
 
     이제 `LFWDataset::CopyData` 메소드를 분석해야 한다. 하지만 그 전에 `Dataset::SetLabel` 메소드가 정확히 무엇을 하는지 분석해본다.
 
@@ -1025,11 +946,7 @@ template<typename DTYPE> void Dataset<DTYPE>::SetLabel(const unsigned char *pLab
 {
     try {
         label.resize(noLabel);
-    } catch(...){
-        printf("Failed to allocate memory (noLabel = %d) in %s (%s %d)\n", noLabel, __FUNCTION__, __FILE__, __LINE__);
-        return;
-    }
-
+...
     for(int i = 0; i < noLabel; i++)
         label[i] = (int)pLabel[i];
 }
@@ -1041,23 +958,19 @@ template<typename DTYPE> void Dataset<DTYPE>::SetLabel(const unsigned char *pLab
 
     !!! danger
     
-        논의가 필요한 코드인 것 같다.
+        논의가 필요한 코드이다. 암시적 형변환이 일어나기 때문이다.
 
 - **4**:
 
     `std::vector<int> label;` 의 크기를 `noLabel` 로 조정한다.
 
-- **10-11**:
+- **6-7**:
 
     `std::vector<int> label;` 에 `pLabel[i]` 를 저장한다. 따라서 `0` 부터 `m_useClasNum` 까지의 `int` 가 저장된다.
 
 !!! done "분석 결론"
 
-    `this->SetLabel(&vTmpLabel[0], m_numOfImg);` 는 `std::vector<int> label;` 에 `vTmpLabel` 의 내용을 저장한다.
-
-!!! info "분석 방향"
-
-    이제 `LFWDataset::CopyData` 메소드를 분석해본다. 
+    `this->SetLabel(&vTmpLabel[0], m_numOfImg);` 는 `Dataset` 의 `std::vector<int> label;` 에 `vTmpLabel` 의 내용을 저장한다.
 
 !!! tldr "분석 지도"
 
@@ -1182,7 +1095,9 @@ template<typename DTYPE> void LFWDataset<DTYPE>::CopyData(int idx, DTYPE *pDest)
 
     압축이 해제된 `.jpeg` 이미지와 그 형상이 저장된 `imgWrp` 을 `vision:Compose::DoTransform` 에 전달한다.
 
-    이것은 `LFW/main.cpp` 의 `main` 함수에서 `vision::Compose *transform = new vision::Compose({new vision::Resize(224), new vision::CenterCrop(220)});` 로 생성된 `Compose` 객체이었다는 것을 기억하자.
+    !!! note
+
+        이것은 `LFW/main.cpp` 의 `main` 함수에서 `vision::Compose *transform = new vision::Compose({new vision::Resize(224), new vision::CenterCrop(220)});` 로 생성된 `Compose` 객체이었다는 것을 기억하자.
 
 - **9**:
 
@@ -1212,11 +1127,11 @@ template<typename DTYPE> void LFWDataset<DTYPE>::CopyData(int idx, DTYPE *pDest)
     
     필요한 처리들을 생성자 또는 `StartProcess` 에서 해주고 `CopyData` 에서는 데이터 복사 기능만 해야 할 것 같다. 왜냐하면 `CopyData` 메소드가 호출될 때마다 이미지 압축 해제와 데이터 처리, 그리고 `Tensor` 변환이 이루어지는데 만약 한번 이루어졌다면 이후에 불필요한 연산이 끝없이 반복되기 때문이다. 또한 소프트웨어 개발의 표준으로 널리 알려진 [유닉스 철학](https://ko.wikipedia.org/wiki/%EC%9C%A0%EB%8B%89%EC%8A%A4_%EC%B2%A0%ED%95%99) 에 따르면 하나의 함수는 하나의 기능만 해야 하기 때문이다.
 
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
 
     이제 실질적으로 데이터셋을 `Tensor` 로 변환해주는 `LFWDataset<DTYPE>::Image2Tensor` 를 분석해야 한다. 
     
-    그런데 그에 앞서 이미지의 형상을 `Shape` 로 만들어서 `imgWrp.imgShape` 에 저장하는 것이 어떤 것인지, 그리고 데이터셋을 `vision:Compose::DoTransform` 에 전달하여 어떤 처리를 해주기 때문에 먼저 이 메소드를 분석해본다.
+    그런데 그에 앞서 이미지의 형상을 `Shape` 로 만들어서 `imgWrp.imgShape` 에 저장하는 것이 어떤 것인지, 그리고 데이터셋을 `vision:Compose::DoTransform` 에 전달하여 어떤 처리를 해주는지 이해해야 하기 때문에 먼저 이 메소드를 분석해본다.
 
 !!! tldr "분석 지도"
 
@@ -1256,7 +1171,7 @@ template<typename DTYPE> void LFWDataset<DTYPE>::CopyData(int idx, DTYPE *pDest)
 
 먼저 [API](../../api.md) 에 `Shape` 에 대한 설명이 있으므로 이번에는 코드 분석에 앞서 API 의 설명을 살펴본다. API 에 따르면 `Shape` 는 `Tensor` 의 차원정보를 저장하고 있는 객체이다. 그러므로 `imgWrp.imgShape = new Shape(tjPixelSize[pixelFormat], height, width);` 이 데이터셋의 차원정보를 저장한다고 생각할 수 있다.
 
-**API** 에 따르면 `publicShape(int pSize0,int pSize1,int pSize2)` 는 3개의 축의 Dimension을 매개변수로 받아 Shape 클래스를 생성하는 생성자이다. 또 `pSize0` 는 첫 번째 축의 Dimension 크기, `pSize1` 두 번째 축의 Dimension 크기, `pSize2` 세 번째 축의 Dimension 크기이다.
+**API** 에 따르면 `public Shape(int pSize0,int pSize1,int pSize2)` 는 3개의 축의 Dimension을 매개변수로 받아 Shape 클래스를 생성하는 생성자이다. 또 `pSize0` 는 첫 번째 축의 Dimension 크기, `pSize1` 두 번째 축의 Dimension 크기, `pSize2` 세 번째 축의 Dimension 크기이다.
 
 ```c++ linenums="1"
 class Shape {
@@ -1298,16 +1213,17 @@ Shape::Shape(int pSize0, int pSize1, int pSize2) {
 #ifdef __CUDNN__
     m_desc = NULL;
 #endif  // if __CUDNN__
-
     Alloc(3, pSize0, pSize1, pSize2);
 }
 ```
 
 - **2-4**:
 
-    멤버 이니셜라이저를 사용하면 좋을 것 같다. 
+    !!! danger
+    
+        멤버 이니셜라이저를 사용하면 좋을 것 같다. 
 
-- **9**:
+- **8**:
 
     `Alloc` 메소드는 다음과 같다.
 
@@ -1346,9 +1262,9 @@ Shape::Shape(int pSize0, int pSize1, int pSize2) {
 
         !!! danger
 
-            `try-catch` 문을 통일하면 코드를 축약시킬 수 있다.
+            `try-catch` 문을 통일하면 코드를 축약시킬 수 있다. 또 에러 메시지를 표준출력스트림으로 보내고 있다. 에러 메시지는 `fprintf(stderr,...)` 또는 `std::cerr << ...` 와 같이 에러스트림으로 보내야 한다.
 
-        어쨌든 `m_Rank = 3` 으로 `int * m_aDim = new int[3]` 으로 초기화한다.
+        `m_Rank = 3` 으로 `int * m_aDim = new int[3]` 으로 초기화한다.
     
     - **17-25**:
 
@@ -1360,11 +1276,11 @@ Shape::Shape(int pSize0, int pSize1, int pSize2) {
 
 !!! done "분석 결론"
 
-    `Shape` 는 데이터셋의 차원정보를 `int * m_aDim` 에 저장고, 축의 개수를 `m_Rank` 에 저장한다. 그러므로 `imgWrp.imgShape = new Shape(tjPixelSize[pixelFormat], height, width);` 는 데이터셋의 차원정보를 `Shape` 객체로 생성하여 `imgWrp.imgShape` 에 저장한다.
+    `Shape` 는 데이터셋의 차원정보를 `int * m_aDim` 에 저장하고, 축의 개수를 `m_Rank` 에 저장한다. 그러므로 `imgWrp.imgShape = new Shape(tjPixelSize[pixelFormat], height, width);` 는 데이터셋의 차원정보
+    
+    $$\text{tjPixelSize[pixelFormat]} \times \text{height } \times \text{width}$$
 
-!!! info "분석 방향"
-
-    이제 `vision:Compose::DoTransform` 을 분석하여 데이터셋에 어떤 처리를 해주는지 분석해본다.
+    를 `Shape` 객체로 생성하여 `imgWrp.imgShape` 에 저장한다.
 
 !!! tldr "분석 지도"
 
@@ -1428,7 +1344,7 @@ private:
 
     `m_listOfTransform` 는 `{new vision::Resize(224), new vision::CenterCrop(220)}` 로 초기화되었으므로 `vision::Resize::DoTransform` 과 `vision::CenterCrop::DoTransform` 이 호출된다.
 
-!!! info "분석 방향"
+!!! info "새로운 분석 방향"
 
     `vision::Resize::DoTransform` 과 `vision::CenterCrop::DoTransform` 가 데이터셋에 어떤 처리를 하는지 분석해본다.
 
