@@ -22,15 +22,9 @@
 
 ## TODO 
 
-[**WICWIU Github Pages**](https://wicwiu.github.io/) 에 작성할 것들을 메모해둔 것입니다.
-
 - 코딩 생산성 높이기 & 여러가지 필수 기술들
 
   - Docker : https://github.com/ccss17/ProgrammerBase/blob/master/docker.md
-
-  - Git : https://github.com/ccss17/ProgrammerBase/blob/master/git.md
-
-  - Markdown : https://github.com/ccss17/ProgrammerBase/blob/master/markdown.md
 
   - VSCode 와 Git 연동해서 겁나 편하게 사용하기 : https://github.com/ccss17/ProgrammerBase/blob/master/vscode.md
 
@@ -42,13 +36,9 @@
     
     - GPU 모니터링 nvidia-smi &rarr; nvtop
 
-- [makefile](https://ccss17.github.io/makefile.html)
-
 - [how to understand large c++ code](https://www.google.com/search?client=firefox-b-d&q=how+to+understand+large+c%2B%2B+code)
 
 - [아무도 가르쳐 주지 않는 것](https://velog.io/@mowinckel/%EC%95%84%EB%AC%B4%EB%8F%84-%EA%B0%80%EB%A5%B4%EC%B3%90-%EC%A3%BC%EC%A7%80-%EC%95%8A%EB%8A%94-%EA%B2%83?fbclid=IwAR33Cn25eV-5MaqBWZPhA5uj_bReJLRVbhn6yewssYsh2tGO38T-iTDxnFQ)
-
-- [WICWIU Documentation](https://github.com/WICWIU/WICWIU/tree/master/Documentation) 포팅
 
 - [Google C++ Style](https://google.github.io/styleguide/cppguide.html) 
 
