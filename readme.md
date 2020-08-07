@@ -52,6 +52,16 @@
 
   - https://github.com/lefticus/cppbestpractices
 
+  - Unix 철학
+
+    - https://medium.com/ingeniouslysimple/philosophy-of-unix-development-aa0104322491
+
+    - https://subscription.packtpub.com/book/networking_and_servers/9781788998475/1/ch01lvl1sec12/the-unix-philosophy-in-a-nutshell
+
+    - https://joone.net/2017/05/20/9-%EC%9C%A0%EB%8B%89%EC%8A%A4-%EC%B2%A0%ED%95%99-2/
+
+    - https://ko.wikipedia.org/wiki/%EC%9C%A0%EB%8B%89%EC%8A%A4_%EC%B2%A0%ED%95%99
+
 - Memory Leak
 
   - https://github.com/google/sanitizers
@@ -63,3 +73,5 @@
   - https://github.com/baidu-research/baidu-allreduce
 
   - https://github.com/microsoft/DeepSpeed
+
+- markdown snippet
