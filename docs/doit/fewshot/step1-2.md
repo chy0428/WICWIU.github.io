@@ -863,6 +863,8 @@ template<typename DTYPE> DTYPE& Tensor<DTYPE>::operator[](unsigned int index) {
 
     - [x] `src/Tensor.hpp`: `Tensor::Zeros` 메소드
 
+    - [x] `src/Tensor.hpp`: `Index5D` 함수
+
     - [x] `src/Tensor.hpp`: `Tensor::operator[]` 메소드
 
     - [ ] `src/LongArray.hpp`: `LongArray` 생성자
@@ -1034,6 +1036,8 @@ template<typename DTYPE> int LongArray<DTYPE>::Alloc(unsigned int pTimeSize, uns
 
     - [x] `src/Tensor.hpp`: `Tensor::Zeros` 메소드
 
+    - [x] `src/Tensor.hpp`: `Index5D` 함수
+
     - [x] `src/Tensor.hpp`: `Tensor::operator[]` 메소드
 
     - [x] `src/LongArray.hpp`: `LongArray` 생성자
@@ -1168,6 +1172,8 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
     - [x] `LFW/LFWDataset.hpp`: `LFWDataset::Image2Tensor` 메소드
 
     - [x] `src/Tensor.hpp`: `Tensor::Zeros` 메소드
+
+    - [x] `src/Tensor.hpp`: `Index5D` 함수
 
     - [x] `src/Tensor.hpp`: `Tensor::operator[]` 메소드
 
