@@ -1107,9 +1107,11 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
 
 !!! danger
 
-    그런데 실제로 `LongArray` 의 `DTYPE ** m_aaHostLongArray` 는 `m_TimeSize` $\times$ `m_CapacityPerTime` 형상의 배열로 저장되어있다. `m_TimeSize` 는 `0`번째 축을 뜻하고, `m_CapacityPerTime` 은 `1`번째 축부터 마지막 축의 크기까지의 곱을 뜻했다.
+    `LongArray` 의 `DTYPE ** m_aaHostLongArray` 는 `m_TimeSize` $\times$ `m_CapacityPerTime` 형상의 배열로 저장되어있다. `m_TimeSize` 는 `0`번째 축을 뜻하고, `m_CapacityPerTime` 은 `1`번째 축부터 마지막 축의 크기까지의 곱을 뜻했다. 
 
-    `Index5D` 에서 전달된 `5` 차원 텐저는 실제로 `Tensor<DTYPE> *result = Tensor<DTYPE>::Zeros(1, 1, channel, height, width);` 로 정의 되었으므로 $t_1 = t_2 = 1$ 이고, 첫번째와 두번째 인덱스가 항상 $0$ 이므로 $i_1=i_2=0$ 이다. 따라서 `5` 차원 텐저가 `1` 차원 배열로 저장하기 위한 인덱스는
+    `Index5D` 에서 전달된 `5` 차원 텐저는 실제로 `Tensor<DTYPE> *result = Tensor<DTYPE>::Zeros(1, 1, channel, height, width);` 로 정의 되었으므로 `m_TimeSize = 0` 이고 `m_CapacityPerTime = 1 * channel * height * width` 이다.
+    
+    한편 이렇게 정의된 `5` 차원 텐저를 `1` 차원 인덱스로 참조하는 방식에 대입해보면 $t_1 = t_2 = 1$ 이고, 첫번째와 두번째 인덱스가 항상 $0$ 이므로 $i_1=i_2=0$ 이다. 따라서 `5` 차원 텐저가 `1` 차원 배열로 저장하기 위한 인덱스는
     
     $$i_1t_5t_4t_3t_2+i_2t_5t_4t_3+i_3t_5t_4+i_2t_5+i_5 = (((i_1t_2+i_2)t_3+i_3)t_4+i_2)t_5 + i_5$$
 
@@ -1121,7 +1123,7 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
     
     어쨌든 그 `3` 차원 배열, 즉 `3` 차원 데이터셋을 `1` 차원 배열에 저장하기 위한 `index` 가 다시 `2` 차원 배열 `DTYPE ** m_aaHostLongArray` 에 저장되기 위한 인덱스 연산 `[index / m_CapacityPerTime][index % m_CapacityPerTime]` 을 거쳐간다.
 
-    > 대체 왜 `3` 차원 데이터셋을 `5` 차원 `Tensor` 에 저장한 다음 `1` 차원 배열에 저장하기 위한 인덱스 연산을 한 다음 `2` 차원 배열에 저장하는 거지???? 왜 이렇게 하는거지?
+    > 대체 왜 `3` 차원 데이터셋을 `5` 차원 `Tensor` 에 저장한 다음 `1` 차원 배열에 저장하기 위한 인덱스 연산을 한 다음 `2` 차원 배열에 저장하는 거지?
     
 !!! done "분석 결론"
 
