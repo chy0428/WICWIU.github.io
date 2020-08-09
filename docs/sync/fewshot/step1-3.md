@@ -16,14 +16,14 @@
 수학에서의 공간좌표는 다음과 같다.
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/16812446/89725063-24e86f80-da46-11ea-9e9c-d0d5ab4b6c25.png" width="50%" />
+  <img src="https://user-images.githubusercontent.com/16812446/89725063-24e86f80-da46-11ea-9e9c-d0d5ab4b6c25.png" width="70%" />
   <figcaption><i>수학에서의 3차원 공간좌표</i></figcaption>
 </figure>
 
 하지만 이미지에서의 좌표는 수학에서의 좌표와 달리 왼쪽 상단부에서 좌표 $(0, 0)$ 이 시작하고 $y$ 축이 아래쪽 방향으로 증가한다. 이 $xy$ 축에 따른 위치가 이미지의 픽셀값이 된다. 그리고 $z$ 축은 픽셀 정밀도를 나타낸다. $z$ 축이 깊을수록 픽셀 정밀도(`depth`)가 높아져서 색채가 더 높은 이미지가 나타난다. 픽셀 정밀도에 대해서는 아래에서 자세히 다룬다.
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/16812446/89725085-71cc4600-da46-11ea-8664-129f8777b06a.png" width="50%" />
+  <img src="https://user-images.githubusercontent.com/16812446/89725085-71cc4600-da46-11ea-8664-129f8777b06a.png" width="70%" />
   <figcaption><i>이미지에서의 픽셀값을 나타내기 위한 3차원 공간좌표</i></figcaption>
 </figure>
 
