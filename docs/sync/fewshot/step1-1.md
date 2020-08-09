@@ -16,6 +16,8 @@
 
 # Coding: CasiaWebFace Image to vector
 
+우리 fewshot 팀은 [**WICWIU**](https://github.com/WICWIU/WICWIU) 개발 가이드의 [**WICWIU 로 학습하기**](../../dev/wicwiu/learn.md) 의 첫번째 과정인 "**Step 1. 학습 데이터 &rarr; `Tensor`**" 을 완수하기 위하여 학습시켜야할 데이터셋인 **Casia Web Face** 를 `Tensor` 로 변환해야 한다.
+
 ## `getDirList` 함수
 
 먼저 **CasiaWebFace** 이미지를 자동으로 읽어오기 위하여 디렉토리 리스트를 얻을 수 있는 코드를 만들어 봤다.
@@ -48,7 +50,7 @@ DIR* getDirList(const char * dirName)
 
 !!! info
 
-    `test_getDirList` 함수의 `test_` 는 **camel case** 가 아닌 **snake case** 로 되어있는데, 테스트 코드임을 강조하기 위하여 그렇게 한 것이다. 나머지 코드는 모두 **camel case** 로 코딩되어 있다.
+    `test_getDirList` 함수의 `test_` 는 **camel case** 가 아닌 **snake case** 로 되어있는데, 테스트 코드임을 강조하고 실제로 사용되면 안되는 함수임을 강조하기 위하여 그렇게 한 것이다. 나머지 코드는 모두 **camel case** 로 코딩되어 있다.
 
 ```c++ linenums="1"
 void test_getDirList(bool error=false);
@@ -66,7 +68,7 @@ void test_getDirList(bool error)
     {
         dir = (error) ?\
             getDirList("aweoifjaowief") :\
-            dir = getDirList("/tmp/casia_train");
+            getDirList("/tmp/casia_train");
         struct dirent *ent;
 
         while ((ent = readdir(dir)) != NULL)
@@ -238,7 +240,9 @@ void test_getFirstCasiaTrainImage()
 
 # Analysis: Dataset to Tensor
 
-fewshot 팀은 LFW 팀이 개발해둔 코드를 참고할 수 있기 때문에 먼저 LFW 코드를 분석해보았다. [**WICWIU**](https://github.com/WICWIU/WICWIU) 개발 가이드의 [**WICWIU 로 학습하기**](../../dev/wicwiu/learn.md) 의 첫번째 과정이 "**Step 1. 학습 데이터 &rarr; `Tensor`**" 이기 때문에 먼저 학습시켜야할 데이터셋인 **Casia Web Face** 를 `Tensor` 로 변환해야 했다. 그래서 LFW 팀의 코드에서 데이터셋을 `Tensor` 로 변환하는 코드 흐름을 중점으로 분석을 시도해보았다.
+우리는 성공적으로 **Casia Web Face** 의 디렉토리 리스트를 읽어보았고 첫번째 디렉토리의 첫번째 이미지를 읽어서 벡터로 변환해보았다. 하지만 여기에서 더 이상 데이터셋을 `Tensor` 로 변환하는 코딩을 할 수 없었다. 그렇기 때문에 잠시 코딩을 멈추고 기존의 [**WICWIU**](https://github.com/WICWIU/WICWIU) 코드를 분석하기로 했다.
+
+우리 fewshot 팀은 LFW 팀이 개발해둔 코드를 참고할 수 있기 때문에 먼저 LFW 코드를 분석해보았다. 지금의 관심사는 데이터셋을 `Tensor` 로 변환하는 것이기 때문에 LFW 팀의 코드에서 데이터셋을 `Tensor` 로 변환하는 코드 흐름을 중점으로 분석을 시도해보았다.
 
 !!! note
 

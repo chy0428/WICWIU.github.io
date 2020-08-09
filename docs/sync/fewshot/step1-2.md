@@ -317,7 +317,7 @@ template<typename DTYPE> Tensor<DTYPE> *LFWDataset<DTYPE>::Image2Tensor(ImageWra
 
         저장 대상인 `LongArray` 의 `DTYPE ** m_aaHostLongArray` 의 추상자료형 `DTYPE` 은 `Tensor` 가 결정하고, `Tensor` 의 추상자료형은 `LFWDataset` 이 결정하고, `LFWDataset` 의 추상자료형은 `LFW/main.cpp` 의 `main` 함수의 호출형태에서 결정된다. 
         
-        그런데 심지어 그 `LFWDataset` 호출형태가 `LFWDataset<float> *train_dataset = new LFWDataset<float>("./data", "lfw_funneled", NUMBER_OF_CLASS, transform);` 이었던 것을 기억하자. 그러므로 `double` 에서 `float` 에서 암시적 형변환이 일어나면서 데이터 손실까지 발생할 수도 있다.
+        그런데 심지어 그 `LFWDataset` 호출형태가 `LFWDataset<float> *train_dataset = new LFWDataset<float>("./data", "lfw_funneled", NUMBER_OF_CLASS, transform);` 이었던 것을 기억하자. 그러므로 `double` 에서 `float` 로 암시적 형변환이 일어나면서 데이터 손실까지 발생할 수도 있다.
 
         좀 더 큰 자료형에 대한 암시적 형변환은 데이터 손실이 없으므로 애교로 봐줄만 하지만 더 작은 자료형에 대한 암시적 형변환은 데이터 손실이 발생할 수도 있으므로 프로젝트의 안정성을 심각하게 해친다.
         
@@ -736,6 +736,8 @@ inline unsigned int Index5D(Shape *pShape, int ti, int ba, int ch, int ro, int c
 
         내가 잘못 판단한 것일 수도 있기 때문에 논의가 필요하다.
 
+        추측을 해보건데 아무래도, `Reshape` 를 동시에 해주는 코드인 것 같다. 하지만 이런 식으로 `Reshape` 을 한다면 보통의 경우에 알아보기가 매우 힘들기 때문에 다른 개발자와의 협력이 전혀 이루어지지 못할 수도 있는 안 좋은 코드라고 할 수 있다.
+
 !!! done "분석 결론"
 
     `Index5D` 는 `Shape` 와 데이터셋 각 축의 인덱스가 전달되면 그것에 대응되는 `LongArray` 의 원소의 인덱스를 반환해준다.
@@ -1109,7 +1111,7 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
 
     `LongArray` 의 `DTYPE ** m_aaHostLongArray` 는 `m_TimeSize` $\times$ `m_CapacityPerTime` 형상의 배열로 저장되어있다. `m_TimeSize` 는 `0`번째 축을 뜻하고, `m_CapacityPerTime` 은 `1`번째 축부터 마지막 축의 크기까지의 곱을 뜻했다. 
 
-    `Index5D` 에서 전달된 `5` 차원 텐저는 실제로 `Tensor<DTYPE> *result = Tensor<DTYPE>::Zeros(1, 1, channel, height, width);` 로 정의 되었으므로 `m_TimeSize = 0` 이고 `m_CapacityPerTime = 1 * channel * height * width` 이다.
+    `Index5D` 에서 전달된 `5` 차원 텐저는 실제로 `Tensor<DTYPE> *result = Tensor<DTYPE>::Zeros(1, 1, channel, height, width);` 로 정의 되었으므로 `m_TimeSize = 1` 이고 `m_CapacityPerTime = 1 * channel * height * width` 이다.
     
     한편 이렇게 정의된 `5` 차원 텐저를 `1` 차원 인덱스로 참조하는 방식에 대입해보면 $t_1 = t_2 = 1$ 이고, 첫번째와 두번째 인덱스가 항상 $0$ 이므로 $i_1=i_2=0$ 이다. 따라서 `5` 차원 텐저가 `1` 차원 배열로 저장하기 위한 인덱스는
     
