@@ -1097,39 +1097,50 @@ template<typename DTYPE> DTYPE& LongArray<DTYPE>::operator[](unsigned int index)
 
     결국 `LFWDataset::Image2Tensor` 란 `Index5D(result->GetShape(), 0, 0, ch, ro, co)` 으로 전달된 `index` 로써 `2` 차원 배열 `m_aaHostLongArray[index / m_CapacityPerTime][index % m_CapacityPerTime]` 에 데이터셋 `imgBuf` 의 원소를 하나하나 복사하고 있는 것이다.
 
+    !!! note
+
+        이때 $t_1 \in \mathbb{N}, t_2 \in \mathbb{N}, t_3 \in \mathbb{N}, t_4 \in \mathbb{N}, t_5 \in \mathbb{N}$ 에 대한 $t_1 \times t_2 \times t_3 \times t_4 \times t_5$ 텐저를 $1 \times t_1t_2t_3t_4t_5$ 배열로 변환하여 인덱스를 참조하기 위해서는 
+        
+        $$i_1 \in \{0, 1, \dots, t_1-1\}$$ 
+        
+        $$i_2 \in \{0, 1, \dots, t_2-1\}$$ 
+        
+        $$i_3 \in \{0, 1, \dots, t_3-1\}$$ 
+
+        $$i_4 \in \{0,1,\dots,t_4-1\}$$ 
+
+        $$i_5 \in \{0, 1, \dots, t_5-1\}$$ 
+
+        인 $i_1, i_2, i_3, i_4, i_5$ 에 대하여 
+        
+        $$\boxed{i_1t_5t_4t_3t_2+i_2t_5t_4t_3+i_3t_5t_4+i_4t_5+i_5 = (((i_1t_2+i_2)t_3+i_3)t_4+i_4)t_5 + i_5} $$
+        
+        로 참조해야 한다는 것에서 `index` 가 $i_1t_5t_4t_3t_2+i_2t_5t_4t_3+i_3t_5t_4+i_4t_5+i_5$ 이고, `m_CapacityPerTime` 이 $t_2t_3t_4t_5$ 이다.
+
+        이때 `index` 를 `m_CapacityPerTime` 으로 나누면 그 몫이 $i_1$ 이므로 `[index / m_CapacityPerTime]` 는 첫번째 축을 참조할 수 있는 좌표 $i_1$ 가 된다. 그렇다면 그 나머지는 $i_2t_5t_4t_3+i_3t_5t_4+i_4t_5+i_5$ 인데 이것은 두번째 축부터 마지막 축까지의 `4` 차원 텐서를 `1` 차원 배열로 인덱싱하기 위한 수식과 같기 때문에 `[index % m_CapacityPerTime]` 가 정확히 인덱싱을 할 수 있다.
+
+        하지만 이것은 $i_2t_5t_4t_3+i_3t_5t_4+i_4t_5+i_5$ 가 반드시 $t_2t_3t_4t_5$ 보다 작다는 가정이 필요하다. 왜냐하면 $i_2t_5t_4t_3+i_3t_5t_4+i_4t_5+i_5$ 이 반드시 $t_2t_3t_4t_5$ 으로 나눈 나머지가 되어야 하기 때문이다.
+
+        그런데 $k \in \{1,2,3,4,5\}$ 에 대한 $i_k$ 들의 상계는 $t_{k} - 1$ 이다. 그러므로
+
+        $$i_2t_5t_4t_3+i_3t_5t_4+i_4t_5+i_5$$
+
+        $$ = (t_2 - 1)t_5t_4t_3+(t_3 - 1)t_5t_4+(t_4 - 1) t_5+ t_5 - 1$$
+
+        $$ = t_2t_5t_4t_3 - t_5t_4t_3 +t_3t_5t_4- t_5t_4+t_4t_5 - t_5+ t_5 - 1$$
+
+        $$ = t_2t_3t_4t_5 - 1$$
+
+        이다. 즉, $i_2, i_3, i_4, i_5$ 가 아무리 커도 $i_2t_5t_4t_3+i_3t_5t_4+i_4t_5+i_5$ 는 
+        $t_2t_3t_4t_5$ 을 넘지 못한다. 그러므로 `[index / m_CapacityPerTime][index % m_CapacityPerTime]` 라는 방식으로 인덱싱을 하는 방식은 항상 유효하다.
+
     !!! success
     
         ^^이로써 우리는 데이터셋을 `Tensor`로 변환하는 방법을 이해했다.^^
 
         데이터셋을 `Tensor` 로 변환하는 방법이란 (1) 데이터셋을 적절한 방식으로 읽고 (2) 메모리에 저장한 다음 (3) `Tensor` 객체를 데이터셋 형상에 맞춰서 적절히 만들고 (4) 그냥 `Tensor[Index5D(i1, i2, i3, i4, i5)]` 라는 식으로 복사하면 끝이다.
 
-    !!! danger
-    
-        근데 `[index / m_CapacityPerTime][index % m_CapacityPerTime]` 라는 인덱싱 방식이 무슨 의미를 갖는거지? `5` 차원 데이터를 참조하는 인덱싱 방식을 가져와서 어떻게 처리를 하길래 `2` 차원 배열에 저장해줄 수 있는거지?
-
-!!! danger
-
-    `LongArray` 의 `DTYPE ** m_aaHostLongArray` 는 `m_TimeSize` $\times$ `m_CapacityPerTime` 형상의 배열로 저장되어있다. `m_TimeSize` 는 `0`번째 축을 뜻하고, `m_CapacityPerTime` 은 `1`번째 축부터 마지막 축의 크기까지의 곱을 뜻했다. 
-
-    `Index5D` 에서 전달된 `5` 차원 텐저는 실제로 `Tensor<DTYPE> *result = Tensor<DTYPE>::Zeros(1, 1, channel, height, width);` 로 정의 되었으므로 `m_TimeSize = 1` 이고 `m_CapacityPerTime = 1 * channel * height * width` 이다.
-    
-    한편 이렇게 정의된 `5` 차원 텐저를 `1` 차원 인덱스로 참조하는 방식에 대입해보면 $t_1 = t_2 = 1$ 이고, 첫번째와 두번째 인덱스가 항상 $0$ 이므로 $i_1=i_2=0$ 이다. 따라서 `5` 차원 텐저가 `1` 차원 배열로 저장하기 위한 인덱스는
-    
-    $$i_1t_5t_4t_3t_2+i_2t_5t_4t_3+i_3t_5t_4+i_2t_5+i_5 = (((i_1t_2+i_2)t_3+i_3)t_4+i_2)t_5 + i_5$$
-
-    $$\iff 0 + 0 + i_3t_5t_4+i_2t_5+i_5 $$
-
-    가 되어 `3` 차원  배열을 저장하기 위한 인덱스로 바뀐다.
-
-    > 왜 이렇게 번거롭게 하는거지? 불필요한 연산들이 성능을 저하시킬 수도 있다.
-    
-    어쨌든 그 `3` 차원 배열, 즉 `3` 차원 데이터셋을 `1` 차원 배열에 저장하기 위한 `index` 가 다시 `2` 차원 배열 `DTYPE ** m_aaHostLongArray` 에 저장되기 위한 인덱스 연산 `[index / m_CapacityPerTime][index % m_CapacityPerTime]` 을 거쳐간다.
-
-    > 대체 왜 `3` 차원 데이터셋을 `5` 차원 `Tensor` 에 저장한 다음 `1` 차원 배열에 저장하기 위한 인덱스 연산을 한 다음 `2` 차원 배열에 저장하는 거지?
-    
 !!! done "분석 결론"
-
-    ^^이로써 우리는 데이터셋을 `Tensor`로 변환하는 방법을 이해했다.^^
 
     **데이터셋을 `Tensor` 로 변환하는 방법이란 (1) 데이터셋을 적절한 방식으로 읽고 (2) 메모리에 저장한 다음 (3) `Tensor` 객체를 데이터셋 형상에 맞춰서 적절히 만들고 (4) 그냥 `Tensor[Index5D(i1, i2, i3, i4, i5)]` 라는 식으로 복사하면 끝이다.**
 
