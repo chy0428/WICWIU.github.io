@@ -57,6 +57,8 @@ theme:
   palette:
     scheme: slate
     primary: indigo
+    # scheme: default
+    # primary: deep purple
   language: kr
   logo: assets/images/favicon.png
   favicon: assets/images/favicon.ico
