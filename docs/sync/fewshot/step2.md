@@ -8,7 +8,7 @@
 
 이 튜토리얼에서는 **FaceNet** 과 SVM 분류기로 사진으로부터 사람의 얼굴을 인식하는 얼굴 인식 시스템을 어떻게 만들 수 있는지 배운다. 이 튜토리얼이 끝나면 다음을 알 수 있다.
 
-- 구글이 어떻게 **FaceNet** 을 개발했고 어떻게 구현할 수 있는지
+- 구글이 어떻게 **FaceNet** 을 개발했고 어떻게 구현했는지
 
 - 얼굴 인식 데이터셋을 어떻게 준비하는지
 
@@ -24,7 +24,7 @@
 
 3. **FaceNet** 을 어떻게 **Keras** 로 로딩하는지
 
-4. 어떻게 얼굴을 인식하는지
+4. 어떻게 얼굴 인식을 위한 얼굴 탐색을 하는지
 
 5. 어떻게 얼굴 분류 시스템을 개발하는지
 
@@ -62,7 +62,66 @@
 
 [여기](https://drive.google.com/drive/folders/1pwQ3H4aJ8a6yyJHZkTwtjcL4wYWQb7bn) 에서 미리 학습된 **Keras** **FaceNet** 모델을 다운로드할 수 있다. 이 `facenet_keras.h5` 을 현재 디렉토리에 위치시키자. 그리고 다음 코드를 실행하자.
 
-## 4. 얼굴 인식하기
+## 4. 얼굴 인식을 위한 얼굴 탐색
+
+실질적으로 얼굴 인식을 하기 전에 먼저 얼굴을 탐색해야만 한다. 얼굴 탐색이란 사진에서 얼굴을 자동으로 찾고 얼굴에 네모 박스를 그려서 나머지 영역들은 제외하는 작업이다.
+
+여기에서는 얼굴 탐색을 위하여 MTCNN(Multi-Task Cascaded Convolutional Neural Network) 을 사용한다. 이것으로 사진에서 얼굴만 추출해낼 것이다. MTCNN 은 2016년 논문 [Joint Face Detection and Alignment Using Multitask Cascaded Convolutional Networks](https://arxiv.org/abs/1604.02878) 에서 설명된 얼굴 탐색에 사용되는 최적의 기법이다.
+
+여기에서는 Iván de Paz Centeno 이 구현한 [ipazc/mtcnn](https://github.com/ipazc/mtcnn) 을 사용할 것인데 이것은 `pip` 로도 설치할 수 있다. 
+
+```shell
+$ sudo pip install mtcnn
+```
+
+### 얼굴 탐색 
+
+먼저 **PIL** 패키지의 `open()` 함수로 이미지를 `numpy` 배열로 변환한다. 이것을 `MTCNN` 객체의 `detect_faces()` 함수에 전달하면 된다. 그러면 사진에서 얼굴만 추출된다.
+
+```python
+# function for face detection with mtcnn
+from PIL import Image
+from numpy import asarray
+from mtcnn.mtcnn import MTCNN
+
+# extract a single face from a given photograph
+def extract_face(filename, required_size=(160, 160)):
+	# load image from file
+	image = Image.open(filename)
+	# convert to RGB, if needed
+	image = image.convert('RGB')
+	# convert to array
+	pixels = asarray(image)
+	# create the detector, using default weights
+	detector = MTCNN()
+	# detect faces in the image
+	results = detector.detect_faces(pixels)
+	# extract the bounding box from the first face
+	x1, y1, width, height = results[0]['box']
+	# bug fix
+	x1, y1 = abs(x1), abs(y1)
+	x2, y2 = x1 + width, y1 + height
+	# extract the face
+	face = pixels[y1:y2, x1:x2]
+	# resize pixels to the model size
+	image = Image.fromarray(face)
+	image = image.resize(required_size)
+	face_array = asarray(image)
+	return face_array
+
+# load the photo and extract the face
+pixels = extract_face('...')
+```
+
+## 5. 얼굴 분류 시스템 개발
+
+우선 MTCNN 으로 [MS-Celeb-1M 데이터셋](https://www.microsoft.com/en-us/research/project/ms-celeb-1m-challenge-recognizing-one-million-celebrities-real-world/) 의 얼굴탐색을 하고 $160 \times 160$ 의 모델에 적합한 이미지를 추출한다. 그리고 **FaceNet** 으로 추출된 얼굴에 대한 face embedding 을 만든다. 그리고 SVM(Linear Support Vector Machine) 분류기 모델로 주어진 얼굴의 신원을 예측해본다.
+
+### 얼굴 탐색하고 저장하기
+
+ㅇㅇ
+
+### Face Embedding 만들기
 
 *참고 및 출처*: 
 
