@@ -34,7 +34,7 @@
 
 | fewshot 팀 | 
 |:---:|
-| [Fewshot Diary](sync/fewshot/step0.md){: .md-button .md-button--primary } |
+| [Fewshot Diary](sync/fewshot/step1-1.md){: .md-button .md-button--primary } |
 
 !!! info
 
