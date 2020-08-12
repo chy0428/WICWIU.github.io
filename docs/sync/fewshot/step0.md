@@ -14,8 +14,8 @@
 |★**Gr1nder**|**chy0428**|**joyfulbean**|**ccss17**|
 |:---:|:---:|:---:|:---:|
 |<i class="fas fa-check-circle"></i>`DataSampling`|<i class="fas fa-check-circle"></i> `Qudruplet Loss`|<i class="fas fa-check-circle"></i> `Data2Tensor` | <i class="fas fa-check-circle"></i> `DataTensor`|
-||<i class="fas fa-check"></i> `BlockSampling`| <i class="fas fa-check-circle"></i> `Transform(Horizontal flip, Random Crop)` | <i class="fas fa-check"></i> **FaceNet** 논문 |
-|||<i class="fas fa-check-circle"></i> `Normalization`| <i class="fas fa-check-circle"></i> `createImageList`|
+||<i class="fas fa-check-circle"></i> `BlockSampling`| <i class="fas fa-check-circle"></i> `Transform(Horizontal flip, Random Crop)` | <i class="fas fa-check"></i> **FaceNet** 논문 |
+||<i class="fas fa-check"></i> `step3.역전파` | <i class="fas fa-check-circle"></i> `Normalization`| <i class="fas fa-check-circle"></i> `createImageList`|
 |||<i class="fas fa-check"></i> `Tensor2Image` | <i class="fas fa-check-circle"></i> `image2imgWrp` |
 |||<i class="fas fa-check-circle"></i> `ImageProcess` 클래스 구현 |<i class="fas fa-check"> `createImageList`, `` |
 |||<i class="fas fa-check-circle"></i> `allocateImageBuffer` 함수 구현 |<i class="fas fa-check"> `createImageList`, `` |
