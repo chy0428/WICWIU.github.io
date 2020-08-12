@@ -89,7 +89,7 @@
 
     이 글은 [저의 블로그 글](https://ccss17.github.io)을 재작성 한 것입니다.
 
-## 노름거리
+## 노름거리, 벡터 사이의 거리
 
 !!! note ""
 
@@ -111,43 +111,21 @@
 
 !!! note ""
 
-    $L_2$ 노름(norm) 거리, 유클리드 거리, **Squared Distance** : 벡터 $a$ 에 대한 $L_2$ 노름은 벡터의 크기에서의 정의와 동일하게 
+    $L_2$ 노름(norm) 거리, 유클리드 거리, 벡터의 크기, **Squared Distance** : 벡터 $a$ 에 대한 $L_2$ 노름은
 
     $$ ||a|| _{2} = \sqrt[]{\sum_{i=1}^{n}a _ i ^{2}} = \sqrt[]{a_1 ^{2}+a_2 ^{2}+\dots+a_n ^{2}} $$
 
     이다.
 
+- $L_2$ 노름은 벡터의 크기의 정의와 동일하다고 볼 수 있다.
+
 - $L_2$ 노름은 유클리드 기하학에서 사용하던 거리와 똑같고 우리가 일상생활에서 직관적으로 생각하던 거리와 동일하다.
 
 - $L_1, L_2$ 노름은 선형회귀 모델의 정규화 항에서 사용된다.
 
-!!! note ""
+- **논문에서 나오는 수식**
 
-    $L_p$ 노름 : 점 $(x_1, x_2, \dots, x_n)$ 과 점 $(y_1, y_2, \dots, y_n)$ 의 $L_p$ 노름 거리는 다음과 같이 정의된다. 
-
-    $$ \Bigg ( \sqrt[]{\sum_{i=1}^{n}|x_i - y_i| ^{p}} \Bigg ) ^{1/p} $$
-
-$L_1$ 노름 거리가 
-
-$$ \sum_{i=1}^{n}|x_i - y_i| ^{p} $$
-
-로 정의되고 $L_2$ 노름 거리가 
-
-$$ \Bigg ( \sqrt[]{\sum_{i=1}^{n}|x_i - y_i| ^{2}} \Bigg ) ^{1/2} $$
-
-로 정의된 것에서 일반화 된 것이다. 
-
-!!! note ""
-
-    무한 $L _{\infty }$ 노름, 체비쇼프 거리(chebyshev distance) : 점 $(x_1, x_2, \dots, x_n)$ 과 점 $(y_1, y_2, \dots, y_n)$ 의 $L _{\infty }$ 노름 거리는 다음과 같이 정의된다. 
-
-    $$ \lim_{p \to \infty}  \Bigg ( \sqrt[]{\sum_{i=1}^{n}|x_i - y_i| ^{p}} \Bigg ) ^{1/p} $$
-
-    또는
-
-    $$ = \max (|x_1 -y_1|, |x_2 - y_2|, \dots, |x_n - y_n|) $$
-
-- 보통 $L_1$ 노름거리과 $L_2$ 노름거리, 무한 노름거리 외에는 잘 사용되지 않는다. 
+    $\|f(x)\|_{2} = 1$ 은 벡터 $f(x)$ 의 크기 또는 $L_2$ 노름 거리가 $1$ 이라는 것이다.
 
 ## 폐구간
 
@@ -259,9 +237,15 @@ $$ \Bigg ( \sqrt[]{\sum_{i=1}^{n}|x_i - y_i| ^{2}} \Bigg ) ^{1/2} $$
 
 *Figure 2.* 에서 볼 수 있듯 가장 중요한 것은 어떻게 얼굴 사진을 그 특징을 대표할 수 있는 벡터로 변환하느냐이다. 즉, 우리는 얼굴 사진 $x$ 을 ^^조건(포즈, 명도 등)에 관계없이 모든 얼굴 사진에 대하여 같은 신원의 $L_2$ 거리는 작고 다른 신원의 $L_2$ 거리는 먼 feature space $\mathbb{R}^{d}$ 에 사상시키는 함수 $f(x)$^^ 을 찾아볼 것이다.
 
-여기에서 다른 손실 함수와 triplet 을 비교해보지는 않겠지만, 그래도 triplet 이 얼굴 검증에는 가장 좋을 것이다.
+여기에서 다른 손실 함수와 triplet 을 비교해보지는 않겠지만, 그래도 triplet 이 얼굴 검증에는 가장 좋을 것이다. [Deep  learning  facerepresentation  by  joint  identification-verification [14]](https://arxiv.org/pdf/1406.4773) 에서의 손실함수는 한 신원의 모든 얼굴을 embedding 공간의 한 점에 사영시킨다. 이것은 억지로 다른 신원과의 거리과 차별성을 강화하면서도 한 신원의 얼굴들이 manifold 에 있게 한다.
 
 ### 3.1. Triplet Loss
+
+embedding 은 이미지 $x$ 와 유클리드 공간 $\mathbb{R}$ 에 대하여 $f: x \to \mathbb{R}^{d}$ 으로 표현된다. 또한 우리는 이 embedding 을 $\|f(x)\| _{2} = 1$ 같은 $d$ 차원 초구(hypersphere) 로 제한시킨다.
+
+이 loss 는 [Distance metric learning for large margin nearest neighbor classification](https://jmlr.csail.mit.edu/papers/volume10/weinberger09a/weinberger09a.pdf) 에서 nearest-neighbor classification 에서 착안했다.
+
+이제 우리가 원하는 것은 어떤 사람 사진 $x _{i}^{a}$(*anchor*) 와 같은 사람 사진 $x _{i}^{p}$(*positive*) 의 거리가 다른 사람 사진 $x _{i}^{n}$(*negative*) 과의 거리보다 가까운 것이다. 이것이 *Figure 3.* 이다.
 
 ### 3.2. Triplet Selection
 
