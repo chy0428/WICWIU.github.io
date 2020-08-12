@@ -93,7 +93,7 @@
 
 !!! note ""
 
-    $L_1$ 노름(norm) 거리 또는 맨해튼 거리 : 벡터 $a$ 에 대한 $L_1$ 노름은 
+    $L_1$ 노름(norm) 거리, 맨해튼 거리 : 벡터 $a$ 에 대한 $L_1$ 노름은 
 
     $$ ||a|| _{1} = |a_1| + |a_2| + |a_3| + \dots + |a_n| = \sum_{i=1}^{n}|a_i| $$
 
@@ -111,7 +111,7 @@
 
 !!! note ""
 
-    $L_2$ 노름(norm) 거리 또는 유클리드 거리 : 벡터 $a$ 에 대한 $L_2$ 노름은 벡터의 크기에서의 정의와 동일하게 
+    $L_2$ 노름(norm) 거리, 유클리드 거리, **Squared Distance** : 벡터 $a$ 에 대한 $L_2$ 노름은 벡터의 크기에서의 정의와 동일하게 
 
     $$ ||a|| _{2} = \sqrt[]{\sum_{i=1}^{n}a _ i ^{2}} = \sqrt[]{a_1 ^{2}+a_2 ^{2}+\dots+a_n ^{2}} $$
 
@@ -139,7 +139,7 @@ $$ \Bigg ( \sqrt[]{\sum_{i=1}^{n}|x_i - y_i| ^{2}} \Bigg ) ^{1/2} $$
 
 !!! note ""
 
-    무한 $L _{\infty }$ 노름 또는 체비쇼프 거리(chebyshev distance) : 점 $(x_1, x_2, \dots, x_n)$ 과 점 $(y_1, y_2, \dots, y_n)$ 의 $L _{\infty }$ 노름 거리는 다음과 같이 정의된다. 
+    무한 $L _{\infty }$ 노름, 체비쇼프 거리(chebyshev distance) : 점 $(x_1, x_2, \dots, x_n)$ 과 점 $(y_1, y_2, \dots, y_n)$ 의 $L _{\infty }$ 노름 거리는 다음과 같이 정의된다. 
 
     $$ \lim_{p \to \infty}  \Bigg ( \sqrt[]{\sum_{i=1}^{n}|x_i - y_i| ^{p}} \Bigg ) ^{1/p} $$
 
@@ -215,31 +215,51 @@ $$ \Bigg ( \sqrt[]{\sum_{i=1}^{n}|x_i - y_i| ^{2}} \Bigg ) ^{1/2} $$
 
     *Figure 1.* 에서 thresholding 을 $1.1$ 로 두면 모든 얼굴 사진을 잘 분류할 수 있다는 것을 알 수 있다.
 
+### FaceNet 과 지금까지의 얼굴 인식 접근법과의 차이
+
 지금까지의 얼굴 인식 접근법은 신경망의 중간층을 학습시키는 것이었다. 이 방식의 단점은 간접적이고, 비효율적이라는 것이다. 이 방식에서는 중간층이 새로운 얼굴도 잘 인식하길 바라는 것이었다. 그리고 얼굴을 나타내는 사이즈가 거의 `1000` 차원 정도로 매우 컸다. 
 
 반면 **FaceNet** 은 [LMNN](http://john.blitzer.com/papers/nips05.pdf) 을 기반으로 한 triplet-based 손실함수를 통하여 얼굴을 `128` 차원으로 embedding 시킨다. triplet 은 매칭되는 얼굴 썸네일과 매칭되지 않는 얼굴 썸네일, 그리고 positive pair 를 distance margin 으로 negative 로부터 분리시키기 위한 손실값으로 구성된다. 썸네일이란 얼굴 영역만 잘려진 사진을 뜻한다. 이 썸네일은 스케일 조정과 이미지 변환이 이루어질 수도 있다.
 
+### triplets 선정
+
 어떤 triplets 을 사용할지 선정하는 것은 좋은 성능을 위하여 매우 중요하다.
 
-1. [Y. Bengio, J. Louradour, R. Collobert, and J. Weston.  Curriculum learning](https://www.icml.cc/Conferences/2009/papers/119.pdf) 에서 착안하여 우리는 triplets 의 어려움을 지속적으로 증가시키는 online negative exemplar mining 전략을 소개한다. 
+1. [Curriculum learning [1]](https://www.icml.cc/Conferences/2009/papers/119.pdf) 에서 착안하여 우리는 triplets 의 어려움을 지속적으로 증가시키는 online negative exemplar mining 전략을 소개한다. 
 
 2. 또한 군집화의 정확도를 향상시키기 위하여 한 사람의 embeddings 을 위한 구형 군집화를 이루는 hard-positive mining 기술을 소개한다.
 
 이로써 *Figure 1.* 같은 사진들도 잘 분류할 수 있다. 솔직히 이걸 분류하는 건 겁나 어려운 문제인데 우리는 해냈다.
 
+### 논문 구조 설명
+
 먼저 **2.** 에서 이 연구분야와 관련된 논문들을 리뷰해본다. **3.1** 에서는 triplet loss 를 정의해본다. **3.2** 에서는 우리의 triplet 선정 방식과 모델 학습 절차를 설명한다. **3.3** 에서 모델 구조 사용에 대하여 설명한다. **4.** 과 **5.** 에서 우리의 방식으로 embedding 을 한 것을 정량적 방식으로 결과를 내보고, 정성적 방식으로 군집화 결과를 확인해본다. 
 
 ## 2. Related Work
 
-[Deeply  learned  facerepresentations  are  sparse,  selective,  and  robust](https://arxiv.org/pdf/1412.1265) 와 [Deepface:Closing the gap to human-level performance in face verifica-tion](https://www.cs.toronto.edu/~ranzato/publications/taigman_cvpr14.pdf) 와 비슷하게 우리도 순수하게 data driven method 를 사용하여 얼굴 사진의 픽셀로부터 그것을 특정할 수 있는 특징을 학습했다. 우리는 라벨링 된 얼굴 데이터셋에서 가변하는 포즈, 명도, 다양한 조건에서 불변하는 특성을 얻었다.
+[Deeply  learned  facerepresentations  are  sparse,  selective,  and  robust [15]](https://arxiv.org/pdf/1412.1265) 와 [Deepface:Closing the gap to human-level performance in face verifica-tion [17]](https://www.cs.toronto.edu/~ranzato/publications/taigman_cvpr14.pdf) 와 비슷하게 우리도 순수하게 data driven method 를 사용하여 얼굴 사진의 픽셀로부터 그것을 특정할 수 있는 특징을 학습했다. 우리는 라벨링 된 얼굴 데이터셋에서 가변하는 포즈, 명도, 다양한 조건에서 불변하는 특성을 얻었다.
 
-본 논문에서는 컴퓨터 비전에서 좋은 성과를 내고 있는 두 가지 신경망 구조를 설명한다. 두 개 다 deep convolutional network 이다. 하나는 [Backpropagation Applied to Handwritten Zip Code Recognition](http://yann.lecun.com/exdb/publis/pdf/lecun-89e.pdf) 이고 하나는 [Learningrepresentations by back-propagating errors.Nature, 1986. 2,4](https://www.iro.umontreal.ca/~vincentp/ift3395/lectures/backprop_old.pdf) 이다.
+본 논문에서는 컴퓨터 비전에서 좋은 성과를 내고 있는 두 가지 신경망 구조를 설명한다. 두 개 다 deep convolutional network 이다. 하나는 [Backpropagation Applied to Handwritten Zip Code Recognition [8]](http://yann.lecun.com/exdb/publis/pdf/lecun-89e.pdf) 이고 하나는 [Learningrepresentations by back-propagating errors [11]](https://www.iro.umontreal.ca/~vincentp/ift3395/lectures/backprop_old.pdf) 이다.
 
-첫번째 모델은 여러개의 interleaved convolutional layers 와 non-linear activations 과 local response normalizations 와 max pooling layers 로 구성된 [Visualizing and understandingconvolutional networks](https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf) 의 모델을 기반으로 한다. 우리는 [Network in network](https://arxiv.org/abs/1312.4400) 에서 착안하여 몇몇의 $1 \times 1 \times d$ convolutional layers 를 추가했다.
+첫번째 모델은 여러개의 interleaved convolutional layers 와 non-linear activations 과 local response normalizations 와 max pooling layers 로 구성된 [Visualizing and understandingconvolutional networks [22]](https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf) 의 모델을 기반으로 한다. 우리는 [Network in network [9]](https://arxiv.org/abs/1312.4400) 에서 착안하여 몇몇의 $1 \times 1 \times d$ convolutional layers 를 추가했다.
 
-두번째 모델은 
+두번째 모델은 ImageNet 2014 에서 사용된 Szegedy 의 Inception model [Going deeper with convolutions [16]](https://arxiv.org/pdf/1409.4842) 을 기반으로 한다. 이 모델은 병행해서 실행되는 몇 개의 다른 convolutional 과 pooling layers 가 섞인 layers 를 사용하고 그것들의 출력을 합친다. 
 
 ## 3. Method
+
+![image](https://user-images.githubusercontent.com/16812446/89889612-e224c400-dc0c-11ea-8770-bb603c6a7436.png)
+
+:   *Figure 2. 모델 구조. FaceNet 은 배치 입력층, deep CNN 층, embedding 을 출력하는 $L_2$ normalization 층, triplet loss 층으로 구성된다. ([FaceNet: A Unified Embedding for Face Recognition and Clustering](https://arxiv.org/abs/1503.03832))*
+
+![image](https://user-images.githubusercontent.com/16812446/89889512-af7acb80-dc0c-11ea-8604-6b274ebe621e.png)
+
+:   *Figure 3. Triplet Loss 는 같은 신원을 가진 anchor 와 positive 의 거리를 최소화 시키고 다른 신원을 가진 anchor 와 negative 의 거리를 최대화 시킨다. ([FaceNet: A Unified Embedding for Face Recognition and Clustering](https://arxiv.org/abs/1503.03832))*
+
+**FaceNet** 은 deep convolutional network 를 사용한다. 우리는 두 가지 핵심 구조를 논의할 것이다. 첫째는 [Visualizing and understandingconvolutional networks [22]](https://cs.nyu.edu/~fergus/papers/zeilerECCV2014.pdf) 스타일의 networks 이고 둘째는 [Going deeper with convolutions [16]](https://arxiv.org/pdf/1409.4842) 의 Inception 타입의 networks 이다. 이 networks 의 자세한 설명은 **3.3** 에서 한다. 이 모델을 *Figure 2.* 에서 회색박스로 표현했다. 
+
+*Figure 2.* 에서 볼 수 있듯 가장 중요한 것은 어떻게 얼굴 사진을 그 특징을 대표할 수 있는 벡터로 변환하느냐이다. 즉, 우리는 얼굴 사진 $x$ 을 ^^조건(포즈, 명도 등)에 관계없이 모든 얼굴 사진에 대하여 같은 신원의 $L_2$ 거리는 작고 다른 신원의 $L_2$ 거리는 먼 feature space $\mathbb{R}^{d}$ 에 사상시키는 함수 $f(x)$^^ 을 찾아볼 것이다.
+
+여기에서 다른 손실 함수와 triplet 을 비교해보지는 않겠지만, 그래도 triplet 이 얼굴 검증에는 가장 좋을 것이다.
 
 ### 3.1. Triplet Loss
 
