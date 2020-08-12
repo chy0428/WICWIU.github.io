@@ -16,7 +16,7 @@
 |<i class="fas fa-check-circle"></i>`DataSampling`|<i class="fas fa-check-circle"></i> `Qudruplet Loss`|<i class="fas fa-check-circle"></i> `Data2Tensor` | <i class="fas fa-check-circle"></i> `DataTensor`|
 ||<i class="fas fa-check"></i> `BlockSampling`| <i class="fas fa-check-circle"></i> `Transform(Horizontal flip, Random Crop)` | <i class="fas fa-check"></i> **FaceNet** 논문 |
 |||<i class="fas fa-check-circle"></i> `Normalization`| <i class="fas fa-check-circle"></i> `createImageList`|
-|||<i class="fas fa-check"></i> `Tensor2Image` | <i class="fas fa-check"></i> `image2imgWrp` |
+|||<i class="fas fa-check"></i> `Tensor2Image` | <i class="fas fa-check-circle"></i> `image2imgWrp` |
 |||<i class="fas fa-check"></i> `ImageProcess` 클래스 구현 | |
 
 이 페이지는 비공개이기 때문에 걱정하실 것 없습니다.
